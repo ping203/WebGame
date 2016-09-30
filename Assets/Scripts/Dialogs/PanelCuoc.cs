@@ -30,7 +30,7 @@ public class PanelCuoc : PanelGame {
         //    temp = BaseInfo.gI().mainInfo.moneyChip;
         //}
         //else {
-        long temp = BaseInfo.gI().mainInfo.moneyXu;
+        long temp = BaseInfo.gI().mainInfo.moneyVip;
         //}
         tienmin = min;
         tienmax = max;

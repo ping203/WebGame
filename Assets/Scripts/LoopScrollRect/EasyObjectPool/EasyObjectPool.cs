@@ -94,11 +94,11 @@ namespace MarchingBytes {
             } else if (fixedSize == false) {
                 //increment size var, this is for info purpose only
                 poolSize++;
-                Debug.Log(string.Format("Growing pool {0}. New size: {1}", poolName, poolSize));
+                //Debug.Log(string.Format("Growing pool {0}. New size: {1}", poolName, poolSize));
                 //create new object
                 po = NewObjectInstance();
             } else {
-                Debug.LogWarning("No object available & cannot grow pool: " + poolName);
+                //Debug.LogWarning("No object available & cannot grow pool: " + poolName);
             }
 
             GameObject result = null;

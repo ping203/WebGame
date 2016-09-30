@@ -8,16 +8,17 @@ public class Res {
     public static string IP = "52.74.154.183";
     public static int PORT = 4326;
     //public static string IP = "101.99.3.131";
+    //public static string IP = "192.168.1.104";
     //public static int PORT = 4323;
     //public static int PORT = 9999;
     public static string TXT_PhoneNumber = "0999999999";
 
     public static int ROOMFREE = 1;
-    public static int ROOMVIP = 0;
+    public static int ROOMVIP = 2;
     //---------------string 
-    public static string MONEY_FREE = " Xu";
+    public static string MONEY_FREE = " Chip";
     public static string MONEY_VIP = " Xu";
-    public static string MONEY_FREE_UPPERCASE = " XU";
+    public static string MONEY_FREE_UPPERCASE = " Chip";
     public static string MONEY_VIP_UPPERCASE = " XU";
     public static string TXT_SANSANG = "Sẵn sàng";
     public static string TXT_BOSANSANG = "Bỏ sẵn sàng";

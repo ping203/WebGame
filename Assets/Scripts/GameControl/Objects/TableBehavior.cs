@@ -97,11 +97,11 @@ public class TableBehavior : MonoBehaviour {
         GameControl.instance.sound.startClickButtonAudio();
         long moneyTemp = 0;
         string money = "";
-        if (RoomControl.roomType == 1) {
-            moneyTemp = BaseInfo.gI().mainInfo.moneyChip;
+        if (BaseInfo.gI().typetableLogin == Res.ROOMFREE) {
+            moneyTemp = BaseInfo.gI().mainInfo.moneyFree;
             money = Res.MONEY_FREE;
         } else {
-            moneyTemp = BaseInfo.gI().mainInfo.moneyXu;
+            moneyTemp = BaseInfo.gI().mainInfo.moneyVip;
             money = Res.MONEY_VIP;
         }
         if (moneyTemp < tableItem.needMoney) {
@@ -112,16 +112,16 @@ public class TableBehavior : MonoBehaviour {
                     });
         } else {
             BaseInfo.gI().numberPlayer = tableItem.maxUser;
-            if (GameControl.instance.gameID == GameID.POKER
-                    || GameControl.instance.gameID == GameID.XITO
-                    || GameControl.instance.gameID == GameID.LIENG) {
-                BaseInfo.gI().moneyNeedTable = tableItem.needMoney;
-                GameControl.instance.panelRutTien.show((long)(tableItem.needMoney), tableItem.maxMoney, 0, tableItem.id, 0, 0, RoomControl.roomType);
-            } else {
+            //if (GameControl.instance.gameID == GameID.POKER
+            //        || GameControl.instance.gameID == GameID.XITO
+            //        || GameControl.instance.gameID == GameID.LIENG) {
+            //    BaseInfo.gI().moneyNeedTable = tableItem.needMoney;
+            //    GameControl.instance.panelRutTien.show((long)(tableItem.needMoney), tableItem.maxMoney, 0, tableItem.id, 0, 0, RoomControl.roomType);
+            //} else {
                 GameControl.instance.panelWaiting.onShow();
                 //SendData.onJoinTablePlay(id, "", -1);
                 SendData.onJoinTablePlay(BaseInfo.gI().mainInfo.nick, tableItem.id, "", -1);
-            }
+            //}
         }
 
     }

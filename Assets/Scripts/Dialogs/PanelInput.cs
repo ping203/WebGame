@@ -27,6 +27,7 @@ public class PanelInput : PanelGame {
                 string nick = ip_enter.text;
                 if (!nick.Equals("")) {
                     SendData.onGetPass(nick);
+                    Debug.Log(nick);
                     base.onHide();
                 } else {
                     GameControl.instance.panelMessageSytem.onShow("Tài khoản không đúng!");

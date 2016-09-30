@@ -23,7 +23,7 @@ public class PanelDoiXuChip : PanelGame {
 	}
 	//panel doi chip
 	public void onChangeValueSliderXuToChip(){
-		xu = (int)(BaseInfo.gI ().mainInfo.moneyXu * slider.value);
+		xu = (int)(BaseInfo.gI ().mainInfo.moneyVip * slider.value);
         ip_doi.text = xu + "";
 
         long c = xu * BaseInfo.gI ().tyle_xu_sang_chip;
@@ -44,7 +44,7 @@ public class PanelDoiXuChip : PanelGame {
 
 	//panel doi xu
 	public void onChangeValueSliderChipToXu(){
-        chip = (int) (BaseInfo.gI ().mainInfo.moneyChip * slider.value);
+        chip = (int) (BaseInfo.gI ().mainInfo.moneyFree * slider.value);
         ip_doi.text = chip + "";
 
         int x = (int) (chip / BaseInfo.gI ().tyle_chip_sang_xu);
@@ -74,7 +74,7 @@ public class PanelDoiXuChip : PanelGame {
 		}
 
 		if (long.Parse(ip_doi.text.Trim ()) > BaseInfo
-		    .gI().mainInfo.moneyXu) {
+		    .gI().mainInfo.moneyVip) {
                 GameControl.instance.panelMessageSytem.onShow ("Số xu chuyển phải <= số " + Res.MONEY_VIP +" hiện tại!");
 			return;
 		}
@@ -95,7 +95,7 @@ public class PanelDoiXuChip : PanelGame {
 		}
 		
 		if (long.Parse(ip_doi.text.Trim ()) > BaseInfo
-		    .gI().mainInfo.moneyChip) {
+		    .gI().mainInfo.moneyFree) {
                 GameControl.instance.panelMessageSytem.onShow ("Số chip chuyển phải <= số " + Res.MONEY_FREE +" hiện tại!");
 			return;
 		}

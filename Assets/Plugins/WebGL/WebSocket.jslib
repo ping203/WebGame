@@ -12,7 +12,6 @@ SocketCreate: function(url)
 
 	socket.socket.binaryType = 'arraybuffer';
 	socket.socket.onopen = function (e) {
-		//alert('Kết nối thành công!');
 	};
 	socket.socket.onmessage = function (e) {
 		// Todo: handle other data types?
@@ -88,19 +87,8 @@ SocketError: function (socketInstance, ptr, bufsize)
 
 SocketSend: function (socketInstance, ptr, length)
 {
-	//var socket = webSocketInstances[socketInstance];
-	//socket.socket.send (HEAPU8.buffer.slice(ptr, ptr+length));
 	var socket = webSocketInstances[socketInstance];
-	if (socket.socket.readyState === 1) {
-    socket.socket.send (HEAPU8.buffer.slice(ptr, ptr+length));
-	}else{
-		//var m_that = this;
-        // optional: implement backoff for interval here
-     //   setTimeout(function () {SocketSend(socketInstance, ptr, length);}
-	//		, 1000);
-	   setTimeout(function () {alert('Sever đang bảo trì!');}
-			, 1000);
-	}
+		socket.socket.send (HEAPU8.buffer.slice(ptr, ptr+length));
 },
 
 SocketRecvLength: function(socketInstance)

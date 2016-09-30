@@ -35,17 +35,21 @@ public class ArrayCard : MonoBehaviour {
 
     public Text lb_SoBai;
     private int soBai;
-
     public void setVisibleSobai(bool isVisible) {
         if (lb_SoBai != null) {
             lb_SoBai.gameObject.SetActive(isVisible);
         }
     }
+
+    Vector3 vtPosCenter;
     void Awake() {
         if (gameControl == null) {
             gameControl = GameControl.instance;
         }
         init(type, maxW, maxH, isSmall, maxCard, inone, isTouch, gameControl);
+        vtPosCenter = mainTransform.InverseTransformPoint(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+
+
     }
     public void init(int type, int maxW, int maxH, bool isSmall, int maxCard,
             bool inone, bool isTouch, GameControl gameControl) {
@@ -495,9 +499,10 @@ public class ArrayCard : MonoBehaviour {
                 Card card = getCardbyPos(i);
                 Vector3 oldPos = card.gameObject.transform.localPosition;
                 card.transform.SetParent(mainTransform);
-                card.transform.localPosition = new Vector3(0, 0, 0);
-                StartCoroutine(card.moveTo(oldPos, 0.25f, i * 0.15f, true));
-                //gameControl.sound.startchiabaiAudio ();
+                card.transform.localPosition = vtPosCenter;
+                card.setvisible(false);
+                //StartCoroutine(card.moveTo(oldPos, 0.25f, i * 0.15f, true));
+                StartCoroutine(card.moveFromTo(vtPosCenter, oldPos, 0.15f, i * 0.1f, true));
             }
         }
         if (inone) {
@@ -522,8 +527,10 @@ public class ArrayCard : MonoBehaviour {
                 Card card = getCardbyPos(i);
                 Vector3 oldPos = card.transform.localPosition;
                 card.transform.parent = mainTransform;
-                card.transform.localPosition = new Vector3(0, 0, 0);
-                StartCoroutine(card.moveTo(oldPos, 0.25f, i * 0.15f, true));
+                card.transform.localPosition = vtPosCenter;
+                card.setvisible(false);
+                //StartCoroutine(card.moveTo(oldPos, 0.25f, i * 0.15f, true));
+                StartCoroutine(card.moveFromTo(vtPosCenter, oldPos, 0.15f, i * 0.1f, true));
             }
         }
         if (inone) {

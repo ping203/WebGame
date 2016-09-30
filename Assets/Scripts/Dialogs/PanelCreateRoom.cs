@@ -15,7 +15,9 @@ public class PanelCreateRoom : PanelGame {
     void Start() {
         sliderMoney.onValueChanged.AddListener(onChangeMoney);
     }
-
+    void OnEnable() {
+        onChangeMoney(0);
+    }
     // Update is called once per frame
     void Update() {
         //#if UNITY_WP8
@@ -95,7 +97,7 @@ public class PanelCreateRoom : PanelGame {
 
             bool check = false;
             string info = "";
-            switch (GameControl.instance.gameID) {
+            switch (gameid) {
                 case GameID.TLMN:
                 case GameID.PHOM:
                 case GameID.XAM:
@@ -146,7 +148,7 @@ public class PanelCreateRoom : PanelGame {
                 //        SendData.onCreateTable(gameid, 1, money, maxplayer, 0, "");
                 //    }
                 //} else {
-                    if (10 * money > BaseInfo.gI().mainInfo.moneyXu) {
+                    if (10 * money > BaseInfo.gI().mainInfo.moneyVip) {
                         GameControl.instance.panelMessageSytem.onShow("Không đủ tiền để tạo bàn!");
                     } else {
                         SendData.onCreateTable(gameid, 2, money, maxplayer, 0, "");
@@ -157,11 +159,10 @@ public class PanelCreateRoom : PanelGame {
             }
         } catch (Exception e) {
             GameControl.instance.toast.showToast("Định dạng bàn không đúng!");
-            //Debug.LogException(e);
         }
     }
 
-    public void onShow() {
+    public override void onShow() {
         sliderMoney.value = 0;
         base.onShow();
     }

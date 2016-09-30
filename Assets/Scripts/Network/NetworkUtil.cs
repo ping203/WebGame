@@ -1,16 +1,10 @@
-﻿using System.IO;
-using System.Threading;
+﻿using System.Threading;
 using System;
 using UnityEngine;
-using UnityEngine.UI;
-using System.Net;
-using System.Text;
-using System.Collections.Generic;
 using System.Collections;
 using System.Net.Sockets;
-using UnityEngine.Networking;
-using UnityEngine.Experimental.Networking;
 using System.Runtime.InteropServices;
+using UnityEngine.SceneManagement;
 
 public class NetworkUtil : MonoBehaviour {
     private MessageHandler messageHandler;
@@ -26,6 +20,10 @@ public class NetworkUtil : MonoBehaviour {
     protected System.Threading.Thread receiveThread;
     private int maxRetry = 1;
 
+#if UNITY_WEBGL && !UNITY_EDITOR
+    [DllImport("__Internal")]
+    private static extern void AlertMessage(string msg);
+#endif
     void Awake() {
         if (instance == null) {
             //If I am the first instance, make me the Singleton
@@ -38,14 +36,17 @@ public class NetworkUtil : MonoBehaviour {
                 Destroy(this.gameObject);
         }
     }
-    //string m_url = "";
+    string m_url = "";
     public IEnumerator Start() {
-        //WWW www = new WWW("https://choibaidoithuong.org/config");
-        //yield return www;
-        //m_url = www.text;
-        //Debug.Log("Ket noi: " + m_url);
+        if (m_url.Equals("")) {
+            WWW www = new WWW("http://choibaidoithuong.org/config");
+            yield return www;
+            m_url = www.text;
+            Debug.Log("OK " + m_url);
+        }
         yield return StartCoroutine(doConnect());
         yield return StartCoroutine(threadReceiveMSG());
+        
     }
 
     public static NetworkUtil GI() {
@@ -68,17 +69,18 @@ public class NetworkUtil : MonoBehaviour {
             // Debug.Log("========try connect=========== : " + Res.IP);
             //w_socket = new WebSocket(new Uri("ws://" + Res.IP + ":" + Res.PORT));        
             //try {
-            //if (m_url.Equals("")) {
-            //    m_url = "ws://" + Res.IP + ":" + Res.PORT;
-            //}
-            //w_socket = new WebSocket(new Uri(m_url));
+            if (m_url.Equals("")) {
+                m_url = "ws://" + Res.IP + ":" + Res.PORT;
+            }
+            w_socket = new WebSocket(new Uri(m_url));
             // w_socket = new WebSocket(new Uri(Res.IP + ":" + Res.PORT));
-            w_socket = new WebSocket(new Uri("ws://" + Res.IP + ":" + Res.PORT));
+            //w_socket = new WebSocket(new Uri("ws://" + Res.IP + ":" + Res.PORT));
             //} catch (Exception e) {
             //    Debug.LogException(e);
             //}
             yield return StartCoroutine(w_socket.Connect());
             connected = true;
+            SceneManager.LoadSceneAsync("main");
             //        if (!connected && maxRetry < 4) {
             //            maxRetry++;
             //            Connect();
@@ -94,9 +96,9 @@ public class NetworkUtil : MonoBehaviour {
             byte[] bytes = msg.toByteArray();
             //string message = System.Text.Encoding.UTF8.GetString(bytes);
 
-#if !UNITY_WEBGL
+//#if UNITY_EDITOR
             Debug.Log("Send : " + msg.command);
-#endif
+//#endif
             w_socket.Send(bytes);
         } catch (Exception ex) {
             Debug.LogException(ex);
@@ -120,9 +122,9 @@ public class NetworkUtil : MonoBehaviour {
                 count++;
                 size = ((a1 & 0xff) << 8) | (a2 & 0xff);
                 byte[] subdata = new byte[size];
-#if !UNITY_WEBGL
+//#if UNITY_EDITOR
                 Debug.Log("Read == " + command);
-#endif
+//#endif
                 Buffer.BlockCopy(data, count, subdata, 0, size);
                 count += size;
                 msg = new Message(command, subdata);
@@ -135,7 +137,7 @@ public class NetworkUtil : MonoBehaviour {
     }
 
     public void close() {
-#if !UNITY_WEBGL
+#if UNITY_EDITOR
         Debug.Log("Close current socket!");
 #endif
         cleanNetwork();
@@ -193,7 +195,6 @@ public class NetworkUtil : MonoBehaviour {
                     //				byte[] bytes = Encoding.ASCII.GetBytes(decodedString);
 
                     processMsgFromData(sdata, sdata.Length);
-
                 }
             } catch (Exception e) {
                 Debug.LogException(e);

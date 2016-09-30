@@ -30,7 +30,7 @@ public class PanelDoiThuong : PanelGame {
         long priceGift = gift.GetComponent<InfoGift>().priceGift;
         string name = gift.GetComponent<InfoGift>().nameGift;
         long balance = gift.GetComponent<InfoGift>().balance;
-        if (BaseInfo.gI().mainInfo.moneyXu <= balance) {
+        if (BaseInfo.gI().mainInfo.moneyVip <= balance) {
             long money = balance + priceGift;
             GameControl.instance.panelMessageSytem.onShow("Bạn cần phải có ít nhất "
             + BaseInfo.formatMoneyDetailDot(money) + " " + Res.MONEY_VIP + " để đổi lấy phần quà này!");

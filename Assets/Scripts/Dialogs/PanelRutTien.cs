@@ -34,7 +34,7 @@ public class PanelRutTien : PanelGame {
 
                 GameControl.instance.panelWaiting.onShow();
                 SendData.onJoinTable(BaseInfo.gI().mainInfo.nick, idtable, "", tienchon);
-                Debug.Log("=========================Table ID: " + idtable);
+               // Debug.Log("=========================Table ID: " + idtable);
                 break;
             case 1:
                 // SendData.onAcceptInviteFriend ((sbyte) idgame,
@@ -42,7 +42,7 @@ public class PanelRutTien : PanelGame {
 
                 GameControl.instance.panelWaiting.onShow();
                 SendData.onAcceptInviteFriend((sbyte)idgame,
-                        (short)idtable, tienchon);
+                        (short)idtable, tienchon, (byte) BaseInfo.gI().typetableLogin);
                 break;
             case 2:
             case 3:
@@ -60,7 +60,7 @@ public class PanelRutTien : PanelGame {
         //    temp = BaseInfo.gI().mainInfo.moneyChip;
         //    moneyName = Res.MONEY_FREE;
         //} else {
-            temp = BaseInfo.gI().mainInfo.moneyXu;
+            temp = BaseInfo.gI().mainInfo.moneyVip;
             moneyName = Res.MONEY_VIP;
         //}
 

@@ -16,11 +16,6 @@ public class PHOM : HasMasterCasino {
 
     bool isHaPhomRoi = false;
 
-    void Awake() {
-        nUsers = 4;
-
-    }
-
     public override void setMasterSecond(string master) {
         base.setMasterSecond(master);
         if (!isStart) {

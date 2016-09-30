@@ -16,8 +16,8 @@ public class HasMasterCasino : BaseCasino {
     }
     public override void changBetMoney(long betMoney) {
         base.changBetMoney(betMoney);
-        btn_sansang.gameObject.SetActive(true);
         if (!BaseInfo.gI().isView && !players[0].isMaster() && !BaseInfo.gI().regOuTable && !BaseInfo.gI().checkHettien()) {
+            btn_sansang.gameObject.SetActive(true);
             if (BaseInfo.gI().isAutoReady) {
                 clickReady();
             }
@@ -41,7 +41,7 @@ public class HasMasterCasino : BaseCasino {
         }
     }
     public override void onJoinTableSuccess(string master) {
-        //vao xem
+        #region vao xem
         if (BaseInfo.gI().isView) {
             btn_batdau.gameObject.SetActive(false);
             btn_sansang.gameObject.SetActive(false);
@@ -50,7 +50,7 @@ public class HasMasterCasino : BaseCasino {
                 toggleLock.gameObject.SetActive(false);
             return;
         }
-        //het vao xem
+        #endregion //het vao xem
 
         if (BaseInfo.gI().mainInfo.nick.Equals(master)) {//neu mh la chu ban
             btn_batdau.gameObject.SetActive(true);
@@ -101,9 +101,9 @@ public class HasMasterCasino : BaseCasino {
             } else {
                 btn_batdau.gameObject.SetActive(false);
                 btn_datcuoc.gameObject.SetActive(false);
-                btn_sansang.gameObject.SetActive(false);
+                //btn_sansang.gameObject.SetActive(false);
+                btn_sansang.gameObject.SetActive(true);
                 if (!players[0].isReady()) {
-                    btn_sansang.gameObject.SetActive(true);
                     if (BaseInfo.gI().isAutoReady) {
                         if (!BaseInfo.gI().regOuTable) {
                             clickReady();

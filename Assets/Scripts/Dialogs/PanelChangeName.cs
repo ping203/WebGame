@@ -6,16 +6,6 @@ public class PanelChangeName : PanelGame {
 	public Text oldName;
     public InputField ip_newname;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 	public void onShow(string name){
 		oldName.text = name;
 		base.onShow ();

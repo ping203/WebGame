@@ -13,9 +13,6 @@ public class Xam : HasMasterCasino {
     private Vector3 posBaoXam = new Vector3(0, 30, 0);
 
     // Use this for initialization
-
-
-    // Use this for initialization
    public new void Awake() {
         nUsers = 4;
         base.Awake();
@@ -32,6 +29,7 @@ public class Xam : HasMasterCasino {
         btn_boluot.gameObject.SetActive(false);
 
         btn_baoxam.gameObject.SetActive(false);
+        timer_baoxam.setEnableClick(false);
         btn_khongbaoxam.gameObject.SetActive(false);
         timer_baoxam.setDeActive();
         timer_baoxam.gameObject.SetActive(false);
@@ -47,6 +45,7 @@ public class Xam : HasMasterCasino {
         btn_danhbai.gameObject.SetActive(false);
         btn_boluot.gameObject.SetActive(false);
         btn_baoxam.gameObject.SetActive(false);
+        timer_baoxam.setEnableClick(false);
         btn_khongbaoxam.gameObject.SetActive(false);
         timer_baoxam.setDeActive();
         timer_baoxam.gameObject.SetActive(false);
@@ -123,6 +122,7 @@ public class Xam : HasMasterCasino {
             if (timer_baoxam.isActive()) {
                 timer_baoxam.setDeActive();
                 btn_baoxam.gameObject.SetActive(false);
+                timer_baoxam.setEnableClick(false);
                 btn_khongbaoxam.gameObject.SetActive(false);
                 setKhongBaoXam();
             }
@@ -324,6 +324,7 @@ public class Xam : HasMasterCasino {
     public void clickButtonBaoXam() {
         SendData.baoxam(1);
         btn_baoxam.gameObject.SetActive(false);
+        timer_baoxam.setEnableClick(false);
         btn_khongbaoxam.gameObject.SetActive(false);
         timer_baoxam.setDeActive();
     }
@@ -331,11 +332,13 @@ public class Xam : HasMasterCasino {
     public void clickButtonKhongBaoXam() {
         SendData.baoxam(0);
         btn_baoxam.gameObject.SetActive(false);
+        timer_baoxam.setEnableClick(false);
         btn_khongbaoxam.gameObject.SetActive(false);
     }
 
     internal void hetGioBaoXam() {
         btn_baoxam.gameObject.SetActive(false);
+        timer_baoxam.setEnableClick(false);
         btn_khongbaoxam.gameObject.SetActive(false);
         setKhongBaoXam();
     }
@@ -344,6 +347,7 @@ public class Xam : HasMasterCasino {
         if (players[0].isPlaying()) {
             btn_baoxam.gameObject.SetActive(true);
             btn_khongbaoxam.gameObject.SetActive(true);
+            timer_baoxam.setEnableClick(true);
         }
 
         timer_baoxam.setActive(time);
@@ -355,6 +359,7 @@ public class Xam : HasMasterCasino {
     public override void onNickBaoXam(string name) {
         base.onNickBaoXam(name);
         btn_baoxam.gameObject.SetActive(false);
+        timer_baoxam.setEnableClick(false);
         btn_khongbaoxam.gameObject.SetActive(false);
         timer_baoxam.setDeActive();
         setBaoXamToPlayer(getPlayer(name), true);

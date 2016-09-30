@@ -8,7 +8,7 @@ public class PanelMessageSytem : PanelGame {
     public Button btnCancel;
     public delegate void CallBack();
     public CallBack onClickOK;
-    const float posXCenter = 0, posX_left = -60, posX_right = 60;
+    const float posXCenter = 0, posX = 80;
 
     public void onShow(string mess) {
         btnCancel.gameObject.SetActive(false);
@@ -31,8 +31,8 @@ public class PanelMessageSytem : PanelGame {
             onClickOK = clickOK;
             base.onShow();
 
-            setPosBtn(btnOK, posX_left);
-            setPosBtn(btnCancel, posX_right);
+            setPosBtn(btnOK, -posX);
+            setPosBtn(btnCancel, posX);
             txt_lb_ok.text = "Đồng ý";
             txt_lb_cancel.text = "Hủy";
         });

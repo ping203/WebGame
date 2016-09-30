@@ -208,6 +208,10 @@ public abstract class BaseCasino : StageControl {
             BaseInfo.gI().regOuTable = false;
             if (!isPlaying && chip_tong != null)
                 chip_tong.gameObject.SetActive(false);
+            if (toggleLock != null) {
+                isLock = false;
+                toggleLock.image.sprite = lockSprite[1];
+            }
         } catch (Exception e) {
             Debug.LogException(e);
         }
@@ -384,6 +388,7 @@ public abstract class BaseCasino : StageControl {
     public int preCard = -1, prevPlayer = -1;
 
     public virtual void startTableOk(int[] cardHand, Message msg, string[] nickPlay) {
+        gameControl.sound.pauseSound();
         isReceiveInFoWinPlayer = false;
         preCard = -1;
         prevPlayer = -1;
@@ -682,7 +687,7 @@ public abstract class BaseCasino : StageControl {
                     //if (RoomControl.roomType == Res.ROOMFREE) {
                     //    BaseInfo.gI().mainInfo.moneyChip = money;
                     //} else {
-                    BaseInfo.gI().mainInfo.moneyXu = money;
+                    BaseInfo.gI().mainInfo.moneyVip = money;
                     //}
                 }
             }
@@ -928,7 +933,8 @@ public abstract class BaseCasino : StageControl {
     }
     [SerializeField]
     Sprite[] lockSprite;//0 lock, 1 unlock
-    bool isLock;
+
+    bool isLock = false;
     public void clickButtonKhoa() {
         GameControl.instance.sound.startClickButtonAudio();
         isLock = !isLock;

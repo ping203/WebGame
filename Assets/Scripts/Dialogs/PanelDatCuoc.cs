@@ -69,6 +69,7 @@ public class PanelDatCuoc : PanelGame {
     }
     public void onShow() {
         sliderMoney.value = 0;
+        onChangeMoney(0);
         base.onShow();
     }
 }

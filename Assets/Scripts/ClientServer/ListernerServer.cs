@@ -136,6 +136,7 @@ public class ListernerServer : IChatListener {
             Debug.LogException(ex);
         }
     }
+
     public void onListTable(int totalTB, Message message) {
         gameControl.listTable.Clear();
         List<TableItem> temp = new List<TableItem>();
@@ -196,71 +197,72 @@ public class ListernerServer : IChatListener {
                 || gameControl.gameID == GameID.TLMNsolo) {
             MAX = 2;
         }
-        long muccuoc;
-        muccuoc = gameControl.listTable[0].money;
-        for (int i = 0; i < gameControl.listTable.Count; i++) {
-            try {
-                if (gameControl.listTable[i].nUser != 0) {
-                    temp.Add(gameControl.listTable[i]);
+        if (gameControl.listTable.Count > 0) {
+            long muccuoc;
+            muccuoc = gameControl.listTable[0].money;
+            for (int i = 0; i < gameControl.listTable.Count; i++) {
+                try {
+                    if (gameControl.listTable[i].nUser != 0) {
+                        temp.Add(gameControl.listTable[i]);
+                        if (gameControl.listTable[i].money != muccuoc) {
+                            dem5 = 0;
+                            dem9 = 0;
+                        }
+                        muccuoc = gameControl.listTable[i].money;
+                        continue;
+                    } else {
+                        if (gameControl.listTable[i].money == muccuoc
+                                && (gameControl.listTable[i].maxUser < 9)) {
+                            dem5++;
+                            if (dem5 <= MAX) {
+                                temp.Add(gameControl.listTable[i]);
+                                muccuoc = gameControl.listTable[i].money;
+                                continue;
+                            }
+
+                        } else {
+                        }
+                        if (gameControl.listTable[i].money == muccuoc
+                                && (gameControl.listTable[i].maxUser == 9)) {
+                            dem9++;
+                            if (dem9 <= MAX) {
+                                temp.Add(gameControl.listTable[i]);
+                                muccuoc = gameControl.listTable[i].money;
+                                continue;
+                            }
+                        } else {
+                        }
+                    }
                     if (gameControl.listTable[i].money != muccuoc) {
                         dem5 = 0;
                         dem9 = 0;
+                        if ((gameControl.listTable[i].maxUser < 9)) {
+                            dem5++;
+                            if (dem5 <= MAX) {
+                                temp.Add(gameControl.listTable[i]);
+                                muccuoc = gameControl.listTable[i].money;
+                                continue;
+                            }
+
+                        } else {
+                        }
+                        if ((gameControl.listTable[i].maxUser == 9)) {
+                            dem9++;
+                            if (dem9 <= MAX) {
+                                temp.Add(gameControl.listTable[i]);
+                                muccuoc = gameControl.listTable[i].money;
+                                continue;
+                            }
+                        } else {
+                        }
+
                     }
                     muccuoc = gameControl.listTable[i].money;
+                } catch (Exception e) {
                     continue;
-                } else {
-                    if (gameControl.listTable[i].money == muccuoc
-                            && (gameControl.listTable[i].maxUser < 9)) {
-                        dem5++;
-                        if (dem5 <= MAX) {
-                            temp.Add(gameControl.listTable[i]);
-                            muccuoc = gameControl.listTable[i].money;
-                            continue;
-                        }
-
-                    } else {
-                    }
-                    if (gameControl.listTable[i].money == muccuoc
-                            && (gameControl.listTable[i].maxUser == 9)) {
-                        dem9++;
-                        if (dem9 <= MAX) {
-                            temp.Add(gameControl.listTable[i]);
-                            muccuoc = gameControl.listTable[i].money;
-                            continue;
-                        }
-                    } else {
-                    }
                 }
-                if (gameControl.listTable[i].money != muccuoc) {
-                    dem5 = 0;
-                    dem9 = 0;
-                    if ((gameControl.listTable[i].maxUser < 9)) {
-                        dem5++;
-                        if (dem5 <= MAX) {
-                            temp.Add(gameControl.listTable[i]);
-                            muccuoc = gameControl.listTable[i].money;
-                            continue;
-                        }
-
-                    } else {
-                    }
-                    if ((gameControl.listTable[i].maxUser == 9)) {
-                        dem9++;
-                        if (dem9 <= MAX) {
-                            temp.Add(gameControl.listTable[i]);
-                            muccuoc = gameControl.listTable[i].money;
-                            continue;
-                        }
-                    } else {
-                    }
-
-                }
-                muccuoc = gameControl.listTable[i].money;
-            } catch (Exception e) {
-                continue;
             }
         }
-
         gameControl.listTable.Clear();
         gameControl.listTable.AddRange(temp);
         //Xep theo muc cuoc, tu thap den cao
@@ -395,8 +397,8 @@ public class ListernerServer : IChatListener {
         try {
             BaseInfo.gI().mainInfo.nick = msg.reader().ReadUTF();
             BaseInfo.gI().mainInfo.userid = msg.reader().ReadLong();
-            BaseInfo.gI().mainInfo.moneyXu = msg.reader().ReadLong();
-            //BaseInfo.gI ().mainInfo.moneyChip = msg.reader ().ReadLong ();
+            BaseInfo.gI().mainInfo.moneyVip = msg.reader().ReadLong();
+            // BaseInfo.gI ().mainInfo.moneyFree = msg.reader ().ReadLong ();
             BaseInfo.gI().mainInfo.fullname = msg.reader().ReadUTF();
             BaseInfo.gI().mainInfo.displayname = msg.reader().ReadUTF();
             BaseInfo.gI().mainInfo.link_Avatar = msg.reader().ReadUTF();
@@ -408,12 +410,14 @@ public class ListernerServer : IChatListener {
 
             BaseInfo.gI().mainInfo.soLanThang = msg.reader().ReadUTF();
             BaseInfo.gI().mainInfo.soLanThua = msg.reader().ReadUTF();
-            BaseInfo.gI().mainInfo.soTienMax = msg.reader().ReadLong();
+            BaseInfo.gI().mainInfo.moneyVipMax = msg.reader().ReadLong();
             //BaseInfo.gI ().mainInfo.soChipMax = msg.reader ().ReadLong ();
             BaseInfo.gI().mainInfo.soGDThanhCong = msg.reader().ReadInt();
             BaseInfo.gI().mainInfo.LanDangNhapCuoi = msg.reader().ReadUTF();
             BaseInfo.gI().mainInfo.gender = msg.reader().ReadByte();
             BaseInfo.gI().mainInfo.isVIP = msg.reader().ReadByte();
+            BaseInfo.gI().mainInfo.moneyFree = msg.reader().ReadLong();
+            BaseInfo.gI().mainInfo.moneyFreeMax = msg.reader().ReadLong();
             //Debug.LogError (" BaseInfo.gI().mainInfo.fullname: " + BaseInfo.gI().mainInfo.fullname);
             //Debug.LogError ("BaseInfo.gI ().mainInfo.soLanThua: " + BaseInfo.gI ().mainInfo.soLanThua);
             //Debug.LogError ("BaseInfo.gI ().mainInfo.LanDangNhapCuoi: " + BaseInfo.gI ().mainInfo.LanDangNhapCuoi);
@@ -541,17 +545,14 @@ public class ListernerServer : IChatListener {
                 bool ready = message.reader().ReadBoolean();
                 int pl = gameControl.currentCasino.getPlayer(nick);
                 if (pl != -1) {
-                    //if (ready) {
-                    //    gameControl.currentCasino.players[pl].resetData();
-                    //}
                     gameControl.currentCasino.players[pl]
                             .setReady(ready);
                 }
                 if (nick.Equals(BaseInfo.gI().mainInfo.nick)) {
                     if (gameControl.currenStage is HasMasterCasino) {
                         if (!ready) {
-                            ((HasMasterCasino)gameControl.currenStage).lb_Btn_sansang
-                                    .text = (Res.TXT_SANSANG);
+                            ((HasMasterCasino)gameControl.currenStage).btn_sansang.gameObject.SetActive(true);
+                            ((HasMasterCasino)gameControl.currenStage).lb_Btn_sansang.text = (Res.TXT_SANSANG);
                         } else {
                             ((HasMasterCasino)gameControl.currenStage).btn_sansang.gameObject.SetActive(false);
                         }
@@ -644,14 +645,18 @@ public class ListernerServer : IChatListener {
                 + ", bạn có đồng ý không?", delegate {
                     BaseInfo.gI().moneyNeedTable = minMoney;
                     // if (maxMoney == -1) {
-                    SendData.onAcceptInviteFriend(gameid, tblid, -1);
+                    SendData.onAcceptInviteFriend(gameid, tblid, -1, (byte)BaseInfo.gI().typetableLogin);
                     SendData.onJoinTablePlay(BaseInfo.gI().mainInfo.nick, tblid, "", -1);
                 });
         }
     }
 
     public void onRegSuccess(Message msg) {
+        //gameControl.panelMessageSytem.onShow("Đăng ký thành công. Bạn có muốn đăng nhập không?", delegate {
+        gameControl.toast.showToast("Đăng ký thành công!");
         gameControl.login.loginWhenRegSucces();
+        //});
+        //
     }
 
     public void onRegFail(string info) {
@@ -672,7 +677,7 @@ public class ListernerServer : IChatListener {
     public void onChatMessage(string nick, string msg, bool outs) {
         gameControl.currentCasino.onMsgChat(nick, msg);
     }
-    
+
     public void onUpdateProfile(int code, string info) {
         gameControl.panelMessageSytem.onShow("Cập nhật thông tin cá nhân thành công!");
     }
@@ -795,8 +800,10 @@ public class ListernerServer : IChatListener {
             string link_Avatar = message.reader().ReadUTF();
             int idAvata = message.reader().ReadInt();
             int gender = message.reader().ReadByte();
+            long moneyFree = message.reader().ReadLong();
+            long moneyFreeMax = message.reader().ReadLong();
 
-            gameControl.panelInfoPlayer.infoProfile(displayname, userID, money, -1, soLanThang, soLanThua, link_Avatar, idAvata, "", "", 0);
+            gameControl.panelInfoPlayer.infoProfile(displayname, userID, money, moneyFree, soLanThang, soLanThua, link_Avatar, idAvata, "", "", 0);
 
             gameControl.panelWaiting.onHide();
             gameControl.panelInfoPlayer.onShow();
@@ -866,15 +873,18 @@ public class ListernerServer : IChatListener {
         gameControl.currentCasino.onNickSkip(nick, msg);
     }
 
-    public void onUpdateMoneyMessage(string readstring, int type, long readInt) {
+    public void onUpdateMoneyMessage(string readstring, int type, long readVip, long readFree) {
         if (readstring.Equals(BaseInfo.gI().mainInfo.nick)) {
             //if (type == 0) {
-            BaseInfo.gI().mainInfo.moneyXu = readInt;
+            BaseInfo.gI().mainInfo.moneyVip = readVip;
             //} else {
-            //    BaseInfo.gI().mainInfo.moneyChip = readInt;
+            BaseInfo.gI().mainInfo.moneyFree = readFree;
             //}
             if (gameControl.currentCasino != null && gameControl.gameID != GameID.XENG) {
-                gameControl.currentCasino.players[0].setMoney(readInt);
+                if (BaseInfo.gI().typetableLogin == Res.ROOMVIP)
+                    gameControl.currentCasino.players[0].setMoney(readVip);
+                else
+                    gameControl.currentCasino.players[0].setMoney(readFree);
             }
         }
     }
@@ -971,70 +981,71 @@ public class ListernerServer : IChatListener {
                 || gameControl.gameID == GameID.TLMNsolo) {
             MAX = 2;
         }
-        long muccuoc;
-        muccuoc = gameControl.listTable[0].money;
-        for (int i = 0; i < gameControl.listTable.Count; i++) {
-            try {
-                if (gameControl.listTable[i].nUser != 0) {
-                    temp.Add(gameControl.listTable[i]);
+        if (gameControl.listTable.Count > 0) {
+            long muccuoc;
+            muccuoc = gameControl.listTable[0].money;
+            for (int i = 0; i < gameControl.listTable.Count; i++) {
+                try {
+                    if (gameControl.listTable[i].nUser != 0) {
+                        temp.Add(gameControl.listTable[i]);
+                        if (gameControl.listTable[i].money != muccuoc) {
+                            dem5 = 0;
+                            dem9 = 0;
+                        }
+                        muccuoc = gameControl.listTable[i].money;
+                        continue;
+                    } else {
+                        if (gameControl.listTable[i].money == muccuoc
+                                && (gameControl.listTable[i].maxUser < 9)) {
+                            dem5++;
+                            if (dem5 <= MAX) {
+                                temp.Add(gameControl.listTable[i]);
+                                muccuoc = gameControl.listTable[i].money;
+                                continue;
+                            }
+
+                        } else {
+                        }
+                        if (gameControl.listTable[i].money == muccuoc
+                                && (gameControl.listTable[i].maxUser == 9)) {
+                            dem9++;
+                            if (dem9 <= MAX) {
+                                temp.Add(gameControl.listTable[i]);
+                                muccuoc = gameControl.listTable[i].money;
+                                continue;
+                            }
+                        } else {
+                        }
+                    }
                     if (gameControl.listTable[i].money != muccuoc) {
                         dem5 = 0;
                         dem9 = 0;
+                        if ((gameControl.listTable[i].maxUser < 9)) {
+                            dem5++;
+                            if (dem5 <= MAX) {
+                                temp.Add(gameControl.listTable[i]);
+                                muccuoc = gameControl.listTable[i].money;
+                                continue;
+                            }
+
+                        } else {
+                        }
+                        if ((gameControl.listTable[i].maxUser == 9)) {
+                            dem9++;
+                            if (dem9 <= MAX) {
+                                temp.Add(gameControl.listTable[i]);
+                                muccuoc = gameControl.listTable[i].money;
+                                continue;
+                            }
+                        } else {
+                        }
+
                     }
                     muccuoc = gameControl.listTable[i].money;
+                } catch (Exception e) {
                     continue;
-                } else {
-                    if (gameControl.listTable[i].money == muccuoc
-                            && (gameControl.listTable[i].maxUser < 9)) {
-                        dem5++;
-                        if (dem5 <= MAX) {
-                            temp.Add(gameControl.listTable[i]);
-                            muccuoc = gameControl.listTable[i].money;
-                            continue;
-                        }
-
-                    } else {
-                    }
-                    if (gameControl.listTable[i].money == muccuoc
-                            && (gameControl.listTable[i].maxUser == 9)) {
-                        dem9++;
-                        if (dem9 <= MAX) {
-                            temp.Add(gameControl.listTable[i]);
-                            muccuoc = gameControl.listTable[i].money;
-                            continue;
-                        }
-                    } else {
-                    }
                 }
-                if (gameControl.listTable[i].money != muccuoc) {
-                    dem5 = 0;
-                    dem9 = 0;
-                    if ((gameControl.listTable[i].maxUser < 9)) {
-                        dem5++;
-                        if (dem5 <= MAX) {
-                            temp.Add(gameControl.listTable[i]);
-                            muccuoc = gameControl.listTable[i].money;
-                            continue;
-                        }
-
-                    } else {
-                    }
-                    if ((gameControl.listTable[i].maxUser == 9)) {
-                        dem9++;
-                        if (dem9 <= MAX) {
-                            temp.Add(gameControl.listTable[i]);
-                            muccuoc = gameControl.listTable[i].money;
-                            continue;
-                        }
-                    } else {
-                    }
-
-                }
-                muccuoc = gameControl.listTable[i].money;
-            } catch (Exception e) {
-                continue;
             }
-
         }
 
         gameControl.listTable.Clear();
@@ -1086,6 +1097,10 @@ public class ListernerServer : IChatListener {
     public void onGetPhoneCSKH(Message message) {
         try {
             string data = message.reader().ReadUTF();
+            bool dm = message.reader().ReadBoolean();
+
+            string data2 = message.reader().ReadUTF();
+
             string[] temp = data.Split(',');
             BaseInfo.gI().txt_phoneNumber = temp[0].ToString();
             if (temp.Length > 1)
@@ -1112,20 +1127,15 @@ public class ListernerServer : IChatListener {
             if (BaseInfo.gI().isDoiThuong == 0) {
                 //gameControl.mainScreen.menu.textNoti.setText("Chào Mừng Bạn đã đến với BIM Game bài Uy Tín !");
                 //gameControl.menu.lb_textnoti.text = "Chào Mừng Bạn đã đến với BIM Game bài Uy Tín !";
+
             } else {
-                // gameControl.menu.lb_textnoti.text = content;
+                gameControl.room.setNoti(content);
             }
         } catch (IOException e) {
             // TODO Auto-generated catch block
             Debug.LogException(e);
         }
     }
-
-    //public void onGetBoxGift(Message message)
-    //{
-
-    //}
-
     public void infoWinPlayer(Message message) {
         try {
             int len = message.reader().ReadByte();
@@ -1198,10 +1208,10 @@ public class ListernerServer : IChatListener {
                     .gameObject.SetActive(true);
         }
         long moneyPlayer = 0;
-        if (RoomControl.roomType == 1) {
-            moneyPlayer = BaseInfo.gI().mainInfo.moneyChip;
+        if (BaseInfo.gI().typetableLogin == Res.ROOMFREE) {
+            moneyPlayer = BaseInfo.gI().mainInfo.moneyFree;
         } else {
-            moneyPlayer = BaseInfo.gI().mainInfo.moneyXu;
+            moneyPlayer = BaseInfo.gI().mainInfo.moneyVip;
         }
         if (BaseInfo.gI().tuDongRutTien) {
             // SendData.onSendGetMoney(-1);
@@ -1228,7 +1238,7 @@ public class ListernerServer : IChatListener {
                                     gameControl.panelRutTien.show(
                                                     BaseInfo.gI().currentMinMoney,
                                                     BaseInfo.gI().currentMaxMoney, 2, 0, 0,
-                                                    0, RoomControl.roomType);
+                                                    0, BaseInfo.gI().typetableLogin);
                                 });
             }
 
@@ -1568,7 +1578,7 @@ public class ListernerServer : IChatListener {
             sbyte type = message.reader().ReadByte();
             if (type == 1) {
                 long xu = message.reader().ReadLong();
-                BaseInfo.gI().mainInfo.moneyXu += xu;
+                BaseInfo.gI().mainInfo.moneyVip += xu;
             }
             string info = message.reader().ReadUTF();
             gameControl.panelMessageSytem.onShow(info, delegate { });
@@ -1584,8 +1594,8 @@ public class ListernerServer : IChatListener {
             if (type == 1) {
                 long xu = message.reader().ReadLong();
                 long chip = message.reader().ReadLong();
-                BaseInfo.gI().mainInfo.moneyXu -= xu;
-                BaseInfo.gI().mainInfo.moneyChip += chip;
+                BaseInfo.gI().mainInfo.moneyVip -= xu;
+                BaseInfo.gI().mainInfo.moneyFree += chip;
             }
             string info = message.reader().ReadUTF();
             gameControl.panelMessageSytem.onShow(info, delegate { });
@@ -1600,8 +1610,8 @@ public class ListernerServer : IChatListener {
             if (type == 1) {
                 long xu = message.reader().ReadLong();
                 long chip = message.reader().ReadLong();
-                BaseInfo.gI().mainInfo.moneyXu += xu;
-                BaseInfo.gI().mainInfo.moneyChip -= chip;
+                BaseInfo.gI().mainInfo.moneyVip += xu;
+                BaseInfo.gI().mainInfo.moneyFree -= chip;
             }
             string info = message.reader().ReadUTF();
             gameControl.panelMessageSytem.onShow(info, delegate { });
@@ -1649,10 +1659,10 @@ public class ListernerServer : IChatListener {
                     gameControl.panelMail.addIconSuKien(id, title, content);
                 }
                 //Debug.Log(title + " ---------- " + title);
-                strEvent += content + ";                                                ";
+                strEvent += content + ";\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
             }
             //TODO: fixed notification.
-            //gameControl.menu.lb_textnoti.text = strEvent.Trim();
+            gameControl.room.setNoti(strEvent.Trim());
             gameControl.panelWaiting.onHide();
 
         } catch (Exception e) {
@@ -1669,17 +1679,17 @@ public class ListernerServer : IChatListener {
         try {
             string sms = message.reader().ReadUTF();
             string ds = message.reader().ReadUTF();
-//#if UNITY_EDITOR
+            //#if UNITY_EDITOR
             gameControl.panelMessageSytem.onShow("Soạn tin theo cú pháp " + sms + " gửi đến " + ds);
-//#else
-//            gameControl.panelMessageSytem.onShow("Chương trình sẽ gửi tin nhắn để đổi mật khẩu (phí 1000đ), bạn có đồng ý không?",
-//                                          delegate { GameControl.sendSMS(ds, sms); });
-//#endif
+            //#else
+            //            gameControl.panelMessageSytem.onShow("Chương trình sẽ gửi tin nhắn để đổi mật khẩu (phí 1000đ), bạn có đồng ý không?",
+            //                                          delegate { GameControl.sendSMS(ds, sms); });
+            //#endif
             gameControl.panelWaiting.onHide();
 
         } catch (Exception ex) {
             Debug.LogException(ex);
-        } 
+        }
         //finally {
         //    SendData.getPass = false;
         //}
@@ -1691,7 +1701,7 @@ public class ListernerServer : IChatListener {
             sbyte x = message.reader().ReadByte();
             if (x == 1) {
                 long tiencong = message.reader().ReadLong();
-                BaseInfo.gI().mainInfo.moneyChip += tiencong;
+                BaseInfo.gI().mainInfo.moneyFree += tiencong;
                 gameControl.panelMessageSytem.onShow("Bạn đã được cộng " + tiencong + " tiền free", delegate { });
             } else {
                 gameControl.panelMessageSytem.onShow("Bạn không đủ điều kiện nhận tiền free", delegate { });

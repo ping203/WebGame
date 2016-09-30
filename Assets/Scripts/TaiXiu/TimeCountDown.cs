@@ -23,9 +23,9 @@ public class TimeCountDown : MonoBehaviour {
     public void setTime(float time) {
         this.time = time;
         if (time > 0) {
-            text_time.gameObject.SetActive(true);
+            gameObject.SetActive(true);
         } else {
-            text_time.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 }

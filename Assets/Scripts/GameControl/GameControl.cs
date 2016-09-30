@@ -143,7 +143,7 @@ public class GameControl : MonoBehaviour {
         Res.list_cards = Resources.LoadAll<Sprite>("Cards/cardall");
         IMEI = "357238040933272";//SystemInfo.deviceUniqueIdentifier;
     }
-    
+
     // Use this for initialization
     void Start() {
 #if !UNITY_WEBGL
@@ -170,21 +170,26 @@ public class GameControl : MonoBehaviour {
         taixiu.DisAppear();
 
         disableAllDialog();
-        NetworkUtil.GI().sendMessage(SendData.onGetPhoneCSKH());
+        if (NetworkUtil.GI().connected)
+            NetworkUtil.GI().sendMessage(SendData.onGetPhoneCSKH());
     }
     public void setStage(StageControl stage) {
         if (currenStage != stage) {
             backState = currenStage;
         }
-        if (currenStage != null) {
-            if (currenStage != room)
-                currenStage.DisAppear();
+        if (stage != login) {
+            currenStage.DisAppear();
         }
+        if (stage == room)
+            isInfo = true;
+        else
+            isInfo = false;
         stage.Appear();
         currenStage = stage;
-
     }
+    public bool isInfo = true;
     public void setCasino(int gameID, int type) {
+        isInfo = false;
         switch (gameID) {
             case GameID.TLMN:
                 setStage(tlmn);
@@ -297,7 +302,7 @@ public class GameControl : MonoBehaviour {
     }
 
     void OnApplicationQuit() {
-
+        NetworkUtil.GI().cleanNetwork();
     }
 
     void OnApplicationPause(bool pauseStatus) {

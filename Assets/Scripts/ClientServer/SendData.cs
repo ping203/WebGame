@@ -384,13 +384,14 @@ public class SendData {
         NetworkUtil.GI().sendMessage(msg);
     }
 
-    public static void onAcceptInviteFriend(sbyte gameid, short tblid, long folowMoney) {
+    public static void onAcceptInviteFriend(sbyte gameid, short tblid, long folowMoney, byte typeRoom) {
         //roomid = 2;
         Message msg = new Message(CMDClient.CMD_ANSWER_INVITE_FRIEND);
         try {
             msg.writer().WriteByte(gameid);
             msg.writer().WriteShort(tblid);
             msg.writer().WriteLong(folowMoney);
+            msg.writer().WriteByte(typeRoom);
         } catch (Exception ex) {
             Debug.LogException(ex);
         }
@@ -1000,10 +1001,10 @@ public class SendData {
     //Game Xoc dia
     #endregion
     #region TAIXIU
-    public static void onjoinTaiXiu(int loaiphong) {
+    public static void onjoinTaiXiu(byte loaiphong) {
         try {
             Message message = new Message(CMDClient.CMD_JOIN_TAIXIU);
-            message.writer().WriteInt(loaiphong);
+            message.writer().WriteByte(loaiphong);
             NetworkUtil.GI().sendMessage(message);
         } catch (Exception e) {
             Debug.LogException(e);
@@ -1019,11 +1020,12 @@ public class SendData {
         }
     }
 
-    public static void onCuocTaiXiu(byte cua, long money) {
+    public static void onCuocTaiXiu(byte cua, long money, byte typeroom) {
         try {
             Message message = new Message(CMDClient.CMD_CUOC_TAIXIU);
             message.writer().WriteByte(cua);
             message.writer().WriteLong(money);
+            message.writer().WriteByte(typeroom);
             NetworkUtil.GI().sendMessage(message);
         } catch (Exception e) {
             Debug.LogException(e);

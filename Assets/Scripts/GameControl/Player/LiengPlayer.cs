@@ -31,8 +31,7 @@ public class LiengPlayer : ABSUser {
             txt_diem.gameObject.SetActive(true);
             txt_diem.transform.DOKill();
             Tween tw = txt_diem.transform.DOScale(0.8f, 0.4f);
-            if (pos != 0) {
-                // Invoke("setVisibleDiemPlayer", 4f);
+            if (!getName().Equals(BaseInfo.gI().mainInfo.nick)) {
                 tw.SetLoops(10);
                 tw.OnComplete(delegate { setVisibleDiemPlayer(); });
             } else {

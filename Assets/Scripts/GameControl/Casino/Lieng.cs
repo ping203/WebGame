@@ -177,4 +177,11 @@ public class Lieng : BaseToCasino {
             Debug.LogException(e);
         }
     }
+
+    public override void onJoinTableSuccess(string master) {
+        base.onJoinTableSuccess(master);
+        for (int i = 0; i < nUsers; i++) {
+            ((LiengPlayer)players[i]).setVisibleDiemPlayer();
+        }
+    }
 }

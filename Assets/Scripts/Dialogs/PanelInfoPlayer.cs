@@ -32,22 +32,42 @@ public class PanelInfoPlayer : PanelGame {
         }
     }
 
+    bool isLoginFB;
+    void OnEnable() {
+        isLoginFB = GameControl.instance.login.isLoginFB;
+        //changePass.SetActive(!isLoginFB);
+        //changeName.SetActive(!isLoginFB);
+        //changeAvata.SetActive(!isLoginFB);
+    }
+
     public void clickChangePass() {
         GameControl.instance.sound.startClickButtonAudio();
-        GameControl.instance.panelChangePassword.onShow();
-        onHide();
+        if (isLoginFB) {
+            GameControl.instance.panelMessageSytem.onShow("Bạn không thể đổi mật khẩu.");
+        } else {
+            GameControl.instance.panelChangePassword.onShow();
+            onHide();
+        }
     }
 
     public void clickChangeName() {
         GameControl.instance.sound.startClickButtonAudio();
-        GameControl.instance.panelChangeName.onShow(BaseInfo.gI().mainInfo.displayname);
-        onHide();
+        if (isLoginFB) {
+            GameControl.instance.panelMessageSytem.onShow("Bạn không thể đổi tên.");
+        } else {
+            GameControl.instance.panelChangeName.onShow(BaseInfo.gI().mainInfo.displayname);
+            onHide();
+        }
     }
 
     public void clickChangeAvata() {
         GameControl.instance.sound.startClickButtonAudio();
-        GameControl.instance.panelChangeAvata.onShow();
-        onHide();
+        if (isLoginFB) {
+            GameControl.instance.panelMessageSytem.onShow("Bạn không thể đổi tên.");
+        } else {
+            GameControl.instance.panelChangeAvata.onShow();
+            onHide();
+        }
     }
 
     public void clickUpdateInfo() {
@@ -94,8 +114,8 @@ public class PanelInfoPlayer : PanelGame {
     public void infoMe() {
         string n = BaseInfo.gI().mainInfo.displayname;
         long uid = BaseInfo.gI().mainInfo.userid;
-        long xuMe = BaseInfo.gI().mainInfo.moneyXu;
-        long chipMe = BaseInfo.gI().mainInfo.moneyChip;
+        long xuMe = BaseInfo.gI().mainInfo.moneyVip;
+        long chipMe = BaseInfo.gI().mainInfo.moneyFree;
         string slt = BaseInfo.gI().mainInfo.soLanThang;
         string slth = BaseInfo.gI().mainInfo.soLanThua;
         int idAva = BaseInfo.gI().mainInfo.idAvata;
@@ -122,13 +142,13 @@ public class PanelInfoPlayer : PanelGame {
         // updateInfo.SetActive(false);
         // ip_email.readOnly = true;
         // ip_phone.readOnly = true;
-
-        if (GameControl.instance.room.isActive) {
-            bool isMe = nameinfo.Equals(BaseInfo.gI().mainInfo.displayname);
+        
+        if (GameControl.instance.isInfo) {
+            // bool isMe = nameinfo.Equals(BaseInfo.gI().mainInfo.displayname);
             //Neu của mh thì hiện lên
-            changePass.SetActive(isMe);
-            changeName.SetActive(isMe);
-            changeAvata.SetActive(isMe);
+            changePass.SetActive(true);
+            changeName.SetActive(true);
+            changeAvata.SetActive(true);
             // updateInfo.SetActive(isMe);
             // if (isMe) {
             //  ip_email.readOnly = false;

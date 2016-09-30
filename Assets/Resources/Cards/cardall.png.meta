@@ -99,11 +99,14 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: cardall_0
+    - serializedVersion: 2
+      name: cardall_0
       rect:
         serializedVersion: 2
         x: 0
@@ -113,13 +116,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -27, y: 37.5}
-        - {x: -28, y: 36.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_1
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_1
       rect:
         serializedVersion: 2
         x: 56
@@ -129,14 +129,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -27, y: 37.5}
-        - {x: -28, y: 36.5}
-        - {x: -28, y: -36.5}
-        - {x: -27, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_2
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_2
       rect:
         serializedVersion: 2
         x: 112
@@ -146,12 +142,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_3
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_3
       rect:
         serializedVersion: 2
         x: 168
@@ -161,12 +155,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_4
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_4
       rect:
         serializedVersion: 2
         x: 224
@@ -176,12 +168,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_5
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_5
       rect:
         serializedVersion: 2
         x: 280
@@ -191,12 +181,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_6
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_6
       rect:
         serializedVersion: 2
         x: 336
@@ -206,12 +194,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_7
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_7
       rect:
         serializedVersion: 2
         x: 392
@@ -221,13 +207,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -27, y: 37.5}
-        - {x: -28, y: 36.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_8
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_8
       rect:
         serializedVersion: 2
         x: 448
@@ -237,12 +220,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_9
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_9
       rect:
         serializedVersion: 2
         x: 504
@@ -252,12 +233,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_10
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_10
       rect:
         serializedVersion: 2
         x: 560
@@ -267,16 +246,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -27, y: 37.5}
-        - {x: -28, y: 36.5}
-        - {x: -28, y: -36.5}
-        - {x: -27, y: -37.5}
-        - {x: 27, y: -37.5}
-        - {x: 28, y: -36.5}
-        - {x: 28, y: 36.5}
-        - {x: 27, y: 37.5}
-    - name: cardall_11
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_11
       rect:
         serializedVersion: 2
         x: 616
@@ -286,12 +259,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_12
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_12
       rect:
         serializedVersion: 2
         x: 672
@@ -301,12 +272,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_13
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_13
       rect:
         serializedVersion: 2
         x: 0
@@ -316,13 +285,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -27, y: 37.5}
-        - {x: -28, y: 36.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_14
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_14
       rect:
         serializedVersion: 2
         x: 56
@@ -332,12 +298,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_15
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_15
       rect:
         serializedVersion: 2
         x: 112
@@ -347,12 +311,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_16
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_16
       rect:
         serializedVersion: 2
         x: 168
@@ -362,12 +324,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_17
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_17
       rect:
         serializedVersion: 2
         x: 224
@@ -377,12 +337,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_18
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_18
       rect:
         serializedVersion: 2
         x: 280
@@ -392,12 +350,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_19
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_19
       rect:
         serializedVersion: 2
         x: 336
@@ -407,13 +363,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -27, y: 37.5}
-        - {x: -28, y: 36.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_20
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_20
       rect:
         serializedVersion: 2
         x: 392
@@ -423,13 +376,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -27, y: 37.5}
-        - {x: -28, y: 36.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_21
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_21
       rect:
         serializedVersion: 2
         x: 448
@@ -439,12 +389,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_22
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_22
       rect:
         serializedVersion: 2
         x: 504
@@ -454,12 +402,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_23
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_23
       rect:
         serializedVersion: 2
         x: 560
@@ -469,12 +415,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_24
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_24
       rect:
         serializedVersion: 2
         x: 616
@@ -484,12 +428,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_25
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_25
       rect:
         serializedVersion: 2
         x: 672
@@ -499,12 +441,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_26
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_26
       rect:
         serializedVersion: 2
         x: 0
@@ -514,13 +454,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -27, y: 37.5}
-        - {x: -28, y: 36.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_27
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_27
       rect:
         serializedVersion: 2
         x: 56
@@ -530,12 +467,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_28
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_28
       rect:
         serializedVersion: 2
         x: 112
@@ -545,12 +480,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_29
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_29
       rect:
         serializedVersion: 2
         x: 168
@@ -560,12 +493,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_30
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_30
       rect:
         serializedVersion: 2
         x: 224
@@ -575,12 +506,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_31
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_31
       rect:
         serializedVersion: 2
         x: 280
@@ -590,12 +519,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_32
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_32
       rect:
         serializedVersion: 2
         x: 336
@@ -605,13 +532,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -27, y: 37.5}
-        - {x: -28, y: 36.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_33
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_33
       rect:
         serializedVersion: 2
         x: 392
@@ -621,12 +545,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_34
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_34
       rect:
         serializedVersion: 2
         x: 448
@@ -636,12 +558,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_35
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_35
       rect:
         serializedVersion: 2
         x: 504
@@ -651,12 +571,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_36
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_36
       rect:
         serializedVersion: 2
         x: 560
@@ -666,12 +584,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_37
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_37
       rect:
         serializedVersion: 2
         x: 616
@@ -681,12 +597,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_38
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_38
       rect:
         serializedVersion: 2
         x: 672
@@ -696,12 +610,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_39
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_39
       rect:
         serializedVersion: 2
         x: 0
@@ -711,13 +623,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 27, y: -37.5}
-        - {x: 28, y: -36.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_40
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_40
       rect:
         serializedVersion: 2
         x: 56
@@ -727,12 +636,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_41
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_41
       rect:
         serializedVersion: 2
         x: 112
@@ -742,13 +649,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -27, y: 37.5}
-        - {x: -28, y: 36.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_42
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_42
       rect:
         serializedVersion: 2
         x: 168
@@ -758,12 +662,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_43
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_43
       rect:
         serializedVersion: 2
         x: 224
@@ -773,12 +675,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_44
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_44
       rect:
         serializedVersion: 2
         x: 280
@@ -788,14 +688,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -26, y: 37.5}
-        - {x: -28, y: 35.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 35.5}
-        - {x: 26, y: 37.5}
-    - name: cardall_45
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_45
       rect:
         serializedVersion: 2
         x: 336
@@ -805,12 +701,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_46
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_46
       rect:
         serializedVersion: 2
         x: 392
@@ -820,13 +714,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -27, y: 37.5}
-        - {x: -28, y: 36.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_47
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_47
       rect:
         serializedVersion: 2
         x: 448
@@ -836,13 +727,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -27, y: 37.5}
-        - {x: -28, y: 36.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_48
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_48
       rect:
         serializedVersion: 2
         x: 504
@@ -852,12 +740,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_49
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_49
       rect:
         serializedVersion: 2
         x: 560
@@ -867,12 +753,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_50
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_50
       rect:
         serializedVersion: 2
         x: 616
@@ -882,12 +766,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_51
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_51
       rect:
         serializedVersion: 2
         x: 672
@@ -897,12 +779,10 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
-    - name: cardall_52
+      outline: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: cardall_52
       rect:
         serializedVersion: 2
         x: 0
@@ -912,11 +792,8 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -28, y: 37.5}
-        - {x: -28, y: -37.5}
-        - {x: 28, y: -37.5}
-        - {x: 28, y: 37.5}
+      outline: []
+      tessellationDetail: -1
     outline: []
   spritePackingTag: Card
   userData: 

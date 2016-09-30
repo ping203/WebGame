@@ -373,6 +373,7 @@ public class XocDia : BaseCasino {
         if (m_diaComponent != null) {
             m_diaComponent.SetAnimationXocdia();
         }
+        m_winXocdia.RemoveWinXocdia();
     }
 
     public override void onBeginXocDiaTimeDatcuoc(int time) {
@@ -569,7 +570,7 @@ public class XocDia : BaseCasino {
         isDatTatTay = false;
         if (id == 4) {
             isDatTatTay = true;
-            m_mucCuoc = BaseInfo.gI().mainInfo.moneyXu;
+            m_mucCuoc = BaseInfo.gI().mainInfo.moneyVip;
         } else
             m_mucCuoc = mucCuoc[id];
         m_mucCuocAnim[id].SetActive(true);
@@ -578,7 +579,7 @@ public class XocDia : BaseCasino {
     public void OnClickDatCuocCua(string lbId) {
         XocdiaPlayer xocdiaPlayer = players[0].GetComponent<XocdiaPlayer>();
         if (isDatTatTay) {
-            m_mucCuoc = BaseInfo.gI().mainInfo.moneyXu;
+            m_mucCuoc = BaseInfo.gI().mainInfo.moneyVip;
         }
         xocdiaPlayer.DatCuoc(lbId, m_mucCuoc, m_isDatCuocCua);
     }
@@ -642,9 +643,9 @@ public class XocDia : BaseCasino {
         gameControl.sound.clickBtnAudio();
         //Play sound.
 
-        if (m_isBetPrevious == true && m_isBetMeAgain == false) {
+        //if (m_isBetPrevious && !m_isBetMeAgain) {
             SendData.onSendDatLai();
-        }
+        //}
 
     }
 

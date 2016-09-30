@@ -21,7 +21,6 @@ public class DragDropHandler : MonoBehaviour,
             GetComponent<CanvasGroup>().blocksRaycasts = false;
             isDrop = false;
             int id = card.getId();
-            Debug.Log(id);
             ExecuteEvents.ExecuteHierarchy<IHasChanged>(gameObject, null, (x, y) => x.HasBeginDrag(id));
         }
     }
@@ -51,10 +50,10 @@ public class DragDropHandler : MonoBehaviour,
     #endregion
 
     public void OnDrop(PointerEventData eventData) {
-        if (GameControl.instance.isTouchMB) {
-            //itemBeingDragged.transform.localPosition = transform.localPosition;
-            //transform.localPosition = startPosition;
-
+        //if (GameControl.instance.isTouchMB) {
+        //itemBeingDragged.transform.localPosition = transform.localPosition;
+        //transform.localPosition = startPosition;
+        if (itemBeingDragged != null) {
             itemBeingDragged.transform.localPosition = startPosition;
 
             int id = itemBeingDragged.GetComponent<Card>().getId();
@@ -62,9 +61,12 @@ public class DragDropHandler : MonoBehaviour,
             itemBeingDragged.GetComponent<Card>().setId(card.getId());
             itemBeingDragged = null;
             card.setId(id);
-
-            isDrop = true;
-            ExecuteEvents.ExecuteHierarchy<IHasChanged>(gameObject, null, (x, y) => x.HasDrop());
+        } else {
+            transform.localPosition = startPosition;
         }
+        isDrop = true;
+        ExecuteEvents.ExecuteHierarchy<IHasChanged>(gameObject, null, (x, y) => x.HasDrop());
+
+        //}
     }
 }

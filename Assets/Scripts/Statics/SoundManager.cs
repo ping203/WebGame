@@ -3,35 +3,37 @@ using System.Collections;
 
 public class SoundManager : MonoBehaviour {
     AudioSource audioSource;
-   // AudioClip[] list_audios;
+    AudioClip[] list_audios;
 
     // Use this for initialization
     void Start() {
         audioSource = GetComponent<AudioSource>();
         audioSource.rolloffMode = AudioRolloffMode.Linear;
         audioSource.volume = 1;
-        //list_audios = Resources.LoadAll<AudioClip>("sounds") as AudioClip[];
+        list_audios = Resources.LoadAll<AudioClip>("sounds") as AudioClip[];
     }
 
-    //AudioClip getSoundByName(string name) {
-    //    for (int i = 0; i < list_audios.Length; i++) {
-    //        if (name.Equals(list_audios[i].name)) {
-    //            return list_audios[i];
-    //        }
-    //    }
-    //    return null;
-    //}
+    AudioClip getSoundByName(string name) {
+        for (int i = 0; i < list_audios.Length; i++) {
+            if (name.Equals(list_audios[i].name)) {
+                return list_audios[i];
+            }
+        }
+        return null;
+    }
 
     void PlaySound(string soundName, bool isLoop) {
         if (BaseInfo.gI().isSound) {
-             audioSource.PlayOneShot(Resources.Load("sounds/" + soundName) as AudioClip);
-            //audioSource.PlayOneShot(getSoundByName(soundName));
+            //audioSource.PlayOneShot(Resources.Load("sounds/" + soundName) as AudioClip);
+            pauseSound();
+            audioSource.PlayOneShot(getSoundByName(soundName));
             audioSource.loop = isLoop;
         }
     }
 
     public void pauseSound() {
-        audioSource.Pause();
+        if (audioSource.isPlaying)
+            audioSource.Pause();
     }
 
     public void PlayVibrate() {

@@ -40,14 +40,14 @@ public class Card : MonoBehaviour {
     void Awake() {
         setId(52);
     }
-
+    const float deltaHeight = 15;
     // Update is called once per frame
     void Update() {
         if (isChoose) {
-            if (deltaY < 20) {
+            if (deltaY < deltaHeight) {
                 deltaY = deltaY + 100 * Time.deltaTime;
             } else {
-                deltaY = 20;
+                deltaY = deltaHeight;
             }
         } else {
             if (deltaY > 0) {
@@ -98,20 +98,24 @@ public class Card : MonoBehaviour {
     }
     public IEnumerator moveFromTo(Vector3 from, Vector3 to, float dur, float wait, bool isDeal) {
         yield return new WaitForSeconds(wait);
+        GameControl.instance.sound.startchiabaiAudio();
+        setvisible(true);
         gameObject.transform.localPosition = from;
         transform.DOLocalMove(to, dur);
     }
 
     public IEnumerator moveTo(Vector3 to, float dur, float wait, bool isDeal) {
+
         int ids = id;
         if (isDeal) {
-            gameObject.SetActive(false);
+            setvisible(false);
             setId(52);
         }
 
         yield return new WaitForSeconds(wait);
+        setvisible(true);
         if (isDeal) {
-            gameObject.SetActive(true);
+            //setvisible(true);
             setId(ids);
         }
         
@@ -121,7 +125,7 @@ public class Card : MonoBehaviour {
     public void setChoose(bool isChoose) {
         this.isChoose = isChoose;
         if (isChoose) {
-            transform.DOLocalMoveY(20, 0.2f);
+            transform.DOLocalMoveY(deltaHeight, 0.2f);
         } else {
             transform.DOLocalMoveY(0, 0.2f);
         }
@@ -131,17 +135,8 @@ public class Card : MonoBehaviour {
         img_card.enabled = isTouchable;
         img_card.image.raycastTarget = isTouchable;
     }
-    // public void setDepth (int index) {
-    //ui2dSprite.depth = 11 + index * 3;
-    //cardMo.depth = 12 + index * 3;
-    //sp_click.depth = 13 + index * 3;
 
-    //Vector3 vt3 = clickObj.GetComponent<BoxCollider>().size;
-    //vt3.z = ui2dSprite.depth;
-    //clickObj.GetComponent<BoxCollider>().size = vt3;
-    //}
-
-    //public float getDepth() {
-    //    return clickObj.GetComponent<BoxCollider>().size.z;
-    //}
+    public void setvisible(bool isVisible) {
+        gameObject.SetActive(isVisible);
+    }
 }

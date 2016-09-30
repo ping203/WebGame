@@ -71,7 +71,7 @@ public class Xeng : BaseCasino {
 
     void onClick_spin() {
         SendData.onDatCuocXengHoaQua(list_item_bet_money);
-        BaseInfo.gI().mainInfo.moneyXu = money_total;
+        BaseInfo.gI().mainInfo.moneyVip = money_total;
     }
 
     void resetGame() {
@@ -150,7 +150,7 @@ public class Xeng : BaseCasino {
             if (index == randomIndex) {
                 isSpin = false;
                 text_ThangCuoc.text = moneyWin + "";
-                BaseInfo.gI().mainInfo.moneyXu += moneyWin;
+                BaseInfo.gI().mainInfo.moneyVip += moneyWin;
                 setMoneyInGame();
                 if (codeFromServer[0] != 9) {
                     list_item_xeng[index].setFinish();
@@ -206,7 +206,7 @@ public class Xeng : BaseCasino {
 
     void setMoneyInGame() {
         gameControl.sound.clickBtnAudio();
-        money_total = BaseInfo.gI().mainInfo.moneyXu;
+        money_total = BaseInfo.gI().mainInfo.moneyVip;
         text_TongTien.text = "" + money_total;
     }
 

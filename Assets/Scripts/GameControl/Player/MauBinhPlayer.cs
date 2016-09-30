@@ -5,6 +5,7 @@ using System;
 using DG.Tweening;
 
 public class MauBinhPlayer : ABSUser {
+
     public override void setExit() {
         base.setExit();
         cardMauBinh[0].removeAllCard();

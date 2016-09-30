@@ -18,7 +18,7 @@ public class PanelChuyenXu : PanelGame {
 	}
 
 	public void onChangeValue(){
-		ip_xu.text = (int)(BaseInfo.gI ().mainInfo.moneyXu * sliderSoXu.value) + "";
+		ip_xu.text = (int)(BaseInfo.gI ().mainInfo.moneyVip * sliderSoXu.value) + "";
 	}
 
     public void onClickChuyenXu () {

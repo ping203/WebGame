@@ -56,6 +56,7 @@ public class Bacay : BaseCasino {
             } else {
                 players[i].setInvite(false);
             }
+            ((BacayPlayer)players[i]).setVisibleDiemPlayer();
         }
         //masterID = "";
         //groupKhoa.gameObject.SetActive(false);
@@ -170,7 +171,6 @@ public class Bacay : BaseCasino {
                 players[i].setCardHand(new int[] { 52, 52, 52 }, true, false,
                         false);
             }
-
         }
 
         turntime = 0;

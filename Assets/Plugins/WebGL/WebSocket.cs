@@ -52,19 +52,11 @@ public class WebSocket {
     [DllImport("__Internal")]
     private static extern int SocketError(int socketInstance, byte[] ptr, int length);
 
-    [DllImport("__Internal")]
-    private static extern void SocketAlert();
 
     int m_NativeRef = 0;
 
     public void Send(byte[] buffer) {
-       // if (SocketState(m_NativeRef) == 1) {
             SocketSend(m_NativeRef, buffer, buffer.Length);
-       // } else {
-            //SocketTimeOut(delegate {
-          //      Send(buffer);
-            //}, 1000);
-        //}
     }
 
     public byte[] Recv() {
@@ -85,8 +77,7 @@ public class WebSocket {
 
     public void Close() {
         SocketClose(m_NativeRef);
-    }
-
+    }   
     public string error {
         get {
             const int bufsize = 1024;
@@ -98,7 +89,7 @@ public class WebSocket {
 
             return Encoding.UTF8.GetString(buffer);
         }
-    }
+    } 
 #else
     WebSocketSharp.WebSocket m_Socket;
     Queue<byte[]> m_Messages = new Queue<byte[]>();

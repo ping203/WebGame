@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using DG.Tweening;
 public class RoomControl : StageControl {
-    public static int roomType = 2; //1:Thuong, 2:VIP
+    //public static int roomType = 2; //1:Thuong, 2:VIP
                                     //  public GameObject prefabsTable;
     public Transform parent;
 
@@ -26,6 +26,9 @@ public class RoomControl : StageControl {
     //public List<GameObject> listRoom = new List<GameObject>();
     [SerializeField]
     LoopVerticalScrollRect loopVerticalScrollRect;//toi uu scroll
+
+    public Text text_noti;
+    public GameObject btn_choingay, noti;
     // Use this for initialization
     void Start() {
         for (int i = 0; i < btn_click_game.Length; i++) {
@@ -36,6 +39,26 @@ public class RoomControl : StageControl {
         }
 
         //loopVerticalScrollRect.enabled = false;
+    }
+    const float posXDefault = 200.0f;
+    public void setNoti(string str) {
+        if (str.Equals("")) {
+            noti.SetActive(false);
+            btn_choingay.SetActive(true);
+        } else {
+            noti.SetActive(true);
+            btn_choingay.SetActive(false);
+            text_noti.text = str;
+
+            //float w = text_noti.rectTransform.rect.width;
+            float w = LayoutUtility.GetPreferredWidth(text_noti.rectTransform);
+            text_noti.transform.localPosition = new Vector3(posXDefault, 0, 0);
+            float posEnd = -posXDefault - w;
+
+            float time = (posXDefault - posEnd) / 100;
+            text_noti.transform.DOKill();
+            text_noti.transform.DOLocalMoveX(posEnd, time).SetLoops(-1).SetEase(Ease.Linear);
+        }
     }
 
     void OnEnable() {
@@ -302,7 +325,10 @@ public class RoomControl : StageControl {
             btn_click_game[i].transform.DOKill();
         }
         onClickGame(game.name);
-        tf_effect.localPosition = game.transform.localPosition;
+        //tf_effect.localPosition = game.transform.localPosition;
+
+        //vtPosCenter = mainTransform.InverseTransformPoint(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        tf_effect.position = game.transform.position;
         game.transform.DOScale(1.05f, 0.6f).SetLoops(-1);
     }
     public void onClickGame(string obj) {
@@ -338,8 +364,8 @@ public class RoomControl : StageControl {
                 break;
             case "Button_TaiXiu":
                 gameControl.gameID = GameID.TAIXIU;
-                gameControl.setCasino(GameID.TAIXIU, Res.ROOMVIP);
-                SendData.onjoinTaiXiu(Res.ROOMVIP);
+                gameControl.setCasino(GameID.TAIXIU, BaseInfo.gI().typetableLogin);
+                SendData.onjoinTaiXiu((byte)BaseInfo.gI().typetableLogin);
                 gameControl.top.setGameName();
                 return;
             case "Button_TLMNSl":

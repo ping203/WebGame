@@ -13,7 +13,7 @@ public class TaiXiuPlayer : ABSUser {
         }
     }
     public void CreateInfoPlayer() {
-        setFollowMoney(BaseInfo.gI().mainInfo.moneyXu);
+        setFollowMoney(BaseInfo.gI().mainInfo.moneyVip);
         setName(name);
         setDisplayeName(BaseInfo.gI().mainInfo.displayname);
         lb_money.text = BaseInfo.formatMoneyNormal(getFolowMoney());

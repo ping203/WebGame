@@ -35,7 +35,7 @@ public class ProcessHandler : MessageHandler {
                         //    break;
                         //}
                         b = message.reader().ReadByte();
-                        Debug.Log(" -------------- LOGIN " + b);
+                       // Debug.Log(" -------------- LOGIN " + b);
                         if (b == 1) {
                             listenner.onLoginSuccess(message);
                         } else {
@@ -253,8 +253,9 @@ public class ProcessHandler : MessageHandler {
                         string nick = message.reader().ReadUTF();
                         //int type = message.reader().ReadInt();//Bo
                         int type = 0; //Xu
-                        long money = message.reader().ReadLong();
-                        listenner.onUpdateMoneyMessage(nick, type, money);
+                        long moneyVip = message.reader().ReadLong();
+                        long moneyFree = message.reader().ReadLong();
+                        listenner.onUpdateMoneyMessage(nick, type, moneyVip, moneyFree);
                         break;
                     case CMDClient.CMD_LIST_INVITE:
                         listenner.onListInvite(message);

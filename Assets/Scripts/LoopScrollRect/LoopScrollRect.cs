@@ -247,8 +247,11 @@ namespace UnityEngine.UI {
                 itemTypeStart = 0;
                 itemTypeEnd = 0;
                 totalCount = 0;
-                for (int i = content.childCount - 1; i >= 0; i--) {
-                    prefabPool.ReturnObjectToPool(content.GetChild(i).gameObject);
+                try {
+                    for (int i = content.childCount - 1; i >= 0; i--) {
+                        prefabPool.ReturnObjectToPool(content.GetChild(i).gameObject);
+                    }
+                }catch(Exception e) {
                 }
             }
         }
@@ -259,16 +262,18 @@ namespace UnityEngine.UI {
                 itemTypeEnd = itemTypeStart;
 
                 Canvas.ForceUpdateCanvases();
-
-                // recycle items if we can
-                for (int i = 0; i < content.childCount; i++) {
-                    if (totalCount >= 0 && itemTypeEnd >= totalCount) {
-                        prefabPool.ReturnObjectToPool(content.GetChild(i).gameObject);
-                        i--;
-                    } else {
-                        content.GetChild(i).SendMessage("ScrollCellIndex", itemTypeEnd);
-                        itemTypeEnd++;
+                try {
+                    // recycle items if we can
+                    for (int i = 0; i < content.childCount; i++) {
+                        if (totalCount >= 0 && itemTypeEnd >= totalCount) {
+                            prefabPool.ReturnObjectToPool(content.GetChild(i).gameObject);
+                            i--;
+                        } else {
+                            content.GetChild(i).SendMessage("ScrollCellIndex", itemTypeEnd);
+                            itemTypeEnd++;
+                        }
                     }
+                } catch (Exception e) {
                 }
                 if (content.childCount > 0) {
                     Canvas.ForceUpdateCanvases();

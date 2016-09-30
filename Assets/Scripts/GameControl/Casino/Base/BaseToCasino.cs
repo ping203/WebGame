@@ -88,6 +88,7 @@ public class BaseToCasino : BaseCasino {
             players[i].resetPositionSp_TypeCard();
             players[i].chipBay.onMoveto(0, 1);
         }
+        sliderTo.SetActive(false);
         isAutoStart = false;
         setMoneyCuoc(0);
         //if (moneyInPot != null) {
@@ -666,10 +667,10 @@ public class BaseToCasino : BaseCasino {
     }
     public void clickButtnRutTien() {
         long temp = 0;
-        if (RoomControl.roomType == 1) {
-            temp = BaseInfo.gI().mainInfo.moneyChip;
+        if (BaseInfo.gI().typetableLogin == Res.ROOMFREE) {
+            temp = BaseInfo.gI().mainInfo.moneyFree;
         } else {
-            temp = BaseInfo.gI().mainInfo.moneyXu;
+            temp = BaseInfo.gI().mainInfo.moneyVip;
         }
         if (temp < BaseInfo.gI().moneyNeedTable) {
             gameControl.panelMessageSytem.onShow("Không đủ tiền để rút, bạn có muốn nạp thêm?");
@@ -677,11 +678,11 @@ public class BaseToCasino : BaseCasino {
         } else {
             if (players[0].getFolowMoney() < BaseInfo.gI().currentMinMoney) {
                 gameControl.panelRutTien.show(BaseInfo.gI().currentMinMoney,
-                        BaseInfo.gI().currentMaxMoney, 2, 0, 0, 0, RoomControl.roomType);
+                        BaseInfo.gI().currentMaxMoney, 2, 0, 0, 0, BaseInfo.gI().typetableLogin);
 
             } else {
                 gameControl.panelRutTien.show(BaseInfo.gI().currentMinMoney,
-                      BaseInfo.gI().currentMaxMoney, 3, 0, 0, 0, RoomControl.roomType);
+                      BaseInfo.gI().currentMaxMoney, 3, 0, 0, 0, BaseInfo.gI().typetableLogin);
 
             }
 

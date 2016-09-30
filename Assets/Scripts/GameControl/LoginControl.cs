@@ -13,16 +13,8 @@ public class LoginControl : StageControl {
     public InputField input_username_reg;
     public InputField input_passsword_reg;
     public InputField input_try_passsword_reg;
-    // Use this for initialization
-    void Start() {
-        //lb_version.text = "Ver " + Res.versionFake;
-    }
-
     // Update is called once per frame
     void Update() {
-        //if (cskh.text.Length == 0) {
-        //    // cskh.text = BaseInfo.gI().cskh;
-        //}
         if (gameObject.activeInHierarchy && Input.GetKeyDown(KeyCode.Escape)) {
             onBack();
         }
@@ -33,6 +25,10 @@ public class LoginControl : StageControl {
         input_username.text = PlayerPrefs.GetString("username");
         input_passsword.text = PlayerPrefs.GetString("password");
         OnSubmit();
+    }
+
+    void OnEnable() {
+        isLoginFB = false;
     }
 
     private bool checkNetWork() {
@@ -149,11 +145,16 @@ public class LoginControl : StageControl {
     }
 
     public void loginWhenRegSucces() {
-        gameControl.panelWaiting.onShow();
+        gameControl.panelWaiting.onHide();
         input_username.text = BaseInfo.gI().username;
         input_passsword.text = BaseInfo.gI().pass;
-        doLogin();
+        //doLogin();
+        tg_dn.isOn = true;
+        tg_dk.isOn = false;
     }
+
+    [SerializeField]
+    Toggle tg_dn, tg_dk;
 
     IEnumerator delayReg(string username, string pass, string imei) {
         if (net != null) {
@@ -198,7 +199,7 @@ public class LoginControl : StageControl {
 
         gameControl.panelWaiting.onShow();
         string imei = GameControl.IMEI;
-        StartCoroutine(delay(4, username, password, imei, "", 0, "", "", ""));
+        StartCoroutine(delay(4, username, password, imei, "", 0, username, "", ""));
         PlayerPrefs.SetString("username", username);
         PlayerPrefs.SetString("password", password);
         PlayerPrefs.Save();
@@ -206,6 +207,7 @@ public class LoginControl : StageControl {
 
     void clickLoginPlayNow() {
         GameControl.instance.sound.startClickButtonAudio();
+        gameControl.panelWaiting.onShow();
         string imei = GameControl.IMEI;
         login(2, imei, imei, imei, "", 1, "", "", "");
     }
@@ -215,12 +217,14 @@ public class LoginControl : StageControl {
 #if UNITY_WEBGL
         Application.ExternalCall("myFacebookLogin");
 #endif
-       // Debug.Log("clickOnFacebook");
+        // Debug.Log("clickOnFacebook");
     }
-
+    public bool isLoginFB { set; get; }
     public void sendloginFB(string accessToken) {
-       // login(1, "sgc", "sgc", GameControl.IMEI, "", 1, "", accessToken, "");
+        // login(1, "sgc", "sgc", GameControl.IMEI, "", 1, "", accessToken, "");
+        gameControl.panelWaiting.onShow();
         StartCoroutine(delay(1, "sgc", "sgc", GameControl.IMEI, "", 1, "", accessToken, ""));
+        isLoginFB = true;
     }
 
     void clickSetting() {

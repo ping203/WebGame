@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class TimerXam : MonoBehaviour {
     public Xam xam;
@@ -7,10 +8,7 @@ public class TimerXam : MonoBehaviour {
     private int timeAll;
     private bool isActives;
     public Timer timer;
-    // Use this for initialization
-    void Start() {
-
-    }
+    public Button btn;
 
     // Update is called once per frame
     void Update() {
@@ -68,5 +66,9 @@ public class TimerXam : MonoBehaviour {
     public void setDeActive() {
         timer.setPercentage(0);
         isActives = false;
+    }
+
+    public void setEnableClick(bool isClick) {
+        btn.enabled = isClick;
     }
 }

@@ -107,7 +107,7 @@ interface IChatListener {
 
     void onNickSkip(string nick, Message msg);
 
-    void onUpdateMoneyMessage(string readstring, int type, long readInt);
+    void onUpdateMoneyMessage(string readstring, int type, long readVip, long readFree);
 
     //void onUpdateVersion(Message message);
 

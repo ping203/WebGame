@@ -384,7 +384,7 @@ public class BaseInfo {
         return true;
     }
     public bool checkHettien() {
-        if (mainInfo.moneyChip < needMoney) {
+        if (mainInfo.moneyFree < needMoney) {
             return true;
         }
         return false;

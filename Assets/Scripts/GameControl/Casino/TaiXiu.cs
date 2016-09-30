@@ -235,7 +235,7 @@ public class TaiXiu : BaseCasino {
         base.onupdatemoneyTaiXiu(message);
         try {
             long money = message.reader().ReadLong();
-            BaseInfo.gI().mainInfo.moneyXu = money;
+            BaseInfo.gI().mainInfo.moneyVip = money;
 
             players[0].setMoney(money);
             //addTweenFlyMoney(players[0]);
@@ -426,7 +426,7 @@ public class TaiXiu : BaseCasino {
     }
 
     public void onClick_DongY() {
-        SendData.onCuocTaiXiu(isDatCuaTai, muc_cuoc);
+        SendData.onCuocTaiXiu(isDatCuaTai, muc_cuoc, (byte) BaseInfo.gI().typetableLogin);
         group_mucCuoc.SetActive(false);
         lblPlayerTai.text = "0";
         lblPlayerXiu.text = "0";

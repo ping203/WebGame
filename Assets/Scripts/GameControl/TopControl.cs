@@ -7,6 +7,7 @@ public class TopControl : PanelGame {
     public Text displayName;
     public Text lb_id;
     public Text displayXu;
+    public Text displayFree;
     public Image imgAvata;
     public RawImage rawAvata;
     
@@ -23,7 +24,8 @@ public class TopControl : PanelGame {
             }
         }
 
-        displayXu.text = BaseInfo.formatMoneyNormal(BaseInfo.gI().mainInfo.moneyXu) + Res.MONEY_VIP_UPPERCASE;
+        displayXu.text = BaseInfo.formatMoneyNormal(BaseInfo.gI().mainInfo.moneyVip) + Res.MONEY_VIP_UPPERCASE;
+        displayFree.text = BaseInfo.formatMoneyNormal(BaseInfo.gI().mainInfo.moneyFree) + Res.MONEY_FREE_UPPERCASE;
     }
     public Image game_name;
     public void setGameName() {
@@ -94,7 +96,7 @@ public class TopControl : PanelGame {
         string link_avata = BaseInfo.gI().mainInfo.link_Avatar;
         int num_star = BaseInfo.gI().mainInfo.level_vip;
 
-        displayXu.text = BaseInfo.formatMoneyNormal(BaseInfo.gI().mainInfo.moneyXu) + Res.MONEY_VIP_UPPERCASE;
+        displayXu.text = BaseInfo.formatMoneyNormal(BaseInfo.gI().mainInfo.moneyVip) + Res.MONEY_VIP_UPPERCASE;
         lb_id.text = "ID: " + BaseInfo.gI().mainInfo.userid;
         www = null;
         if (link_avata != "") {

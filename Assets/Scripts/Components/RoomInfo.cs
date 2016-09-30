@@ -3,8 +3,7 @@ using System.Collections;
 
 public class RoomInfo {
 
-    public RoomInfo()
-    {
+    public RoomInfo() {
         // TODO Auto-generated constructor stub
     }
 
@@ -17,63 +16,51 @@ public class RoomInfo {
     private int nUser;
     private string name;
 
-    public void setLevel(sbyte level)
-    {
+    public void setLevel(sbyte level) {
         this.level = level;
     }
 
-    public sbyte getLevel()
-    {
+    public sbyte getLevel() {
         return level;
     }
 
-    public sbyte getId()
-    {
+    public sbyte getId() {
         return id;
     }
 
-    public void setId(sbyte id)
-    {
+    public void setId(sbyte id) {
         this.id = id;
     }
 
-    public long getMoney()
-    {
+    public long getMoney() {
         return money;
     }
 
-    public void setMoney(long money)
-    {
+    public void setMoney(long money) {
         this.money = money;
     }
 
-    public int getnUser()
-    {
+    public int getnUser() {
         return nUser;
     }
 
-    public void setnUser(int nUser)
-    {
+    public void setnUser(int nUser) {
         this.nUser = nUser;
     }
 
-    public string getName()
-    {
+    public string getName() {
         return name;
     }
 
-    public void setName(string name)
-    {
+    public void setName(string name) {
         this.name = name;
     }
 
-    public long getNeedMoney()
-    {
+    public long getNeedMoney() {
         return needMoney;
     }
 
-    public void setNeedMoney(long needMoney)
-    {
+    public void setNeedMoney(long needMoney) {
         this.needMoney = needMoney;
     }
 }

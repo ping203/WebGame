@@ -35,8 +35,10 @@ public class MauBinh : BaseCasino, IHasChanged {
     }
 
     public override void onTimeAuToStart(sbyte time) {
-        if (timerWaiting != null) {
-            timerWaiting.setActive(time);
+        if (players.Length > 1) {
+            if (timerWaiting != null) {
+                timerWaiting.setActive(time);
+            }
         }
     }
 
@@ -51,6 +53,7 @@ public class MauBinh : BaseCasino, IHasChanged {
         masterID = "";
         if (toggleLock != null)
             toggleLock.gameObject.SetActive(false);
+
     }
 
     public void demoMB() {
@@ -134,6 +137,7 @@ public class MauBinh : BaseCasino, IHasChanged {
         action_card_down();
 
         gameControl.isTouchMB = false;
+        card_show_mb.gameObject.SetActive(false);
     }
 
     const float height_down = 30;
@@ -420,6 +424,8 @@ public class MauBinh : BaseCasino, IHasChanged {
         go_chi.SetActive(false);
 
         if (!BaseInfo.gI().isView && players[0].isPlaying()) {
+            sp_chi.transform.DOKill();
+            sp_chi.transform.localScale = Vector3.one;
             if (!sp_chi.gameObject.activeInHierarchy)
                 sp_chi.gameObject.SetActive(true);
             sp_chi.sprite = list_sp_chi[chi - 1];
@@ -519,10 +525,10 @@ public class MauBinh : BaseCasino, IHasChanged {
                 }
             default: {
                     players[index].sp_typeCard.gameObject.SetActive(true);
-                    StopAllCoroutines();
                     players[index].sp_typeCard.transform.localScale = new Vector3(0, 0, 0);
-                    players[index].sp_typeCard.transform.DOScale(1.4f, 0.2f);
-                    StartCoroutine(setInvisible(players[index].sp_typeCard.gameObject));
+                    players[index].sp_typeCard.transform.DOScale(1.4f, 0.2f).OnComplete(delegate {
+                        StartCoroutine(setInvisible(players[index].sp_typeCard.gameObject));
+                    });
 
                     players[index].sp_typeCard.sprite = gameControl.list_typecards[typeCard];
                     players[index].sp_typeCard.SetNativeSize();
@@ -702,9 +708,6 @@ public class MauBinh : BaseCasino, IHasChanged {
         if (lb_time_mb.gameObject.activeInHierarchy) {
             long time = turntimeMB
                     - (GetCurrentMilli() - timeReceiveTurnMB) / 1000;
-            //if (time < 10) {
-
-            //}
             if ((int)time <= 1 && !isSendCard) {
                 isSendCard = true;
                 guiFinalMauBinh();

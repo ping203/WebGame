@@ -60,7 +60,7 @@ public class MenuControl : StageControl {
         string link_avata = BaseInfo.gI().mainInfo.link_Avatar;
         int num_star = BaseInfo.gI().mainInfo.level_vip;
 
-        lb_xu.text = "" + BaseInfo.formatMoneyNormal(BaseInfo.gI().mainInfo.moneyXu) + Res.MONEY_VIP;
+        lb_xu.text = "" + BaseInfo.formatMoneyNormal(BaseInfo.gI().mainInfo.moneyVip) + Res.MONEY_VIP;
 
         www = null;
         if (link_avata != "") {
@@ -126,7 +126,7 @@ public class MenuControl : StageControl {
             case "taixiu":
                 gameControl.gameID = GameID.TAIXIU;
                 gameControl.setCasino(GameID.TAIXIU, 0);
-                SendData.onjoinTaiXiu(Res.ROOMVIP);
+                SendData.onjoinTaiXiu((byte)BaseInfo.gI().typetableLogin);
                 gameControl.top.setGameName();
                 //gameControl.toast.showToast("GAME ĐANG PHÁT TRIỂN!");
                 return;
@@ -177,7 +177,7 @@ public class MenuControl : StageControl {
     public void clickHomThu() {
         GameControl.instance.sound.startClickButtonAudio();
         SendData.onGetInboxMessage();
-        //gameControl.panelWaiting.onShow ();
+        gameControl.panelWaiting.onShow ();
         gameControl.panelMail.onShow();
     }
 

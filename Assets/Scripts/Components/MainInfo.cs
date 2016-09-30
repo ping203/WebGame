@@ -21,9 +21,14 @@ public class MainInfo {
     public long total_money_charging = 0;
     public long total_time_play = 0;
 
-
-    public long moneyChip = -1;
-    public long moneyXu = 0;
+    /// <summary>
+    /// Tien free
+    /// </summary>
+    public long moneyFree = -1;
+    /// <summary>
+    /// tien vip
+    /// </summary>
+    public long moneyVip = 0;
     public int level = 1;
     public string[] cardName;
     public int[][] score;
@@ -35,8 +40,8 @@ public class MainInfo {
     // ----- new
     public string soLanThang;
     public string soLanThua;
-    public long soTienMax;
-    public long soChipMax;
+    public long moneyVipMax;
+    public long moneyFreeMax;
     public int soGDThanhCong;
     public string LanDangNhapCuoi;
     public int level_vip = 0;

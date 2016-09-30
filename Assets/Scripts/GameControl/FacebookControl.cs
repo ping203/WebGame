@@ -69,4 +69,8 @@ public class FacebookControl : MonoBehaviour {
         Debug.Log("IP: " + ip);
         GameControl.IMEI = ip;
     }
+
+    void SendClose() {
+        NetworkUtil.GI().close();
+    }
 }
