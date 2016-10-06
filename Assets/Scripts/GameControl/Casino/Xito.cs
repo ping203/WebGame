@@ -223,11 +223,17 @@ public class Xito : BaseToCasino {
             type = info2[i].typeCard;
             if (type >= 0 && type <= 8) {
                 int poss2 = getPlayer(info2[i].name);
-                players[poss2].sp_typeCard.sprite = gameControl.list_typecards[type];//gameControl.getTypeCardByName(Res.TypeCard_Name[type]);
-                players[poss2].sp_typeCard.SetNativeSize();
-                players[poss2].sp_typeCard.transform.localPosition = Vector3.zero;//players[poss2].oldPosTypeCard.localPosition;
-                players[poss2].sp_typeCard.gameObject.SetActive(true);
-                players[poss2].onMoveSp_TypeCardToPlayer();
+                //if (poss2 != 0) {
+                    players[poss2].sp_typeCard.sprite = gameControl.list_typecards[type];//gameControl.getTypeCardByName(Res.TypeCard_Name[type]);
+                    players[poss2].sp_typeCard.SetNativeSize();
+                    players[poss2].sp_typeCard.transform.localPosition = Vector3.zero;
+                    players[poss2].sp_typeCard.gameObject.SetActive(true);
+                    players[poss2].onMoveSp_TypeCardToPlayer();
+                //} else {
+                if (poss2 == 0) {
+                    if (listTypeCard != null)
+                        listTypeCard.setTg(type);
+                }
             }
         }
     }
@@ -235,7 +241,7 @@ public class Xito : BaseToCasino {
     public override void startFlip(sbyte p) {
         isChooseCard = true;
         txt_chonbai.gameObject.SetActive(true);
-        btn_ruttien.gameObject.SetActive(false);
+        //btn_ruttien.gameObject.SetActive(false);
         time_chonbai = p;
         this.timeReceiveTurnChonBai = GetCurrentMilli();
     }

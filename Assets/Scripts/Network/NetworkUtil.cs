@@ -20,10 +20,6 @@ public class NetworkUtil : MonoBehaviour {
     protected System.Threading.Thread receiveThread;
     private int maxRetry = 1;
 
-#if UNITY_WEBGL && !UNITY_EDITOR
-    [DllImport("__Internal")]
-    private static extern void AlertMessage(string msg);
-#endif
     void Awake() {
         if (instance == null) {
             //If I am the first instance, make me the Singleton
@@ -42,11 +38,13 @@ public class NetworkUtil : MonoBehaviour {
             WWW www = new WWW("http://choibaidoithuong.org/config");
             yield return www;
             m_url = www.text;
-            Debug.Log("OK " + m_url);
         }
+#if UNITY_WEBGL
+        Application.ExternalCall("StartLoad");
+#endif
         yield return StartCoroutine(doConnect());
         yield return StartCoroutine(threadReceiveMSG());
-        
+
     }
 
     public static NetworkUtil GI() {
@@ -96,9 +94,9 @@ public class NetworkUtil : MonoBehaviour {
             byte[] bytes = msg.toByteArray();
             //string message = System.Text.Encoding.UTF8.GetString(bytes);
 
-//#if UNITY_EDITOR
+            //#if UNITY_EDITOR
             Debug.Log("Send : " + msg.command);
-//#endif
+            //#endif
             w_socket.Send(bytes);
         } catch (Exception ex) {
             Debug.LogException(ex);
@@ -122,9 +120,9 @@ public class NetworkUtil : MonoBehaviour {
                 count++;
                 size = ((a1 & 0xff) << 8) | (a2 & 0xff);
                 byte[] subdata = new byte[size];
-//#if UNITY_EDITOR
+                //#if UNITY_EDITOR
                 Debug.Log("Read == " + command);
-//#endif
+                //#endif
                 Buffer.BlockCopy(data, count, subdata, 0, size);
                 count += size;
                 msg = new Message(command, subdata);

@@ -71,10 +71,6 @@ public class BaseInfo {
     public bool isFirstJoinTable = false;
     public bool isFirstLogin = false;
 
-    //public List<MessInfo> allMess = new List<MessInfo>();
-    //public List<GiftInfo> giftTheCao = new List<GiftInfo>();
-    //public List<GiftInfo> giftPhanQua = new List<GiftInfo>();
-    //public List<VuaBaiEvent> listEvent = new List<VuaBaiEvent>();
     public int soDu = 50000;
     public bool isPurchase = false;
     public int isHidexuchip;
@@ -83,10 +79,9 @@ public class BaseInfo {
     public string khuyenMai;
     public int phanTram;
     public bool isVIP = false;
-
-    //public List<BetMoney> listBetMoneysVIP = new List<BetMoney>();
+    
     public List<long> listBetMoneysVIP = new List<long>();
-    public List<BetMoney> listBetMoneysFREE = new List<BetMoney>();
+    public List<long> listBetMoneysFREE = new List<long>();
 
     public int type_sort = 0;
     public bool sort_giam_dan_bancuoc, sort_giam_dan_muccuoc, sort_giam_dan_nguoichoi;
@@ -312,7 +307,23 @@ public class BaseInfo {
         } else {
             return "";
         }
-
+    }
+    /// <summary>
+    /// 0- 9 diem, 1 - anh, 2 - lieng, 3 sap
+    /// </summary>
+    public static string tinhDiemNew(int[] cardhand) {
+        cardhand = sortValue(cardhand);
+        if (isSap(cardhand)) {
+            return "sap";// "Sáp";
+        } else if (isLieng(cardhand)) {
+            return "lieng";
+        } else if (isHinh(cardhand)) {
+            return "anh";
+        } else if (getScoreFinal(cardhand) == 9) {
+            return "9diem";
+        } else {
+            return "";
+        }
     }
 
     private static bool isHinh(int[] cardhand) {

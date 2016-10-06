@@ -48,27 +48,23 @@ public class MauBinhPlayer : ABSUser {
         if (type < 0 || type > 8) {
             return;
         }
-        sp_typeCard.StopAllCoroutines();
-        sp_typeCard.gameObject.SetActive(true);
 
-        //sp_typeCard.spriteName = Res.TypeCard_Name[type];
-        //sp_typeCard.MakePixelPerfect ();
-        ////sp_typeCard.gameObject.transform.localPosition = new Vector3 (0, -50, 0);
-        //sp_typeCard.gameObject.transform.localScale = new Vector3 (0.8f, 0.8f, 0.8f);
-        //TweenPosition.Begin (sp_typeCard.gameObject, 0.5f, new Vector3 (0, -20, 0));
-        //StartCoroutine (setVisible (sp_typeCard.gameObject, 2.5f));
 
-        sp_typeCard.sprite = GameControl.instance.list_typecards[type];
-        sp_typeCard.SetNativeSize();
+        if (pos != 0) {
+            sp_typeCard.StopAllCoroutines();
+            sp_typeCard.gameObject.SetActive(true);
+            sp_typeCard.sprite = GameControl.instance.list_typecards[type];
+            sp_typeCard.SetNativeSize();
 
-        sp_typeCard.gameObject.transform.localPosition = new Vector3(0, -50, 0);
-        sp_typeCard.gameObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-        sp_typeCard.transform.DOLocalMoveY(-20, 0.5f);
-        StartCoroutine(setVisible(sp_typeCard.gameObject, 2.5f));
+            sp_typeCard.gameObject.transform.localPosition = new Vector3(0, -50, 0);
+            sp_typeCard.gameObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+            sp_typeCard.transform.DOLocalMoveY(-20, 0.5f);
+            StartCoroutine(setVisible(sp_typeCard.gameObject, 2.5f));
+        } else {
+            if (((MauBinh)casinoStage).listTypeCard != null)
+                ((MauBinh)casinoStage).listTypeCard.setTg(type);
+        }
     }
-
-    // String[] animationMB = new String[] { "aniRongCuon", "aniSanhRong",
-    //			"ani5Doi1Sam", "aniLucPheBon", "ani3CaiThung", "ani3CaiSanh" };
 
     public override void setThangTrang(int type) {
         if (type < 0 || type > 6) {

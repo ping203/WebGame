@@ -27,6 +27,7 @@ public class ListernerServer : IChatListener {
         gameControl.panelMessageSytem.onShowDCN("Mất kết nối!", delegate {
             gameControl.disableAllDialog();
             gameControl.setStage(gameControl.login);
+            Debug.Log("Mất kết nối!");
             NetworkUtil.GI().close();
         });
     }
@@ -130,7 +131,7 @@ public class ListernerServer : IChatListener {
             //int idRoom = Res.ROOMFREE;
             BaseInfo.gI().typetableLogin = message.reader().ReadInt();
             // message.reader().ReadInt();
-            SendData.onJoinRoom(BaseInfo.gI().mainInfo.nick, BaseInfo.gI().typetableLogin);
+            SendData.onJoinRoom(/*BaseInfo.gI().mainInfo.nick, */BaseInfo.gI().typetableLogin);
 
         } catch (Exception ex) {
             Debug.LogException(ex);
@@ -152,9 +153,9 @@ public class ListernerServer : IChatListener {
                 ctb.needMoney = message.reader().ReadLong();
                 ctb.maxMoney = message.reader().ReadLong();
                 ctb.maxUser = (message.reader().ReadByte());
-                if (GameControl.instance.gameID == GameID.LIENG) {
-                    Debug.Log(" onListTable     tableItem.nUser" + ctb.nUser + "   tableItem.maxUser  " + ctb.maxUser);
-                }
+                //if (GameControl.instance.gameID == GameID.LIENG) {
+                //    Debug.Log(" onListTable     tableItem.nUser" + ctb.nUser + "   tableItem.maxUser  " + ctb.maxUser);
+                //}
                 gameControl.listTable.Add(ctb);
             } catch (Exception ex) {
                 Debug.LogException(ex);
@@ -398,7 +399,6 @@ public class ListernerServer : IChatListener {
             BaseInfo.gI().mainInfo.nick = msg.reader().ReadUTF();
             BaseInfo.gI().mainInfo.userid = msg.reader().ReadLong();
             BaseInfo.gI().mainInfo.moneyVip = msg.reader().ReadLong();
-            // BaseInfo.gI ().mainInfo.moneyFree = msg.reader ().ReadLong ();
             BaseInfo.gI().mainInfo.fullname = msg.reader().ReadUTF();
             BaseInfo.gI().mainInfo.displayname = msg.reader().ReadUTF();
             BaseInfo.gI().mainInfo.link_Avatar = msg.reader().ReadUTF();
@@ -416,9 +416,16 @@ public class ListernerServer : IChatListener {
             BaseInfo.gI().mainInfo.LanDangNhapCuoi = msg.reader().ReadUTF();
             BaseInfo.gI().mainInfo.gender = msg.reader().ReadByte();
             BaseInfo.gI().mainInfo.isVIP = msg.reader().ReadByte();
-            BaseInfo.gI().mainInfo.moneyFree = msg.reader().ReadLong();
-            BaseInfo.gI().mainInfo.moneyFreeMax = msg.reader().ReadLong();
-            //Debug.LogError (" BaseInfo.gI().mainInfo.fullname: " + BaseInfo.gI().mainInfo.fullname);
+            string str_phone = msg.reader().ReadUTF();
+            sbyte level = msg.reader().ReadByte();
+            long mf = msg.reader().ReadLong();
+            long mfmax = msg.reader().ReadLong();
+
+            BaseInfo.gI().mainInfo.phoneNumber = str_phone;
+            BaseInfo.gI().mainInfo.level_vip = level;
+            BaseInfo.gI().mainInfo.moneyFree = mf;
+            BaseInfo.gI().mainInfo.moneyFreeMax = mfmax;
+            //Debug.Log(" BaseInfo.gI().mainInfo.fullname: " + BaseInfo.gI().mainInfo.fullname);
             //Debug.LogError ("BaseInfo.gI ().mainInfo.soLanThua: " + BaseInfo.gI ().mainInfo.soLanThua);
             //Debug.LogError ("BaseInfo.gI ().mainInfo.LanDangNhapCuoi: " + BaseInfo.gI ().mainInfo.LanDangNhapCuoi);
 
@@ -595,7 +602,7 @@ public class ListernerServer : IChatListener {
         gameControl.currentCasino.onDropPhomSuccess(nick, arrayPhom);
     }
 
-    public void onInvite(string nickInvite, string displayName, sbyte gameid, short roomid, short tblid, long needmoney, long minMoney, long maxMoney) {
+    public void onInvite(string nickInvite, string displayName, sbyte gameid, sbyte roomid, short tblid, long needmoney, long minMoney, long maxMoney) {
         string gameName = "";
         switch (gameid) {
             case GameID.PHOM:
@@ -645,7 +652,7 @@ public class ListernerServer : IChatListener {
                 + ", bạn có đồng ý không?", delegate {
                     BaseInfo.gI().moneyNeedTable = minMoney;
                     // if (maxMoney == -1) {
-                    SendData.onAcceptInviteFriend(gameid, tblid, -1, (byte)BaseInfo.gI().typetableLogin);
+                    SendData.onAcceptInviteFriend(gameid, tblid, -1, roomid);
                     SendData.onJoinTablePlay(BaseInfo.gI().mainInfo.nick, tblid, "", -1);
                 });
         }
@@ -778,28 +785,22 @@ public class ListernerServer : IChatListener {
         try {
             string nick = message.reader().ReadUTF();
             long userID = message.reader().ReadLong();
-            long money = message.reader().ReadLong();
-            //TODO: bo chip.
-            //long chip = message.reader ().ReadLong ();
+            long money = message.reader().ReadLong();//tien vip
             string fullname = message.reader().ReadUTF();
             string displayname = message.reader().ReadUTF();
             long exp = message.reader().ReadLong();
             long score_vip = message.reader().ReadLong();
             long total_money_charging = message.reader().ReadLong();
             long total_time_play = message.reader().ReadLong();
-            // m.idAvatar = message.reader().readShort();
-
             string soLanThang = message.reader().ReadUTF();
             string soLanThua = message.reader().ReadUTF();
-            long soTienMax = message.reader().ReadLong();
-
-            //TODO: bo chip.
-            //long soChipMax = message.reader ().ReadLong ();
+            long soTienMax = message.reader().ReadLong();//vip
             int soGDThanhCong = message.reader().ReadInt();
             string LanDangNhapCuoi = message.reader().ReadUTF();
             string link_Avatar = message.reader().ReadUTF();
             int idAvata = message.reader().ReadInt();
             int gender = message.reader().ReadByte();
+            sbyte level = message.reader().ReadByte();
             long moneyFree = message.reader().ReadLong();
             long moneyFreeMax = message.reader().ReadLong();
 
@@ -1203,10 +1204,10 @@ public class ListernerServer : IChatListener {
         }
     }
     public void onGetMoney() {
-        if (((BaseToCasino)gameControl.currentCasino) != null && ((BaseToCasino)gameControl.currentCasino).btn_ruttien != null) {
-            ((BaseToCasino)gameControl.currentCasino).btn_ruttien
-                    .gameObject.SetActive(true);
-        }
+        //if (((BaseToCasino)gameControl.currentCasino) != null && ((BaseToCasino)gameControl.currentCasino).btn_ruttien != null) {
+        //    ((BaseToCasino)gameControl.currentCasino).btn_ruttien
+        //            .gameObject.SetActive(true);
+        //}
         long moneyPlayer = 0;
         if (BaseInfo.gI().typetableLogin == Res.ROOMFREE) {
             moneyPlayer = BaseInfo.gI().mainInfo.moneyFree;
@@ -1220,10 +1221,10 @@ public class ListernerServer : IChatListener {
             } else {
                 SendData.onSendGetMoney(BaseInfo.gI().soTienRut);
             }
-            if (((BaseToCasino)gameControl.currentCasino).btn_ruttien != null) {
-                ((BaseToCasino)gameControl.currentCasino).btn_ruttien
-                        .gameObject.SetActive(false);
-            }
+            //if (((BaseToCasino)gameControl.currentCasino).btn_ruttien != null) {
+            //    ((BaseToCasino)gameControl.currentCasino).btn_ruttien
+            //            .gameObject.SetActive(false);
+            //}
         } else {
             if (moneyPlayer < BaseInfo.gI().moneyNeedTable) {
                 gameControl.panelMessageSytem.onShow(
@@ -1534,19 +1535,17 @@ public class ListernerServer : IChatListener {
     public void onListBetMoney(Message message) {
         try {
             BaseInfo.gI().listBetMoneysVIP.Clear();
-            //BaseInfo.gI().listBetMoneysFREE.Clear();
+            BaseInfo.gI().listBetMoneysFREE.Clear();
 
             int size = message.reader().ReadShort();
-            //Debug.LogError("sizeListBet: " + size);
             for (int i = 0; i < size; i++) {
-                //BetMoney betM = new BetMoney();
                 long listBet = message.reader().ReadLong();
-                //  betM.setListBet(listBet);
-                BaseInfo.gI().listBetMoneysVIP.Add(listBet);
-
-                //Debug.LogError("lllllll " + listBet);
+                if (BaseInfo.gI().typetableLogin == Res.ROOMVIP) {
+                    BaseInfo.gI().listBetMoneysVIP.Add(listBet);
+                } else {
+                    BaseInfo.gI().listBetMoneysFREE.Add(listBet);
+                }
             }
-
         } catch (Exception e) {
             Debug.LogException(e);
         }
@@ -2033,4 +2032,10 @@ public class ListernerServer : IChatListener {
         gameControl.top.setGameName();
     }
     #endregion
+
+
+    public void onUpVIP(Message message) {
+        sbyte vip = message.reader().ReadByte();
+        gameControl.panelUpVip.onShow(vip);
+    }
 }

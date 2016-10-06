@@ -23,9 +23,9 @@
     TOTAL_MEMORY: 268435456,
     errorhandler: null,			// arguments: err, url, line. This function must return 'true' if the error is handled, otherwise 'false'
     compatibilitycheck: null,
-    dataUrl: "Release/webgame.data",
-    codeUrl: "Release/webgame.js",
-    memUrl: "Release/webgame.mem",
+    dataUrl: "Release/webgame.datagz",
+    codeUrl: "Release/webgame.jsgz",
+    memUrl: "Release/webgame.memgz",
   };
 </script>
 <script src="Release/UnityLoader.js"></script>
@@ -33,11 +33,7 @@
 <script>
   // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
-    //console.log('statusChangeCallback');
-   // console.log(response);
     if (response.status === 'connected') {
-	  	//console.log(response.authResponse.accessToken);
-		//console.log(response.authResponse.userID);
 		SendMessage('FacebookControl', 'SendAccetoken', response.authResponse.accessToken);
     }
   }
@@ -55,10 +51,6 @@
     xfbml      : true,  // parse social plugins on this page
     version    : 'v2.5' // use graph api version 2.5
   });
-
-  //FB.getLoginStatus(function(response) {
-  //  statusChangeCallback(response);
-  //});
   };
 
   // Load the SDK asynchronously
@@ -69,6 +61,7 @@
     js.src = "https://connect.facebook.net/en_US/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
+  
   function myFacebookLogin() {
 	  FB.login(
 	  function(response){
@@ -82,7 +75,6 @@
 				FB.ui({method: 'apprequests',
 					  message: 'RGame - Chơi bài đổi thưởng!'
 					}, function(response){
-					  //console.log(response);
 					   if (response) {
 						alert('Mời bạn bè thành công!');
 					   } else {
@@ -94,6 +86,23 @@
 			}
 		});
 	}
+	
+	function StartLoad() {
+        //alert('haha');
+    }
+	
+	function ShareFB(vip) {
+		var str = 'Chúc mừng bạn đã lên vip ' + vip;
+        //alert(str);
+       FB.ui({
+		  method: 'share',
+		  href: 'http://choibaidoithuong.org/',
+		  caption: str,
+		}, function(response){
+		
+		});
+    }
+
 	
 	window.onbeforeunload = function () {
 		return "";

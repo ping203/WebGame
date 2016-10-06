@@ -56,7 +56,6 @@ public class Lieng : BaseToCasino {
         for (int i = 1; i < players.Length; i++) {
             if (players[i].getName().Length > 0) {
                 if (players[i].cardHand.getArrCardObj()[0].getId() != 52) {
-
                     ((LiengPlayer)players[i]).setDiem(BaseInfo.tinhDiem(players[i].cardHand.getArrCardAll()));
                 }
             }
@@ -65,7 +64,30 @@ public class Lieng : BaseToCasino {
     public override void calculDiem() {
         if (players[0].cardHand3Cay.getArrCardObj()[0].getId() != 52) {
             ((LiengPlayer)players[0]).setDiem(BaseInfo.tinhDiem(players[0].cardHand3Cay.getArrCardAll()));
-
+            string inde = BaseInfo.tinhDiemNew(players[0].cardHand3Cay.getArrCardAll());
+            int index = -1;
+            switch (inde) {
+                case "sap":
+                    index = 3;
+                    break;
+                case "lieng":
+                    index = 2;
+                    break;
+                case "anh":
+                    index = 1;
+                    break;
+                case "9diem":
+                    index = 0;
+                    break;
+                default:
+                    index = -1;
+                    break;
+            }
+            if (index == -1) {
+                listTypeCard.setOffAll();
+            } else {
+                listTypeCard.setTg(index);
+            }
         }
     }
     public override void onFinishGame(Message message) {
@@ -78,10 +100,6 @@ public class Lieng : BaseToCasino {
             ((LiengPlayer)players[0]).setDiem(BaseInfo.tinhDiem(players[0].cardHand.getArrCardAll()));
         }
         onPaintDiemOtherPlayer();
-
-        //for (int i = 0; i < players.Length; i++) {
-        //    ((LiengPlayer)players[i]).setVisibleDiemPlayer();
-        //}
     }
 
     public override void startTableOk(int[] cardHand, Message msg, string[] nickPlay) {

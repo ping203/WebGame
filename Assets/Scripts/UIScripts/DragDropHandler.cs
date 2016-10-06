@@ -12,7 +12,6 @@ public class DragDropHandler : MonoBehaviour,
     public bool isDrop = false;
 
     public Card card;
-
     #region IBeginDragHandler implement
     public void OnBeginDrag(PointerEventData eventData) {
         if (GameControl.instance.isTouchMB) {
@@ -39,13 +38,14 @@ public class DragDropHandler : MonoBehaviour,
     public void OnEndDrag(PointerEventData eventData) {
         if (GameControl.instance.isTouchMB) {
             itemBeingDragged = null;
-            GetComponent<CanvasGroup>().blocksRaycasts = true;
             if (!isDrop) {
                 transform.localPosition = startPosition;
             }
             isDrop = false;
             ExecuteEvents.ExecuteHierarchy<IHasChanged>(gameObject, null, (x, y) => x.HasEndDrag());
         }
+
+        GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
     #endregion
 
@@ -66,7 +66,7 @@ public class DragDropHandler : MonoBehaviour,
         }
         isDrop = true;
         ExecuteEvents.ExecuteHierarchy<IHasChanged>(gameObject, null, (x, y) => x.HasDrop());
-
+        GetComponent<CanvasGroup>().blocksRaycasts = true;
         //}
     }
 }

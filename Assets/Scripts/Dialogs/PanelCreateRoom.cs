@@ -15,64 +15,22 @@ public class PanelCreateRoom : PanelGame {
     void Start() {
         sliderMoney.onValueChanged.AddListener(onChangeMoney);
     }
-    void OnEnable() {
-        onChangeMoney(0);
-    }
-    // Update is called once per frame
-    void Update() {
-        //#if UNITY_WP8
-        //        if (Input.GetButtonDown("Fire1") && (this.transform.localPosition.y == 160)) {
-        //            OnHideKeyBoard();
-        //        }
-
-        //        if (Input.deviceOrientation == DeviceOrientation.Portrait || Input.deviceOrientation == DeviceOrientation.PortraitUpsideDown) {
-        //            OnHideKeyBoard();
-        //        }
-        //#endif
-    }
-
     public void onChangeMoney(float value) {
-        //bool isOk = false;
-        //float vl = sliderMoney.value;
-        //if (RoomControl.roomType == 1) {
-        //    for (int j = 0; j < BaseInfo.gI().listBetMoneysFREE.Count; j++) {
-        //        BetMoney b = BaseInfo.gI().listBetMoneysFREE[j];
-        //        if (BaseInfo.gI().mainInfo.moneyXu < b.maxMoney) {
-        //            rateFREE = (float)1 / b.listBet.Count;
-        //            for (int i = 0; i < b.listBet.Count; i++) {
-        //                if (vl <= i * rateFREE) {
-        //                    inputMoney.text = b.listBet[i] + "";
-        //                    isOk = true;
-        //                    break;
-        //                }
-        //            }
-        //        }
-        //        if (isOk)
-        //            break;
-        //    }
-        //} else {
-        //    for (int j = 0; j < BaseInfo.gI().listBetMoneysVIP.Count; j++) {
-        //        BetMoney b = BaseInfo.gI().listBetMoneysVIP[j];
-        //        if (BaseInfo.gI().mainInfo.moneyXu < b.maxMoney) {
-        //            rateVIP = (float)1 / b.listBet.Count;
-        //            for (int i = 0; i < b.listBet.Count; i++) {
-        //                if (vl <= i * rateVIP) {
-        //                    inputMoney.text = b.listBet[i] + "";
-        //                    isOk = true;
-        //                    break;
-        //                }
-        //            }
-        //        }
-        //        if (isOk)
-        //            break;
-        //    }
-        //}
-        rateVIP = (float)1 / BaseInfo.gI().listBetMoneysVIP.Count;
-        for (int j = 0; j < BaseInfo.gI().listBetMoneysVIP.Count; j++) {
-            if (value <= j * rateVIP) {
-                inputMoney.text = BaseInfo.formatMoneyDetailDot(BaseInfo.gI().listBetMoneysVIP[j]);
-                // money = BaseInfo.gI().listBetMoneysVIP[j];
-                break;
+        if (BaseInfo.gI().typetableLogin == Res.ROOMVIP) {
+            rateVIP = (float)1 / BaseInfo.gI().listBetMoneysVIP.Count;
+            for (int j = 0; j < BaseInfo.gI().listBetMoneysVIP.Count; j++) {
+                if (value <= j * rateVIP) {
+                    inputMoney.text = BaseInfo.formatMoneyDetailDot(BaseInfo.gI().listBetMoneysVIP[j]);
+                    break;
+                }
+            }
+        } else {
+            rateFREE = (float)1 / BaseInfo.gI().listBetMoneysFREE.Count;
+            for (int j = 0; j < BaseInfo.gI().listBetMoneysFREE.Count; j++) {
+                if (value <= j * rateFREE) {
+                    inputMoney.text = BaseInfo.formatMoneyDetailDot(BaseInfo.gI().listBetMoneysFREE[j]);
+                    break;
+                }
             }
         }
     }
@@ -81,7 +39,6 @@ public class PanelCreateRoom : PanelGame {
         try {
             GameControl.instance.sound.startClickButtonAudio();
             int gameid = GameControl.instance.gameID;
-            //int roomid = 0;
             string strMoney = inputMoney.text;
             string strMaxPlayer = inputPlayer.text;
             if (strMoney == "" || strMaxPlayer == "") {
@@ -141,19 +98,19 @@ public class PanelCreateRoom : PanelGame {
             }
 
             if (check) {
-                //if (RoomControl.roomType == 1) {//free
-                //    if (10 * money > BaseInfo.gI().mainInfo.moneyChip) {
-                //        GameControl.instance.panelMessageSytem.onShow("Không đủ tiền để tạo bàn!");
-                //    } else {
-                //        SendData.onCreateTable(gameid, 1, money, maxplayer, 0, "");
-                //    }
-                //} else {
+                if (BaseInfo.gI().typetableLogin == Res.ROOMVIP) {
                     if (10 * money > BaseInfo.gI().mainInfo.moneyVip) {
                         GameControl.instance.panelMessageSytem.onShow("Không đủ tiền để tạo bàn!");
                     } else {
                         SendData.onCreateTable(gameid, 2, money, maxplayer, 0, "");
                     }
-                //}
+                } else {
+                    if (10 * money > BaseInfo.gI().mainInfo.moneyFree) {
+                        GameControl.instance.panelMessageSytem.onShow("Không đủ tiền để tạo bàn!");
+                    } else {
+                        SendData.onCreateTable(gameid, 1, money, maxplayer, 0, "");
+                    }
+                }
             } else {
                 GameControl.instance.panelMessageSytem.onShow(info);
             }
@@ -164,6 +121,7 @@ public class PanelCreateRoom : PanelGame {
 
     public override void onShow() {
         sliderMoney.value = 0;
+        onChangeMoney(0);
         base.onShow();
     }
 }

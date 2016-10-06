@@ -60,9 +60,26 @@ public class XocDia : BaseCasino {
     private bool m_isDatCuocCua = false;
 
     //Tong so tien cuoc cua cac cua.BaseInfo
+    /// <summary>
+    /// Tong so tien cuoc cua cua cac player
+    /// 0-chan, 1-le, 2-4do, 3-4trang, 4 - 3do, 5-3trang 
+    /// </summary>
     public Text[] m_totalMoneyCuaCuoc;
-    public Text[] m_totalMeMoneyCuaCuoc;
+    /// <summary>
+    /// Tong so tien cuoc cua cua cac player
+    /// 0-chan, 1-le, 2-4do, 3-4trang, 4 - 3do, 5-3trang 
+    /// </summary>
     private long[] m_totalMoney;
+
+    /// <summary>
+    /// Tong so tien cuoc cua cua player[0]
+    /// 0-chan, 1-le, 2-4do, 3-4trang, 4 - 3do, 5-3trang 
+    /// </summary>
+    public Text[] m_totalMeMoneyCuaCuoc;
+    /// <summary>
+    /// Tong so tien cuoc cua cua player[0]
+    /// 0-chan, 1-le, 2-4do, 3-4trang, 4 - 3do, 5-3trang 
+    /// </summary>
     private long[] m_totalMeMoney;
 
     //Xu ly viec dat cuoc gap doi.
@@ -269,6 +286,8 @@ public class XocDia : BaseCasino {
         for (int i = 0; i < m_totalMeMoneyCuaCuoc.Length; i++) {
             m_totalMeMoneyCuaCuoc[i].text = "0";
         }
+
+        Debug.Log("=============ResetData");
         //So tien cuoc thong ke.
         //--------------------
 
@@ -310,7 +329,6 @@ public class XocDia : BaseCasino {
                 m_totalMeMoney[i] = 0;
             }
         }
-
         for (int i = 0; i < m_totalMoneyCuaCuoc.Length; i++) {
             m_totalMoneyCuaCuoc[i].text = "0";
         }
@@ -508,10 +526,6 @@ public class XocDia : BaseCasino {
         if (aIDs == null) {
             return;
         }
-
-        //int len = aIDs.Count;
-        //int iCount = 0;
-        //int jCount = 0;
         int nChan = 0;
         int nLe = 0;
         for (int i = 0; i < aIDs.Count; i++) {
@@ -525,22 +539,7 @@ public class XocDia : BaseCasino {
             }
 
             go.transform.SetParent(m_posLichsu, true);
-            //go.transform.SetParent(m_posLichsu_Le, true);
-
             go.transform.localScale = Vector3.one;
-
-            //go.transform.localPosition = new Vector3( m_posLichsu.localPosition.x + iCount *  m_deltaX,
-            //     m_posLichsu.localPosition.y + jCount *  m_deltaY,
-            //     m_posLichsu.localPosition.z);
-
-            //iCount++;
-            //if ((iCount % 8) == 0) {
-            //    {
-            //        iCount = 0;
-            //        jCount++;
-            //    }
-            //}
-
             //Save total go lich su.
             //We will remove go lich su after function is called again.
             m_lsCount.Add(go);
@@ -644,7 +643,7 @@ public class XocDia : BaseCasino {
         //Play sound.
 
         //if (m_isBetPrevious && !m_isBetMeAgain) {
-            SendData.onSendDatLai();
+        SendData.onSendDatLai();
         //}
 
     }
@@ -780,11 +779,10 @@ public class XocDia : BaseCasino {
             string nick = message.reader().ReadUTF();
             for (int i = 0; i < 6; i++) {
                 m_totalMoney[i] = message.reader().ReadLong();
+                m_totalMeMoney[i] = message.reader().ReadLong();
+
                 m_totalMoneyCuaCuoc[i].text = BaseInfo.formatMoney(m_totalMoney[i]);
-                if (BaseInfo.gI().mainInfo.nick.Equals(nick)) {
-                    m_totalMeMoney[i] = message.reader().ReadLong();
-                    m_totalMeMoneyCuaCuoc[i].text = BaseInfo.formatMoney(m_totalMeMoney[i]);
-                }
+                m_totalMeMoneyCuaCuoc[i].text = BaseInfo.formatMoney(m_totalMeMoney[i]);
             }
         } catch (System.IO.IOException e) {
             Debug.LogException(e);

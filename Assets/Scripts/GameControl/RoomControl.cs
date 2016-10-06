@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 using DG.Tweening;
 public class RoomControl : StageControl {
     //public static int roomType = 2; //1:Thuong, 2:VIP
-                                    //  public GameObject prefabsTable;
+    //  public GameObject prefabsTable;
     public Transform parent;
 
     public Transform tf_effect;
@@ -28,7 +28,6 @@ public class RoomControl : StageControl {
     LoopVerticalScrollRect loopVerticalScrollRect;//toi uu scroll
 
     public Text text_noti;
-    public GameObject btn_choingay, noti;
     // Use this for initialization
     void Start() {
         for (int i = 0; i < btn_click_game.Length; i++) {
@@ -42,15 +41,9 @@ public class RoomControl : StageControl {
     }
     const float posXDefault = 200.0f;
     public void setNoti(string str) {
-        if (str.Equals("")) {
-            noti.SetActive(false);
-            btn_choingay.SetActive(true);
-        } else {
-            noti.SetActive(true);
-            btn_choingay.SetActive(false);
+        if (!str.Equals("")) {
             text_noti.text = str;
-
-            //float w = text_noti.rectTransform.rect.width;
+            
             float w = LayoutUtility.GetPreferredWidth(text_noti.rectTransform);
             text_noti.transform.localPosition = new Vector3(posXDefault, 0, 0);
             float posEnd = -posXDefault - w;
@@ -62,7 +55,6 @@ public class RoomControl : StageControl {
     }
 
     void OnEnable() {
-        //    updateProfileUser();
         gameControl.top.setGameName();
     }
 
@@ -244,24 +236,35 @@ public class RoomControl : StageControl {
         BaseInfo.gI().isHideTabeFull = isChecked;
         SendData.onUpdateRoom();
     }
-    //public void clickRoomVip () {
-    //    GameControl.instance.sound.startClickButtonAudio ();
-    //    if(vip.value) {
-    //        BaseInfo.gI ().typetableLogin = Res.ROOMVIP;
-    //        SendData.onJoinRoom (Res.ROOMVIP);
-    //        gameControl.panelWaiting.onShow ();
-    //    }
-    //    //gameControl.menu.setToggle ();
-    //}
-    //public void clickRoopFree () {
-    //    GameControl.instance.sound.startClickButtonAudio ();
-    //    if(thuong.value) {
-    //        BaseInfo.gI ().typetableLogin = Res.ROOMFREE;
-    //        SendData.onJoinRoom (Res.ROOMFREE);
-    //        gameControl.panelWaiting.onShow ();
-    //    }
-    //    //gameControl.menu.setToggle ();
-    //}
+    [SerializeField]
+    Button btn_vip, btn_free;
+    [SerializeField]
+    Sprite[] sp_btn;
+    public void clickRoomVip() {
+        GameControl.instance.sound.startClickButtonAudio();
+        BaseInfo.gI().typetableLogin = Res.ROOMVIP;
+        SendData.onJoinRoom(Res.ROOMVIP);
+        gameControl.panelWaiting.onShow();
+        setStateButton();
+    }
+
+    public void clickRoopFree() {
+        GameControl.instance.sound.startClickButtonAudio();
+        BaseInfo.gI().typetableLogin = Res.ROOMFREE;
+        SendData.onJoinRoom(Res.ROOMFREE);
+        gameControl.panelWaiting.onShow();
+        setStateButton();
+    }
+
+    void setStateButton() {
+        if (BaseInfo.gI().typetableLogin == Res.ROOMVIP) {
+            btn_vip.image.sprite = sp_btn[0];
+            btn_free.image.sprite = sp_btn[1];
+        } else {
+            btn_vip.image.sprite = sp_btn[1];
+            btn_free.image.sprite = sp_btn[0];
+        }
+    }
     //public void clickSetting() {
     //    GameControl.instance.sound.startClickButtonAudio();
     //    gameControl.panelSetting.onShow();
@@ -304,12 +307,6 @@ public class RoomControl : StageControl {
     //    GameControl.instance.sound.startClickButtonAudio();
     //    gameControl.panelNotiDoiThuong.onShow();
     //}
-
-    public void inviteFacebook() {
-        //gameControl.facebookControl.invite();
-        gameControl.toast.showToast("Chức năng đang phát triển!");
-    }
-
     public void clickPlayNow() {
         GameControl.instance.sound.startClickButtonAudio();
         gameControl.panelWaiting.onShow();
@@ -328,7 +325,9 @@ public class RoomControl : StageControl {
         //tf_effect.localPosition = game.transform.localPosition;
 
         //vtPosCenter = mainTransform.InverseTransformPoint(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-        tf_effect.position = game.transform.position;
+        //tf_effect.position = game.transform.position;
+        tf_effect.transform.SetParent(game.transform);
+        tf_effect.localPosition = Vector3.zero;
         game.transform.DOScale(1.05f, 0.6f).SetLoops(-1);
     }
     public void onClickGame(string obj) {

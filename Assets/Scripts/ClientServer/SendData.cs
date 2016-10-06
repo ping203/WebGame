@@ -140,7 +140,7 @@ public class SendData {
     }
 
 
-    public static void onJoinRoom(string nick, int rid) {
+    public static void onJoinRoom(/*string nick,*/ int rid) {
         Message msg = new Message(CMDClient.CMD_LIST_TABLE);
         // SerializerHelper.writeInt(rid);
         // System.out.println(rid+" >>>>");
@@ -384,8 +384,7 @@ public class SendData {
         NetworkUtil.GI().sendMessage(msg);
     }
 
-    public static void onAcceptInviteFriend(sbyte gameid, short tblid, long folowMoney, byte typeRoom) {
-        //roomid = 2;
+    public static void onAcceptInviteFriend(sbyte gameid, short tblid, long folowMoney, sbyte typeRoom) {
         Message msg = new Message(CMDClient.CMD_ANSWER_INVITE_FRIEND);
         try {
             msg.writer().WriteByte(gameid);

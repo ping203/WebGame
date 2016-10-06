@@ -7,27 +7,24 @@ using DG.Tweening;
 public class BaseToCasino : BaseCasino {
     protected int first;
     public Button btn_bo, btn_xembai, btn_theo,
-            btn_To;//, btn_xembai_fold
-    public Button btn_ruttien;
+            btn_To, btn_To14, btn_To12, btn_ToAll, btn_Tox2;
+    //public Button btn_ruttien;
     protected bool is_bo, is_xem, is_theo, is_to;
-    //public UIToggle cb_fold, cb_check_fold, cb_check, cb_call, cb_callany;
     public Text txt_moneyCuoc;
-    public Text lb_bo, lb_xem, lb_theo, lb_to;//, lb_check_fold
+    public Text lb_bo, lb_xem, lb_theo, lb_to, lb_to14, lb_to12, lb_toall, lb_tox2;
     protected long moneyCuoc = 0;
-    //long tongtien = 0;
     long minMoney, maxMoney;
     bool isDongY;
-    //public MoneyInpot[] moneyInPot;
-    //public MoneyInpot moneyTemp;
     public bool isAutoStart;
     protected bool started;
 
     public GameObject sliderTo;
     public Slider slider;
     public Text currentMoney;
+
+    public ListTypeCard listTypeCard;
     public new void Awake() {
         is_bo = false;
-        //is_check_fold = false;
         is_xem = false;
         is_theo = false;
         is_to = false;
@@ -111,7 +108,6 @@ public class BaseToCasino : BaseCasino {
         // TODO Auto-generated method stub
         base.onJoinView(message);
         hideAllButton();
-        //btn_ruttien.gameObject.SetActive(false);
     }
     public override void onJoinTableSuccess(string master) {
         if (BaseInfo.gI().isView) {
@@ -151,6 +147,14 @@ public class BaseToCasino : BaseCasino {
             lb = lb_theo;
         } else if (button == btn_To) {
             lb = lb_to;
+        } else if (button == btn_To14) {
+            lb = lb_to14;
+        } else if (button == btn_To12) {
+            lb = lb_to12;
+        } else if (button == btn_Tox2) {
+            lb = lb_tox2;
+        } else if (button == btn_ToAll) {
+            lb = lb_toall;
         } else if (button == btn_xembai) {
             lb = lb_xem;
         } else if (button == btn_bo) {
@@ -161,12 +165,10 @@ public class BaseToCasino : BaseCasino {
             if (lb != null) {
                 lb.color = Color.gray;
             }
-            //button.state = UIButtonColor.State.Disabled;
         } else {
             if (lb != null) {
                 lb.color = Color.white;
             }
-            //button.state = UIButtonColor.State.Normal;
         }
         if (button != null)
             button.enabled = !isDisable;
@@ -276,14 +278,23 @@ public class BaseToCasino : BaseCasino {
     private void hideAllButton() {
         btn_theo.gameObject.SetActive(false);
         btn_To.gameObject.SetActive(false);
+        btn_To14.gameObject.SetActive(false);
+        btn_To12.gameObject.SetActive(false);
+        btn_ToAll.gameObject.SetActive(false);
+        btn_Tox2.gameObject.SetActive(false);
         btn_xembai.gameObject.SetActive(false);
         btn_bo.gameObject.SetActive(false);
-        btn_ruttien.gameObject.SetActive(false);
+        //btn_ruttien.gameObject.SetActive(false);
+        btn_To.transform.parent.gameObject.SetActive(false);
     }
     protected void enableAllButton(bool isEnable) {
         setDisable(btn_theo, !isEnable);
         setDisable(btn_xembai, !isEnable);
         setDisable(btn_To, !isEnable);
+        setDisable(btn_To14, !isEnable);
+        setDisable(btn_To12, !isEnable);
+        setDisable(btn_ToAll, !isEnable);
+        setDisable(btn_Tox2, !isEnable);
         setDisable(btn_bo, !isEnable);
     }
     protected void showAllButton(bool isWait, bool isCheck,
@@ -303,26 +314,25 @@ public class BaseToCasino : BaseCasino {
             //lb_callany.text = (Res.TXT_CALL_ANY );
             setDisable(btn_theo, true);
             setDisable(btn_To, true);
+            setDisable(btn_To14, true);
+            setDisable(btn_To12, true);
+            setDisable(btn_ToAll, true);
+            setDisable(btn_Tox2, true);
             setDisable(btn_xembai, true);
             setDisable(btn_bo, true);
         } else {
             // TODO Auto-generated method stub
             lb_bo.text = (Res.TXT_FOLD);
-            //lb_check_fold.text = (Res.TXT_CHECK_FOLD );
             lb_xem.text = (Res.TXT_CHECK);
             lb_theo.text = (Res.TXT_CALL);
             lb_to.text = (Res.TXT_RAISE);
             //setDisable(btn_call, false);
-            //setDisable(btn_callany, false);
-            //setDisable(btn_xembai, false);
             setDisable(btn_bo, false);
-            //setDisable(btn_xembai_fold, true);
 
         }
 
         if (!isCheck) {
             is_bo = false;
-            //is_check_fold = false;
             is_xem = false;
             is_theo = false;
             is_to = false;
@@ -333,21 +343,24 @@ public class BaseToCasino : BaseCasino {
 
         if (isVisible) {
             btn_bo.gameObject.SetActive(true);
-            //btn_xembai_fold.gameObject.SetActive(true);
             btn_xembai.gameObject.SetActive(true);
             btn_theo.gameObject.SetActive(true);
             btn_To.gameObject.SetActive(true);
-            btn_ruttien.gameObject.SetActive(false);
+            btn_To14.gameObject.SetActive(true);
+            btn_To12.gameObject.SetActive(true);
+            btn_ToAll.gameObject.SetActive(true);
+            btn_Tox2.gameObject.SetActive(true);
+            btn_To.transform.parent.gameObject.SetActive(true);
         } else {
             btn_bo.gameObject.SetActive(false);
-            //btn_xembai_fold.gameObject.SetActive(false);
             btn_xembai.gameObject.SetActive(false);
             btn_theo.gameObject.SetActive(false);
             btn_To.gameObject.SetActive(false);
-
-            //TODO: bo button ruttien.
-            //btn_ruttien.gameObject.SetActive (true);
-            btn_ruttien.gameObject.SetActive(false);
+            btn_To14.gameObject.SetActive(false);
+            btn_To12.gameObject.SetActive(false);
+            btn_ToAll.gameObject.SetActive(false);
+            btn_Tox2.gameObject.SetActive(false);
+            btn_To.transform.parent.gameObject.SetActive(false);
         }
     }
     protected long getMaxMoney(long money) {
@@ -406,7 +419,6 @@ public class BaseToCasino : BaseCasino {
                 if (players[i].cardHand3Cay != null)
                     players[i].cardHand3Cay.setAllMo(true);
             } catch (Exception e) {
-                Debug.Log(" infoWinPlayer ");
                 Debug.LogException(e);
             }
             players[i].cardHand.reAddAllCard();
@@ -489,11 +501,19 @@ public class BaseToCasino : BaseCasino {
                 showAllButton(false, false, true);
                 setDisable(btn_xembai, true);
                 setDisable(btn_To, true);
+                setDisable(btn_To14, true);
+                setDisable(btn_To12, true);
+                setDisable(btn_ToAll, true);
+                setDisable(btn_Tox2, true);
                 lb_theo.text = (Res.TXT_ALLIN);
             }
         }
         if (getmoneyTong() == 0) {
             setDisable(btn_To, true);
+            setDisable(btn_To14, true);
+            setDisable(btn_To12, true);
+            setDisable(btn_ToAll, true);
+            setDisable(btn_Tox2, true);
         }
     }
 
@@ -635,36 +655,87 @@ public class BaseToCasino : BaseCasino {
         //}
     }
     public void clickButtonTo() {
-        if (isDongY) {
-            players[0].setTurn(false);
-            SendData.onCuocXT(-99, BaseInfo.gI().moneyto);
-            showAllButton(true, false, true);
-            hideThanhTo();
-            setDisable(btn_To, false);
-        } else {
-            minMoney = getmoneyTong();
-            if (minMoney > BaseInfo.gI().moneyMinTo) {
-                minMoney = BaseInfo.gI().moneyMinTo;
-            }
-            if (minMoney < 0) {
-                minMoney = 0;
-            }
-            if (minMoney > getmoneyTong()) {
-                minMoney = getmoneyTong();
-            }
-            setMoneyTruot(minMoney);
-            showThanhTo(
-                    minMoney + getMaxChips()
-                            - players[0].getMoneyChip(),
-                    getmoneyTong() + getMaxChips()
-                            - players[0].getMoneyChip());
-            //lb_callany.text = (Res.TXT_DONGY );
-            setDisable(btn_To, true);
-        }
-        isDongY = !isDongY;
-
+        /* if (isDongY) {
+             players[0].setTurn(false);
+             SendData.onCuocXT(-99, BaseInfo.gI().moneyto);
+             showAllButton(true, false, true);
+             hideThanhTo();
+             setDisable(btn_To, false);
+         } else {
+             minMoney = getmoneyTong();
+             if (minMoney > BaseInfo.gI().moneyMinTo) {
+                 minMoney = BaseInfo.gI().moneyMinTo;
+             }
+             if (minMoney < 0) {
+                 minMoney = 0;
+             }
+             if (minMoney > getmoneyTong()) {
+                 minMoney = getmoneyTong();
+             }
+             setMoneyTruot(minMoney);
+             showThanhTo(
+                     minMoney + getMaxChips()
+                             - players[0].getMoneyChip(),
+                     getmoneyTong() + getMaxChips()
+                             - players[0].getMoneyChip());
+             //lb_callany.text = (Res.TXT_DONGY );
+             setDisable(btn_To, true);
+         }
+         isDongY = !isDongY;
+         */
         //}
+        BaseInfo.gI().moneyto = moneyCuocban;
+
+        players[0].setTurn(false);
+        SendData.onCuocXT(-99, BaseInfo.gI().moneyto);
+        showAllButton(true, false, true);
+
+        setDisable(btn_To, false);
+        setDisable(btn_To14, false);
+        setDisable(btn_To12, false);
+        setDisable(btn_ToAll, false);
+        setDisable(btn_Tox2, false);
     }
+
+    public void clickButtonTo_Rate(string action) {
+        float rate = 1;
+        long _money = 0;
+        switch (action) {
+            case "14":
+                rate = 4;
+                break;
+            case "12":
+                rate = 2;
+                break;
+            case "all":
+            case "x2":
+                rate = 1;
+                break;
+        }
+
+        if (action.Equals("x2")) {
+            _money = moneyCuocban * 2;
+        } else {
+            if (BaseInfo.gI().typetableLogin == Res.ROOMVIP) {
+                _money = BaseInfo.gI().mainInfo.moneyVip;
+            } else {
+                _money = BaseInfo.gI().mainInfo.moneyFree;
+            }
+        }
+
+        BaseInfo.gI().moneyto = (long)(_money / rate);
+
+        players[0].setTurn(false);
+        SendData.onCuocXT(-99, BaseInfo.gI().moneyto);
+        showAllButton(true, false, true);
+
+        setDisable(btn_To, false);
+        setDisable(btn_To14, false);
+        setDisable(btn_To12, false);
+        setDisable(btn_ToAll, false);
+        setDisable(btn_Tox2, false);
+    }
+
     public void clickButtnRutTien() {
         long temp = 0;
         if (BaseInfo.gI().typetableLogin == Res.ROOMFREE) {

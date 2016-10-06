@@ -88,9 +88,9 @@ public class Card : MonoBehaviour {
     public const float W_CARD = 50f;
     public const float H_CARD = 70f;
     public void OnClickCard() {
-        if (onClickOK != null) {
-            onClickOK.Invoke();
-        }
+            if (onClickOK != null) {
+                onClickOK.Invoke();
+            }
 
     }
     public void setListenerClick(CallBack click) {
@@ -115,10 +115,9 @@ public class Card : MonoBehaviour {
         yield return new WaitForSeconds(wait);
         setvisible(true);
         if (isDeal) {
-            //setvisible(true);
             setId(ids);
         }
-        
+
         transform.DOLocalMove(to, dur);
         GameControl.instance.sound.startchiabaiAudio();
     }

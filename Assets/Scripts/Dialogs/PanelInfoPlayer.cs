@@ -6,6 +6,7 @@ public class PanelInfoPlayer : PanelGame {
     public Text txt_id;
     public Text txt_name;
     public Text txt_xu;
+    public Text txt_chip;
     public Text txt_thang_thua;
     // public Text chip;
     public Image Img_Avata;
@@ -159,7 +160,7 @@ public class PanelInfoPlayer : PanelGame {
         txt_name.text = "Tên: " + nameinfo;
         txt_id.text = "ID: " + userid;
         txt_xu.text = BaseInfo.formatMoneyDetailDot(xuinfo) + " " + Res.MONEY_VIP_UPPERCASE;
-        // chip.text = Res.MONEY_FREE + ": " + BaseInfo.formatMoneyDetailDot(chipinfo);
+        txt_chip.text = BaseInfo.formatMoneyDetailDot(chipinfo) + " " + Res.MONEY_FREE_UPPERCASE;
         //ip_email.text = email;
         //ip_phone.text = phone;
 

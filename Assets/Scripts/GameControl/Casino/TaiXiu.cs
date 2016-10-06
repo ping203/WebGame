@@ -65,10 +65,10 @@ public class TaiXiu : BaseCasino {
             long tien_tai = message.reader().ReadLong();
             long tien_xiu = message.reader().ReadLong();
 
-            lblTotalMoneyTai.text = "" + tong_tien_tai;
-            lblTotalMoneyXiu.text = "" + tong_tien_xiu;
-            lblMoneyTai.text = "" + tien_tai;
-            lblMoneyXiu.text = "" + tien_xiu;
+            lblTotalMoneyTai.text = "" + BaseInfo.formatMoneyNormal(tong_tien_tai);
+            lblTotalMoneyXiu.text = "" + BaseInfo.formatMoneyNormal(tong_tien_xiu);
+            lblMoneyTai.text = "" + BaseInfo.formatMoneyNormal(tien_tai);
+            lblMoneyXiu.text = "" + BaseInfo.formatMoneyNormal(tien_xiu);
 
             int size = message.reader().ReadInt();
             removeLichSu();
@@ -313,7 +313,7 @@ public class TaiXiu : BaseCasino {
         if (money <= 0) {
             return "0";
         } else {
-            return money.ToString("0.0");//formatmoney.format(money);
+            return BaseInfo.formatMoneyNormal(money);
         }
     }
 

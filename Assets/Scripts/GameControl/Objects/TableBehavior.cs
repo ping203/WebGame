@@ -62,7 +62,7 @@ public class TableBehavior : MonoBehaviour {
         setInfo(tableItem, index);
     }
 
-    void setInfo(TableItem tableItem,int index) {
+    void setInfo(TableItem tableItem, int index) {
         if (index % 2 == 0) {
             backgroundSprite.color = color[0];
         } else {
@@ -70,27 +70,28 @@ public class TableBehavior : MonoBehaviour {
         }
         lb_tenban.text = "Bàn " + tableItem.id;
         //lb_muccuoc.text = BaseInfo.formatMoney(money) + " " + BaseInfo.formatMoney(needMoney);
-        // if (typeTable == Res.ROOMFREE) {
-        lb_muccuoc.text = BaseInfo.formatMoneyNormal(tableItem.money) + " " + Res.MONEY_FREE;
-        lb_can.text = BaseInfo.formatMoneyNormal(tableItem.needMoney) + " " + Res.MONEY_FREE;
-        // } else {
-        //   lb_muccuoc.text = BaseInfo.formatMoneyDetailDot(money) + " " + Res.MONEY_VIP;
-        //     lb_can.text = BaseInfo.formatMoneyDetailDot(needMoney) + " " + Res.MONEY_VIP;
-        //}
-            if (GameControl.instance.gameID == GameID.XOCDIA) {
-                slide_tinhtrang.gameObject.SetActive(false);
-                slide_tinhtrang_XocDia.gameObject.SetActive(true);
-                slide_tinhtrang_XocDia.value = (float)tableItem.nUser / tableItem.maxUser;
-                numPlayer.text = tableItem.nUser + "/" + tableItem.maxUser;
-            } else {
-                slide_tinhtrang.gameObject.SetActive(true);
-                slide_tinhtrang_XocDia.gameObject.SetActive(false);
-                slide_tinhtrang.GetComponent<RectTransform>().sizeDelta = new Vector2(20 * tableItem.maxUser, 25);
-                slide_tinhtrang.value = (float)tableItem.nUser / tableItem.maxUser;
-            }
+        tableItem.typeTable = BaseInfo.gI().typetableLogin;
+        if (tableItem.typeTable == Res.ROOMFREE) {
+            lb_muccuoc.text = BaseInfo.formatMoneyNormal(tableItem.money) + " " + Res.MONEY_FREE;
+            lb_can.text = BaseInfo.formatMoneyNormal(tableItem.needMoney) + " " + Res.MONEY_FREE;
+        } else {
+            lb_muccuoc.text = BaseInfo.formatMoneyDetailDot(tableItem.money) + " " + Res.MONEY_VIP;
+            lb_can.text = BaseInfo.formatMoneyDetailDot(tableItem.needMoney) + " " + Res.MONEY_VIP;
+        }
+        if (GameControl.instance.gameID == GameID.XOCDIA) {
+            slide_tinhtrang.gameObject.SetActive(false);
+            slide_tinhtrang_XocDia.gameObject.SetActive(true);
+            slide_tinhtrang_XocDia.value = (float)tableItem.nUser / tableItem.maxUser;
+            numPlayer.text = tableItem.nUser + "/" + tableItem.maxUser;
+        } else {
+            slide_tinhtrang.gameObject.SetActive(true);
+            slide_tinhtrang_XocDia.gameObject.SetActive(false);
+            slide_tinhtrang.GetComponent<RectTransform>().sizeDelta = new Vector2(21 * tableItem.maxUser, 21);
+            slide_tinhtrang.value = (float)tableItem.nUser / tableItem.maxUser;
+        }
 
-            bool isLock = tableItem.isLock == 1 ? true : false;
-            spriteLock.gameObject.SetActive(isLock);
+        bool isLock = tableItem.isLock == 1 ? true : false;
+        spriteLock.gameObject.SetActive(isLock);
     }
 
     public void clickTable() {
@@ -107,7 +108,7 @@ public class TableBehavior : MonoBehaviour {
         if (moneyTemp < tableItem.needMoney) {
             GameControl.instance.panelMessageSytem.onShow("Bạn cần có ít nhât "
                     + BaseInfo.formatMoney(tableItem.needMoney) + " " + money
-                    + " để vào bàn! Bạn muốn nạp thêm " + Res.MONEY_VIP + "?", delegate {
+                    + " để vào bàn! Bạn muốn nạp thêm " + money + "?", delegate {
                         GameControl.instance.panelNapChuyenXu.onShow();
                     });
         } else {
@@ -118,9 +119,9 @@ public class TableBehavior : MonoBehaviour {
             //    BaseInfo.gI().moneyNeedTable = tableItem.needMoney;
             //    GameControl.instance.panelRutTien.show((long)(tableItem.needMoney), tableItem.maxMoney, 0, tableItem.id, 0, 0, RoomControl.roomType);
             //} else {
-                GameControl.instance.panelWaiting.onShow();
-                //SendData.onJoinTablePlay(id, "", -1);
-                SendData.onJoinTablePlay(BaseInfo.gI().mainInfo.nick, tableItem.id, "", -1);
+            GameControl.instance.panelWaiting.onShow();
+            //SendData.onJoinTablePlay(id, "", -1);
+            SendData.onJoinTablePlay(BaseInfo.gI().mainInfo.nick, tableItem.id, "", -1);
             //}
         }
 

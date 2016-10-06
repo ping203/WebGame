@@ -86,6 +86,7 @@ public class GameControl : MonoBehaviour {
     public PanelChangePassword panelChangePassword;
     public PanelChangeName panelChangeName;
     public PanelRank panelRank;
+    public PanelUpVip panelUpVip;
 
     public SoundManager sound;
 
@@ -117,6 +118,9 @@ public class GameControl : MonoBehaviour {
         }
         return null;
     }
+
+    public GameObject[] list_help_typecards;
+
     public int gameID;
 
     public bool cancelAllInvite = false;
@@ -177,7 +181,7 @@ public class GameControl : MonoBehaviour {
         if (currenStage != stage) {
             backState = currenStage;
         }
-        if (stage != login) {
+        if (currenStage != room) {
             currenStage.DisAppear();
         }
         if (stage == room)
@@ -299,6 +303,7 @@ public class GameControl : MonoBehaviour {
         panelChangePassword.onHide();
         panelChangeName.onHide();
         panelRank.onHide();
+        panelUpVip.onHide();
     }
 
     void OnApplicationQuit() {

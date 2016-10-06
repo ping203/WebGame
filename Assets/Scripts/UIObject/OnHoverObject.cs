@@ -5,12 +5,7 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 
 public class OnHoverObject : MonoBehaviour {
-    //public ToastInfo toast;
-   // Image img;
-   // public Align _align = Align.Center;
 
-   // public string str { set; get; }
-   // Vector3 vtDefault;
     // Use this for initialization
     void Start() {
         //img = GetComponent<Image>();
@@ -30,11 +25,6 @@ public class OnHoverObject : MonoBehaviour {
 
             //onExitHover();
         //}
-    }
-
-    // Update is called once per frame
-    void Update() {
-
     }
     void onHover() {
         transform.DOScale(1.05f, 0.1f);
@@ -62,8 +52,6 @@ public class OnHoverObject : MonoBehaviour {
     }
 
     void onExitHover() {
-        // toast.gameObject.SetActive(false);
-
         transform.DOScale(1f, 0.1f);
     }
 }

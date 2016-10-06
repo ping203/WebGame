@@ -15,9 +15,7 @@ public class UIPlayer : MonoBehaviour {
     // mau binh
     public ArrayCard[] cardMauBinh;
     public Vector3[] posCardMB;
-    public Card cardMauBinhTouch;
-
-
+    
     public GameObject body;
     public Timer timer;
     public Chat chat;

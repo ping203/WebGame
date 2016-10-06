@@ -660,4 +660,10 @@ public class ArrayCard : MonoBehaviour {
         return soBai;
     }
 
+    public void setTouch(bool isTouch) {
+        this.isTouch = isTouch;
+        for (int i = 0; i < arrCard.Count; i++) {
+            arrCard[i].setTouchable(isTouch);
+        }
+    }
 }

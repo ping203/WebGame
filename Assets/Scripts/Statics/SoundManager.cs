@@ -24,8 +24,8 @@ public class SoundManager : MonoBehaviour {
 
     void PlaySound(string soundName, bool isLoop) {
         if (BaseInfo.gI().isSound) {
-            //audioSource.PlayOneShot(Resources.Load("sounds/" + soundName) as AudioClip);
             pauseSound();
+            //audioSource.PlayOneShot(Resources.Load("sounds/" + soundName) as AudioClip);
             audioSource.PlayOneShot(getSoundByName(soundName));
             audioSource.loop = isLoop;
         }
@@ -33,7 +33,7 @@ public class SoundManager : MonoBehaviour {
 
     public void pauseSound() {
         if (audioSource.isPlaying)
-            audioSource.Pause();
+            audioSource.Stop();
     }
 
     public void PlayVibrate() {

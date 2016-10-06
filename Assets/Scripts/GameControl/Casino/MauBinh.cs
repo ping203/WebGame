@@ -18,7 +18,7 @@ public class MauBinh : BaseCasino, IHasChanged {
 
     int turntimeMB;
     long timeReceiveTurnMB;
-
+    public ListTypeCard listTypeCard;
     Vector3 vt_chi_1;// = new Vector3(220, 135, 0);
     Vector3 vt_chi_2;// = new Vector3(220, 60, 0);
     Vector3 vt_chi_3;// = new Vector3(220, -15, 0);
@@ -90,7 +90,7 @@ public class MauBinh : BaseCasino, IHasChanged {
 
     public void clickButtonXepLai() {
         gameControl.isTouchMB = true;
-
+        setTouchCardMB(true);
         btn_xong.gameObject.SetActive(true);
         btn_xeplai.gameObject.SetActive(false);
         players[0].sp_xepXong.gameObject.SetActive(false);
@@ -137,6 +137,7 @@ public class MauBinh : BaseCasino, IHasChanged {
         action_card_down();
 
         gameControl.isTouchMB = false;
+        setTouchCardMB(false);
         card_show_mb.gameObject.SetActive(false);
     }
 
@@ -200,7 +201,14 @@ public class MauBinh : BaseCasino, IHasChanged {
         StartCoroutine(setCardHand(cardHand, 0, true));
         StartCoroutine(delayXepXong());
 
-        gameControl.isTouchMB = true;
+       gameControl.isTouchMB = true;
+        setTouchCardMB(true);
+    }
+
+    void setTouchCardMB(bool isTouch) {
+        for (int i = 0; i < players[0].cardMauBinh.Length; i++) {
+            players[0].cardMauBinh[i].setTouch(isTouch);
+        }
     }
 
     IEnumerator delayXepXong() {
@@ -297,6 +305,8 @@ public class MauBinh : BaseCasino, IHasChanged {
             }
         }
         go_chi.SetActive(false);
+        gameControl.isTouchMB = false;
+        setTouchCardMB(false);
     }
 
     public void setLoaiBai(int chi, int typeCard) {

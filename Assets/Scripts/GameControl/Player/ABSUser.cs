@@ -184,7 +184,8 @@ public class ABSUser : MonoBehaviour {
                     }
                     timer.sprite.color = Color.green;
 
-                } else*/ if (temp > 50) {
+                } else*/
+                if (temp > 50) {
                     if (pos == 0 && !BaseInfo.gI().isView) {
                         GameControl.instance.sound.pauseSound();
                     }
@@ -728,7 +729,6 @@ public class ABSUser : MonoBehaviour {
         if (pos == 0) {
             isMe = true;
         }
-
         //casinoStage.historychat.addChat(getName(), mess, isMe);
     }
     public virtual int[] getEatCard() {

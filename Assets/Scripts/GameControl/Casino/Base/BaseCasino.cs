@@ -17,7 +17,8 @@ public abstract class BaseCasino : StageControl {
     public int nUsers;
     public Image img_TableName;
     public Text lbInfoTable;
-    public Text lbInfoMoney;
+    public Text lbInfoMoney_Vip;
+    public Text lbInfoMoney_Free;
     public Text lb_luatchoi;
     //public GameObject groupKhoa;
     public Button toggleLock;
@@ -36,6 +37,7 @@ public abstract class BaseCasino : StageControl {
     public Sprite[] animationMauBinh;
     //public UISprite strengNetwork;
 
+    public ChatControl chatControl;
     // Use this for initialization
     public void Awake() {
         if (toggleLock != null) {
@@ -212,18 +214,30 @@ public abstract class BaseCasino : StageControl {
                 isLock = false;
                 toggleLock.image.sprite = lockSprite[1];
             }
+            if (chatControl != null)
+                chatControl.clearList();// vao ban thi clear chat
         } catch (Exception e) {
             Debug.LogException(e);
         }
     }
-
+    public long moneyCuocban = 0;
     public void setTableName(string name, short id, long money) {
-        if (lbInfoMoney != null) {
+        moneyCuocban = money;
+        if (lbInfoTable != null) {
             lbInfoTable.text = "Bàn: " + id;
         }
-
+        /*
         if (lbInfoMoney != null) {
             lbInfoMoney.text = "Cược: " + BaseInfo.formatMoneyDetail(money) + Res.MONEY_VIP_UPPERCASE;
+        }*/
+        if (BaseInfo.gI().typetableLogin == Res.ROOMVIP) {
+            lbInfoMoney_Vip.gameObject.SetActive(true);
+            lbInfoMoney_Free.gameObject.SetActive(false);
+            lbInfoMoney_Vip.text = "Cược: " + BaseInfo.formatMoneyDetail(money) + Res.MONEY_VIP_UPPERCASE;
+        } else {
+            lbInfoMoney_Vip.gameObject.SetActive(false);
+            lbInfoMoney_Free.gameObject.SetActive(true);
+            lbInfoMoney_Free.text = "Cược: " + BaseInfo.formatMoneyDetail(money) + Res.MONEY_FREE_UPPERCASE;
         }
         setLuatChoi(rule);
 
@@ -721,7 +735,15 @@ public abstract class BaseCasino : StageControl {
     }
 
     internal void onMsgChat(string nick, string msg) {
-        players[getPlayer(nick)].setTextChat(msg);
+        if (gameControl.gameID == GameID.POKER
+            || gameControl.gameID == GameID.XITO
+            || gameControl.gameID == GameID.LIENG) {
+            if (chatControl != null) {
+                chatControl.setText(nick, msg);
+            }
+        } else {
+            players[getPlayer(nick)].setTextChat(msg);
+        }
     }
 
     public virtual void onGetCardNoc(String nick, int card) {

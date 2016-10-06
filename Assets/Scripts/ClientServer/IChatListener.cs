@@ -60,7 +60,7 @@ interface IChatListener {
 
     void onDropPhomSuccess(string nick, int[] arrayPhom);
 
-    void onInvite(string nickInvite, string displayName, sbyte gameid, short roomid, short tblid, long money, long minMoney, long maxMoney);
+    void onInvite(string nickInvite, string displayName, sbyte gameid, sbyte roomid, short tblid, long money, long minMoney, long maxMoney);
     void onChangeBetMoney(Message message);
     void onRegSuccess(Message msg);
 
@@ -233,4 +233,6 @@ interface IChatListener {
     void oninfoTaiXiu(Message message);
     void oninfoLSTheoPhienTaiXiu(Message message);
     void onExitTaiXiu(Message message);
+
+    void onUpVIP(Message message);
 }

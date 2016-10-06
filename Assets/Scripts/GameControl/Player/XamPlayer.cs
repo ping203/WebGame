@@ -12,7 +12,7 @@ public class XamPlayer : ABSUser {
             });
         }
     }
-    
+
     public static int[] sort(int[] arr) {// mang cac so thu tu quan bai tu 0-51
         int[] turn = arr;
         int length = turn.Length;
@@ -46,12 +46,8 @@ public class XamPlayer : ABSUser {
         base.setRank(rank);
         if (cardHand.getSize() == 13) {
             if (rank == 1) {
-                //sp_thang.spriteName = "rank_thangtrang";
-                //sp_thang.MakePixelPerfect();
                 sp_thang.gameObject.SetActive(true);
             } else {
-                //sp_thang.spriteName = "rank_cong";
-                //sp_thang.MakePixelPerfect();
                 sp_thang.gameObject.SetActive(true);
             }
         } else {

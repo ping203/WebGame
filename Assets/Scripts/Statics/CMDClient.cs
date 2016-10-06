@@ -216,4 +216,6 @@ public class CMDClient {
     public const sbyte CMD_START_XENG = -32;
     public const sbyte CMD_GAMEOVER_XENG = -36;
     public const sbyte CMD_EXIT_XENG = -35;
+    
+    public const sbyte CMD_UP_VIP = -125;
 }

@@ -193,8 +193,9 @@ public class ProcessHandler : MessageHandler {
                                 long money_ = message.reader().ReadLong();
                                 long minMoney = message.reader().ReadLong();
                                 long maxMoney = message.reader().ReadLong();
+                                sbyte roomid = message.reader().ReadByte();
 
-                                listenner.onInvite(nickInvite, displayName, gameid, -1, tblid, money_, minMoney, maxMoney);
+                                listenner.onInvite(nickInvite, displayName, gameid, roomid, tblid, money_, minMoney, maxMoney);
                             }
                         }
                         break;
@@ -516,7 +517,8 @@ public class ProcessHandler : MessageHandler {
                         listenner.onExitTaiXiu(message);
                         break;
                     //end tai xiu
-
+                    case CMDClient.CMD_UP_VIP:
+                        break;
                     default:
                         if (secondHandler != null) {
                             secondHandler.processMessage(message);

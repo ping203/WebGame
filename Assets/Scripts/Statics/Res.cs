@@ -8,7 +8,7 @@ public class Res {
     public static string IP = "52.74.154.183";
     public static int PORT = 4326;
     //public static string IP = "101.99.3.131";
-    //public static string IP = "192.168.1.104";
+    //public static string IP = "192.168.1.120";
     //public static int PORT = 4323;
     //public static int PORT = 9999;
     public static string TXT_PhoneNumber = "0999999999";

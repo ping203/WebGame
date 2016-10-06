@@ -42,7 +42,7 @@ public class PanelRutTien : PanelGame {
 
                 GameControl.instance.panelWaiting.onShow();
                 SendData.onAcceptInviteFriend((sbyte)idgame,
-                        (short)idtable, tienchon, (byte) BaseInfo.gI().typetableLogin);
+                        (short)idtable, tienchon, (sbyte) BaseInfo.gI().typetableLogin);
                 break;
             case 2:
             case 3:

@@ -26,13 +26,6 @@ public class Chat : MonoBehaviour {
             emoticons.Add(smileys[i], smileName[i]);
         }
     }
-    // Use this for initialization
-    //void Awake() {
-    //    for (int i = 0; i < smileName.Length; i++) {
-    //        emoticons.Add(smileys[i], smileName[i]);
-    //    }
-    //}
-
     internal void setText(string content) {
         string temp;
         bool check = emoticons.TryGetValue(content, out temp);

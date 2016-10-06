@@ -101,7 +101,7 @@ public class Poker : BaseToCasino {
                     String name = message.reader().ReadUTF();
                     //moneyInPot[i].addChip2(money / len2, name, false);
                 }
-               // moneyInPot[i].setmMoneyInPotNonModifier(money);
+                // moneyInPot[i].setmMoneyInPotNonModifier(money);
             }
             setTurn(turnName, time);
         } catch (Exception e) {
@@ -240,11 +240,17 @@ public class Poker : BaseToCasino {
             type = info2[i].typeCard;
             if (type >= 0 && type <= 8) {
                 int poss2 = getPlayer(info2[i].name);
-                players[poss2].sp_typeCard.sprite = gameControl.list_typecards[type];//gameControl.getTypeCardByName(Res.TypeCard_Name[type]);
-                players[poss2].sp_typeCard.SetNativeSize();
-                players[poss2].sp_typeCard.transform.localPosition = Vector3.zero;
-                players[poss2].sp_typeCard.gameObject.SetActive(true);
-                players[poss2].onMoveSp_TypeCardToPlayer();
+                //if (poss2 != 0) {
+                    players[poss2].sp_typeCard.sprite = gameControl.list_typecards[type];//gameControl.getTypeCardByName(Res.TypeCard_Name[type]);
+                    players[poss2].sp_typeCard.SetNativeSize();
+                    players[poss2].sp_typeCard.transform.localPosition = Vector3.zero;
+                    players[poss2].sp_typeCard.gameObject.SetActive(true);
+                    players[poss2].onMoveSp_TypeCardToPlayer();
+                //} else {
+                if (poss2 == 0) {
+                    if (listTypeCard != null)
+                        listTypeCard.setTg(type);
+                }
             }
         }
         cardTable.setAllMo(true);
@@ -279,7 +285,7 @@ public class Poker : BaseToCasino {
         cardTable.removeAllCard();
         resetAllCardPlayer();
     }
-    
+
     /*
     public void onClickDemo() {
         int[] card1 = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };

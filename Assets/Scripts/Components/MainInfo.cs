@@ -40,8 +40,8 @@ public class MainInfo {
     // ----- new
     public string soLanThang;
     public string soLanThua;
-    public long moneyVipMax;
-    public long moneyFreeMax;
+    public long moneyVipMax = 0;
+    public long moneyFreeMax = 0;
     public int soGDThanhCong;
     public string LanDangNhapCuoi;
     public int level_vip = 0;
