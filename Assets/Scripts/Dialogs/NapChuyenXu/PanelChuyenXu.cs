@@ -7,16 +7,6 @@ public class PanelChuyenXu : PanelGame {
 	public InputField ip_userId, ip_xu;
 	public Slider sliderSoXu;
 
-	// Use this for initialization
-	void Start () {
-		//EventDelegate.Set (sliderSoXu.onChange, onChangeValue);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 	public void onChangeValue(){
 		ip_xu.text = (int)(BaseInfo.gI ().mainInfo.moneyVip * sliderSoXu.value) + "";
 	}

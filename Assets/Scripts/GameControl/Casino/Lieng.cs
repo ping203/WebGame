@@ -95,7 +95,6 @@ public class Lieng : BaseToCasino {
 
         if (players[0].getName().Equals(BaseInfo.gI().mainInfo.nick)) {
             ((LiengPlayer)players[0]).setDiem(BaseInfo.tinhDiem(players[0].cardHand3Cay.getArrCardAll()));
-
         } else {
             ((LiengPlayer)players[0]).setDiem(BaseInfo.tinhDiem(players[0].cardHand.getArrCardAll()));
         }

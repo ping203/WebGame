@@ -21,24 +21,21 @@ public class PanelInfoPlayer : PanelGame {
 
     //public Image[] stars;
 
-    WWW www;
-    bool isOne = false;
-    // Update is called once per frame
-    void Update() {
-        if (www != null) {
-            if (www.isDone && !isOne) {
-                Raw_Avata.texture = www.texture;
-                isOne = true;
-            }
-        }
-    }
+    /* WWW www;
+     bool isOne = false;
+     // Update is called once per frame
+     void Update() {
+         /*if (www != null) {
+             if (www.isDone && !isOne) {
+                 Raw_Avata.texture = www.texture;
+                 isOne = true;
+             }
+         }
+     }*/
 
     bool isLoginFB;
     void OnEnable() {
         isLoginFB = GameControl.instance.login.isLoginFB;
-        //changePass.SetActive(!isLoginFB);
-        //changeName.SetActive(!isLoginFB);
-        //changeAvata.SetActive(!isLoginFB);
     }
 
     public void clickChangePass() {
@@ -130,7 +127,8 @@ public class PanelInfoPlayer : PanelGame {
 
     public void updateAvata() {
         int id = BaseInfo.gI().mainInfo.idAvata;
-        Img_Avata.sprite = Res.getAvataByID(id);
+        //Img_Avata.sprite = Res.getAvataByID(id);
+        LoadAssetBundle.LoadSprite(Img_Avata, Res.AS_AVATA, "" + id);
     }
 
     public void infoProfile(string nameinfo, long userid, long xuinfo, long chipinfo,
@@ -143,7 +141,7 @@ public class PanelInfoPlayer : PanelGame {
         // updateInfo.SetActive(false);
         // ip_email.readOnly = true;
         // ip_phone.readOnly = true;
-        
+
         if (GameControl.instance.isInfo) {
             // bool isMe = nameinfo.Equals(BaseInfo.gI().mainInfo.displayname);
             //Neu của mh thì hiện lên
@@ -191,16 +189,28 @@ public class PanelInfoPlayer : PanelGame {
 
             txt_thang_thua.text = "Thắng: " + slth + "\t\t\t\t\tThua: " + slthu;
         }
-        www = null;
+        //www = null;
         if (link_avata.Equals("")) {
             Img_Avata.gameObject.SetActive(true);
             Raw_Avata.gameObject.SetActive(false);
-            Img_Avata.sprite = Res.getAvataByID(idAvata);
-        } else if (link_avata != "") {
-            Img_Avata.gameObject.SetActive(false);
-            Raw_Avata.gameObject.SetActive(true);
-            www = new WWW(link_avata);
-            isOne = false;
+            //Img_Avata.sprite = Res.getAvataByID(idAvata);
+            LoadAssetBundle.LoadSprite(Img_Avata, Res.AS_AVATA, "" + idAvata);
+        } else {
+            //Img_Avata.gameObject.SetActive(false);
+            // Raw_Avata.gameObject.SetActive(true);
+            // www = new WWW(link_avata);
+            // isOne = false;
+            StartCoroutine(getAvata(link_avata));
         }
+    }
+
+    IEnumerator getAvata(string link) {
+        WWW www = new WWW(link);
+        yield return www;
+        Img_Avata.gameObject.SetActive(false);
+        Raw_Avata.gameObject.SetActive(true);
+        Raw_Avata.texture = www.texture;
+        www.Dispose();
+        www = null;
     }
 }

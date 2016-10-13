@@ -17,8 +17,7 @@ public abstract class BaseCasino : StageControl {
     public int nUsers;
     public Image img_TableName;
     public Text lbInfoTable;
-    public Text lbInfoMoney_Vip;
-    public Text lbInfoMoney_Free;
+    public Text lbInfoMoney;
     public Text lb_luatchoi;
     //public GameObject groupKhoa;
     public Button toggleLock;
@@ -223,6 +222,7 @@ public abstract class BaseCasino : StageControl {
     public long moneyCuocban = 0;
     public void setTableName(string name, short id, long money) {
         moneyCuocban = money;
+        Debug.Log("=-=-=-=-=-=-=- " + moneyCuocban);
         if (lbInfoTable != null) {
             lbInfoTable.text = "Bàn: " + id;
         }
@@ -231,13 +231,11 @@ public abstract class BaseCasino : StageControl {
             lbInfoMoney.text = "Cược: " + BaseInfo.formatMoneyDetail(money) + Res.MONEY_VIP_UPPERCASE;
         }*/
         if (BaseInfo.gI().typetableLogin == Res.ROOMVIP) {
-            lbInfoMoney_Vip.gameObject.SetActive(true);
-            lbInfoMoney_Free.gameObject.SetActive(false);
-            lbInfoMoney_Vip.text = "Cược: " + BaseInfo.formatMoneyDetail(money) + Res.MONEY_VIP_UPPERCASE;
+            lbInfoMoney.transform.GetComponentInChildren<Image>().sprite = gameControl.icon_moneys[0];
+            lbInfoMoney.text = "Cược: " + BaseInfo.formatMoneyDetail(money) + Res.MONEY_VIP_UPPERCASE;
         } else {
-            lbInfoMoney_Vip.gameObject.SetActive(false);
-            lbInfoMoney_Free.gameObject.SetActive(true);
-            lbInfoMoney_Free.text = "Cược: " + BaseInfo.formatMoneyDetail(money) + Res.MONEY_FREE_UPPERCASE;
+            lbInfoMoney.transform.GetComponentInChildren<Image>().sprite = gameControl.icon_moneys[1];
+            lbInfoMoney.text = "Cược: " + BaseInfo.formatMoneyDetail(money) + Res.MONEY_FREE_UPPERCASE;
         }
         setLuatChoi(rule);
 
@@ -841,6 +839,7 @@ public abstract class BaseCasino : StageControl {
     public void clickSetting() {
         GameControl.instance.sound.startClickButtonAudio();
         gameControl.panelSetting.onShow();
+        //LoadAssetBundle.LoadScene("sub_setting", "sub_setting");
     }
 
     public void clickNapChuyenXu() {

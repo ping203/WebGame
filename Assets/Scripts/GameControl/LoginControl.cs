@@ -230,6 +230,8 @@ public class LoginControl : StageControl {
     void clickSetting() {
         GameControl.instance.sound.startClickButtonAudio();
         gameControl.panelSetting.onShow();
+
+        //LoadAssetBundle.LoadScene("sub_setting", "sub_setting");
     }
 
     void clickHelp() {

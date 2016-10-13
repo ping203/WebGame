@@ -10,7 +10,7 @@ public class Bacay : BaseCasino {
     public Button btn_cuoc, btn_bocuoc;
     //[HideInInspector]
     //public long int_cuoc1, int_cuoc2, int_cuoc3, int_cuoc4, int_cuoc5,
-       //     int_cuoc6;
+    //     int_cuoc6;
     sbyte time;// tim con lai de bat dau choi
     private long maxCuoc = 0;
     public new void Awake() {
@@ -90,6 +90,9 @@ public class Bacay : BaseCasino {
         if (a < 0) {
             return "";
         }
+        if (a == 100) {
+            return "Sáp";
+        }
         int finalDiem = a % 10;
         String diem = "";
         if (finalDiem == 0) {
@@ -119,8 +122,8 @@ public class Bacay : BaseCasino {
                 string nicks = "";
                 string info = "";
                 if (score == 99) {
-                    nicks = nick + ": " + "MƯỜI A RÔ" + " ";
-                    info = "MƯỜI A RÔ";
+                    nicks = nick + ": " + "MƯỜI ÁT RÔ" + " ";
+                    info = "MƯỜI ÁT RÔ";
                 } else if (score == 100) {
                     nicks = nick + ": " + "SÁP" + " ";
                     info = "SÁP";
@@ -257,9 +260,9 @@ public class Bacay : BaseCasino {
             } else {
                 players[0].setPlaying(true);
                 //if (players[0].isMaster()) {
-                    //lbl_timeBC.text = ("Thời gian nhận cược còn lại: ");
+                //lbl_timeBC.text = ("Thời gian nhận cược còn lại: ");
                 //} else {
-                    //lbl_timeBC.text = ("Thời gian đặt cược còn lại: ");
+                //lbl_timeBC.text = ("Thời gian đặt cược còn lại: ");
                 //}
                 //lbl_timeBC.gameObject.SetActive(true);
                 timeReceiveTurnBC = GetCurrentMilli();

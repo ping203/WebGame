@@ -72,7 +72,8 @@ public class MenuControl : StageControl {
             imgAvata.gameObject.SetActive(true);
             rawAvata.gameObject.SetActive(false);
             // spriteAvata.spriteName = idAvata + "";
-            imgAvata.sprite = Res.getAvataByID(idAvata);//Res.list_avata[idAvata + 1];
+            //imgAvata.sprite = Res.getAvataByID(idAvata);//Res.list_avata[idAvata + 1];
+            LoadAssetBundle.LoadSprite(imgAvata, Res.AS_AVATA, "" + idAvata);
         }
     }
 
@@ -139,6 +140,8 @@ public class MenuControl : StageControl {
     public void clickSetting() {
         GameControl.instance.sound.startClickButtonAudio();
         gameControl.panelSetting.onShow();
+
+        //LoadAssetBundle.LoadScene("sub_setting", "sub_setting");
     }
 
     public void clickHelp() {

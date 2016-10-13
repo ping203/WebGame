@@ -3,18 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class PanelRank : PanelGame {
-    public GameObject itemRanking;
+    //public GameObject itemRanking;
     public Transform parentItem;
 
     public List<GameObject> list_top = new List<GameObject>();
 
     public void InstanceItem(int rank, int idAvata, string playername, long money) {
-        GameObject go = (GameObject)Instantiate(itemRanking);
-        go.transform.SetParent(parentItem);
-        go.transform.localScale = Vector3.one;
-        go.GetComponent<ItemRanking>().SetData(rank, idAvata, playername, money);
+        LoadAssetBundle.LoadPrefab(Res.AS_PREFABS, "ItemRank", (prefabAB) => {
+            GameObject go = (GameObject)Instantiate(prefabAB);
+            go.transform.SetParent(parentItem);
+            go.transform.localScale = Vector3.one;
+            go.GetComponent<ItemRanking>().SetData(rank, idAvata, playername, money);
 
-        list_top.Add(go);
+            list_top.Add(go);
+        });
     }
 
     public void clearList() {

@@ -6,21 +6,22 @@ using UnityEngine.UI;
 public class PanelDoiThuong : PanelGame {
     public GameObject tblContaintGiftTheCao;
     public GameObject tblContaintGiftVatPham;
-    public GameObject btnGift;
     public bool isLoaded = false;
     public void addGiftInfo(int id, int type, string name, long price, long balance, string link) {
-        GameObject btnT = Instantiate(btnGift) as GameObject;
-        if (type == 1) {
-            btnT.transform.parent = tblContaintGiftTheCao.transform;
-        } else {
-            btnT.transform.parent = tblContaintGiftVatPham.transform;
-        }
+        LoadAssetBundle.LoadPrefab(Res.AS_PREFABS, "Button_Gift", (prefabAB) => {
+            GameObject btnT = Instantiate(prefabAB) as GameObject;
+            if (type == 1) {
+                btnT.transform.parent = tblContaintGiftTheCao.transform;
+            } else {
+                btnT.transform.parent = tblContaintGiftVatPham.transform;
+            }
 
-        btnT.transform.localScale = Vector3.one;
-        btnT.GetComponent<InfoGift>().setInfoGift(id, name, link, price, balance);
+            btnT.transform.localScale = Vector3.one;
+            btnT.GetComponent<InfoGift>().setInfoGift(id, name, link, price, balance);
 
-        btnT.GetComponent<Button>().onClick.AddListener(delegate {
-            sendGift(btnT);
+            btnT.GetComponent<Button>().onClick.AddListener(delegate {
+                sendGift(btnT);
+            });
         });
     }
 

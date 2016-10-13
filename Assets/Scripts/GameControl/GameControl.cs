@@ -96,11 +96,14 @@ public class GameControl : MonoBehaviour {
 
     public List<RoomInfo> phongFree = new List<RoomInfo>();
     public List<RoomInfo> phongVip = new List<RoomInfo>();
-    //public List<RoomInfo> phongQT = new List<RoomInfo>();
     public List<TableItem> listTable = new List<TableItem>();
 
     public GameObject[] gameObj_Actions_InGame;
     public Sprite[] chips_InGame;
+    /// <summary>
+    /// 0-vip, 1- free
+    /// </summary>
+    public Sprite[] icon_moneys;
     public Sprite getChipByName(string name) {
         for (int i = 0; i < chips_InGame.Length; i++) {
             if (name.Equals(chips_InGame[i].name))
@@ -142,8 +145,12 @@ public class GameControl : MonoBehaviour {
                 Destroy(this.gameObject);
         }
 
-        Res.list_avata = Resources.LoadAll<Sprite>("Avata");
-        Res.list_emotions = Resources.LoadAll<Sprite>("Emotions");
+         //Res.list_avata = Resources.LoadAll<Sprite>("Avata");
+        //for (int i = 0; i < Res.list_avata.Length; i++) {
+            
+        //}
+       // Res.list_avata = LoadAssetBundle.LoadSprite()
+       // Res.list_emotions = Resources.LoadAll<Sprite>("Emotions");
         Res.list_cards = Resources.LoadAll<Sprite>("Cards/cardall");
         IMEI = "357238040933272";//SystemInfo.deviceUniqueIdentifier;
     }
@@ -284,7 +291,7 @@ public class GameControl : MonoBehaviour {
     internal void disableAllDialog() {
         panelWaiting.onHide();
         panelMessageSytem.onHide();
-        panelSetting.onHide();
+        //panelSetting.onHide();
         panelInfoPlayer.onHide();
         panleHelp.onHide();
         panelNapChuyenXu.onHide();

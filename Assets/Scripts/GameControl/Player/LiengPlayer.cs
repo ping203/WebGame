@@ -30,6 +30,7 @@ public class LiengPlayer : ABSUser {
             txt_diem.text = diem;
             txt_diem.gameObject.SetActive(true);
             txt_diem.transform.DOKill();
+            txt_diem.transform.localScale = Vector3.one;
             Tween tw = txt_diem.transform.DOScale(0.8f, 0.4f);
             if (!getName().Equals(BaseInfo.gI().mainInfo.nick)) {
                 tw.SetLoops(10);

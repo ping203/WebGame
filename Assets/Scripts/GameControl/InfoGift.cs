@@ -1,9 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-//using UnityEngine.Networking;
-//using UnityEngine.Experimental.Networking;
-//using System.Runtime.InteropServices;
 
 public class InfoGift : MonoBehaviour {
     public int idGift { get; set; }
@@ -33,12 +30,6 @@ public class InfoGift : MonoBehaviour {
                 www = null;
             }
         }
-
-        // if (/*gameObject.activeInHierarchy &&*/ !isSet) {
-        //StartCoroutine(coDownload(linkGift));
-        // StartCoroutine(GetTexture(linkGift));
-        // isSet = true;
-        //}
     }
 
     internal void setInfoGift(int id, string name, string linkGift, long longPrice, long longBalance) {
@@ -65,18 +56,5 @@ public class InfoGift : MonoBehaviour {
         www.Dispose();
         www = null;
     }
-    
-    IEnumerator GetTexture(string link) {
-        using (UnityWebRequest www = UnityWebRequest.GetTexture(link)) {
-            yield return www.Send();
-
-            if (www.isError) {
-                Debug.Log(www.error);
-            } else {
-                Texture myTexture = DownloadHandlerTexture.GetContent(www);
-                Gift.texture = myTexture;
-            }
-        }
-    }
-*/
+    */
 }

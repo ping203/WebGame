@@ -3,14 +3,15 @@ using System.Collections;
 
 public class SoundManager : MonoBehaviour {
     AudioSource audioSource;
-    AudioClip[] list_audios;
+    [SerializeField]
+   AudioClip[] list_audios;
 
     // Use this for initialization
     void Start() {
         audioSource = GetComponent<AudioSource>();
         audioSource.rolloffMode = AudioRolloffMode.Linear;
         audioSource.volume = 1;
-        list_audios = Resources.LoadAll<AudioClip>("sounds") as AudioClip[];
+        //list_audios = Resources.LoadAll<AudioClip>("sounds") as AudioClip[];
     }
 
     AudioClip getSoundByName(string name) {

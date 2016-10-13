@@ -78,13 +78,7 @@ public class NetworkUtil : MonoBehaviour {
             //}
             yield return StartCoroutine(w_socket.Connect());
             connected = true;
-            SceneManager.LoadSceneAsync("main");
-            //        if (!connected && maxRetry < 4) {
-            //            maxRetry++;
-            //            Connect();
-            //        } else if (!connected && maxRetry >= 4) {
-            //            close();
-            //        }
+            //SceneManager.LoadSceneAsync("main");
         }
     }
 
@@ -94,9 +88,9 @@ public class NetworkUtil : MonoBehaviour {
             byte[] bytes = msg.toByteArray();
             //string message = System.Text.Encoding.UTF8.GetString(bytes);
 
-            //#if UNITY_EDITOR
+            #if UNITY_EDITOR
             Debug.Log("Send : " + msg.command);
-            //#endif
+            #endif
             w_socket.Send(bytes);
         } catch (Exception ex) {
             Debug.LogException(ex);
@@ -120,9 +114,9 @@ public class NetworkUtil : MonoBehaviour {
                 count++;
                 size = ((a1 & 0xff) << 8) | (a2 & 0xff);
                 byte[] subdata = new byte[size];
-                //#if UNITY_EDITOR
+                #if UNITY_EDITOR
                 Debug.Log("Read == " + command);
-                //#endif
+                #endif
                 Buffer.BlockCopy(data, count, subdata, 0, size);
                 count += size;
                 msg = new Message(command, subdata);

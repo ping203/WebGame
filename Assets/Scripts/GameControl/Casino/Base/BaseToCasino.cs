@@ -523,8 +523,7 @@ public class BaseToCasino : BaseCasino {
         } else {
             BaseInfo.gI().moneyMinTo = soTienTo;
         }
-
-        Debug.Log("--------------------------soTienTo " + soTienTo);
+        
         for (int i = 0; i < nUsers; i++) {
             if (players[i].isPlaying()) {
                 if (players[i].getName().Equals(nick)) {
@@ -537,7 +536,6 @@ public class BaseToCasino : BaseCasino {
                     gameControl.sound.startToAudio();
                     tongMoney += soTienTo;
                     chip_tong.setMoneyChipChu(tongMoney);
-                    Debug.Log("======================================tongMoney " + tongMoney);
                     break;
                 }
             }
@@ -546,7 +544,6 @@ public class BaseToCasino : BaseCasino {
         try {
             setTurn(message.reader().ReadUTF(), message);
         } catch (Exception e) {
-            Debug.Log(" onNickCuoc ");
             Debug.LogException(e);
         }
 

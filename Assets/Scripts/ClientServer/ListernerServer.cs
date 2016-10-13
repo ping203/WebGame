@@ -129,7 +129,8 @@ public class ListernerServer : IChatListener {
             }
 
             //int idRoom = Res.ROOMFREE;
-            BaseInfo.gI().typetableLogin = message.reader().ReadInt();
+            message.reader().ReadInt();
+            //BaseInfo.gI().typetableLogin = message.reader().ReadInt();
             // message.reader().ReadInt();
             SendData.onJoinRoom(/*BaseInfo.gI().mainInfo.nick, */BaseInfo.gI().typetableLogin);
 
@@ -642,10 +643,13 @@ public class ListernerServer : IChatListener {
                 gameName = "Game Tài Xỉu";
                 break;
         }
-        if (BaseInfo.gI().isNhanLoiMoiChoi) {// && !gameControl.dialogNapXu.isShow && !gameControl.dialogDoiThuong.isShow
+        if (BaseInfo.gI().isNhanLoiMoiChoi) {
             string m = "";
-            m = Res.MONEY_VIP;
-            roomid = 2;
+            if (roomid == Res.ROOMVIP) {
+                m = Res.MONEY_VIP;
+            } else {
+                m = Res.MONEY_FREE;
+            }
             gameControl.panelMessageSytem.onShow(displayName.Equals("") ? nickInvite
                                           : displayName
                 + " mời bạn đánh " + gameName + ", mức cược là  " + needmoney + m
@@ -659,11 +663,8 @@ public class ListernerServer : IChatListener {
     }
 
     public void onRegSuccess(Message msg) {
-        //gameControl.panelMessageSytem.onShow("Đăng ký thành công. Bạn có muốn đăng nhập không?", delegate {
         gameControl.toast.showToast("Đăng ký thành công!");
         gameControl.login.loginWhenRegSucces();
-        //});
-        //
     }
 
     public void onRegFail(string info) {
@@ -703,7 +704,8 @@ public class ListernerServer : IChatListener {
             gameControl.gameID = message.reader().ReadByte();
             if (gameControl.gameID == -99) {
                 gameControl.gameID = message.reader().ReadByte();
-                //string nameRoom = message.reader ().ReadUTF ();
+                string nameRoom = message.reader().ReadUTF();
+                BaseInfo.gI().typetableLogin = message.reader().ReadByte();
             }
         } catch (Exception ex) {
             Debug.LogException(ex);
@@ -1540,11 +1542,21 @@ public class ListernerServer : IChatListener {
             int size = message.reader().ReadShort();
             for (int i = 0; i < size; i++) {
                 long listBet = message.reader().ReadLong();
-                if (BaseInfo.gI().typetableLogin == Res.ROOMVIP) {
-                    BaseInfo.gI().listBetMoneysVIP.Add(listBet);
-                } else {
-                    BaseInfo.gI().listBetMoneysFREE.Add(listBet);
-                }
+                //if (BaseInfo.gI().typetableLogin == Res.ROOMVIP) {
+                BaseInfo.gI().listBetMoneysVIP.Add(listBet);
+                // } else {
+                //    BaseInfo.gI().listBetMoneysFREE.Add(listBet);
+                //}
+            }
+
+            size = message.reader().ReadShort();
+            for (int i = 0; i < size; i++) {
+                long listBet = message.reader().ReadLong();
+                //if (BaseInfo.gI().typetableLogin == Res.ROOMVIP) {
+                // BaseInfo.gI().listBetMoneysVIP.Add(listBet);
+                // } else {
+                BaseInfo.gI().listBetMoneysFREE.Add(listBet);
+                //}
             }
         } catch (Exception e) {
             Debug.LogException(e);
@@ -1564,9 +1576,8 @@ public class ListernerServer : IChatListener {
             }
             BaseInfo.gI().sms10 = message.reader().ReadInt();
             BaseInfo.gI().sms15 = message.reader().ReadInt();
-            //BaseInfo.gI ().tyle_xu_sang_chip = message.reader ().ReadInt ();
+            BaseInfo.gI().tyle_xu_sang_chip = message.reader().ReadInt();
             //BaseInfo.gI ().tyle_chip_sang_xu = message.reader ().ReadInt ();
-
         } catch (Exception e) {
             Debug.LogException(e);
         }
@@ -1597,7 +1608,7 @@ public class ListernerServer : IChatListener {
                 BaseInfo.gI().mainInfo.moneyFree += chip;
             }
             string info = message.reader().ReadUTF();
-            gameControl.panelMessageSytem.onShow(info, delegate { });
+            gameControl.panelMessageSytem.onShow(info);
         } catch (Exception e) {
             Debug.LogException(e);
         }

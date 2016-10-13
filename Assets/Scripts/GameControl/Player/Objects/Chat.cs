@@ -35,7 +35,8 @@ public class Chat : MonoBehaviour {
             chat_text_left.SetActive(false);
             chat_text_right.SetActive(false);
             spriteSmile.gameObject.SetActive(true);
-            spriteSmile.sprite = Res.getSmileByName(temp);
+            // spriteSmile.sprite = Res.getSmileByName(temp);
+            LoadAssetBundle.LoadSprite(spriteSmile, Res.AS_UI, temp);
             spriteSmile.transform.DOKill();
             spriteSmile.transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
             spriteSmile.transform.DOScale(1, 0.2f).SetLoops(-1);
@@ -66,9 +67,6 @@ public class Chat : MonoBehaviour {
     }
 
     IEnumerator setInvisible() {
-        //yield return new WaitForSeconds(2);
-        //transform.DOKill();
-        //transform.DOScale(0, 0.2f);
         yield return new WaitForSeconds(2f);
         gameObject.SetActive(false);
     }

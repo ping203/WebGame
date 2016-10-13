@@ -27,7 +27,8 @@ public class ItemRanking : MonoBehaviour {
         }
         icon_top.SetNativeSize();
         lb_stt.text = stt.ToString();
-        img_avata.sprite = Res.getAvataByID(idAvatar);
+        //img_avata.sprite = Res.getAvataByID(idAvatar);
+        LoadAssetBundle.LoadSprite(img_avata, Res.AS_AVATA, "" + idAvatar);
         if (name.Length > 10) {
             name = name.Substring(0, 10) + "...";
         }

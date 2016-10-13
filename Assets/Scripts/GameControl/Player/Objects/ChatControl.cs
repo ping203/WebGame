@@ -4,8 +4,8 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class ChatControl : MonoBehaviour {
-    [SerializeField]
-    GameObject txt_chat_prefab, icon_chat_prefab;
+    // [SerializeField]
+    // GameObject txt_chat_prefab, icon_chat_prefab;
     [SerializeField]
     ScrollRect scroll;
     [SerializeField]
@@ -16,8 +16,8 @@ public class ChatControl : MonoBehaviour {
 
     [SerializeField]
     Transform parentSmile;
-    [SerializeField]
-    GameObject btnSmile;
+    //[SerializeField]
+    //GameObject btnSmile;
 
     [SerializeField]
     GameObject chatSmile;
@@ -33,14 +33,25 @@ public class ChatControl : MonoBehaviour {
 
     Dictionary<string, string> emoticons = new Dictionary<string, string>();
     void Awake() {
-        for (int i = 0; i < Res.list_emotions.Length; i++) {
-            GameObject btn = Instantiate(btnSmile) as GameObject;
-            btn.transform.SetParent(parentSmile);
-            btn.transform.localScale = Vector3.one;
-            btn.GetComponent<Button>().image.sprite = Res.getSmileByName("a" + (i + 1));
-            btn.name = "" + i;
-            btn.GetComponent<Button>().onClick.AddListener(delegate {
-                sendSmile(btn);
+        StartCoroutine(loadAvata());
+    }
+
+    IEnumerator loadAvata() {
+        yield return new WaitForEndOfFrame();
+        LoadAssetBundle.LoadPrefab(Res.AS_PREFABS, "Item_Chat_Smile", (btn) => {
+            SetImage(btn);
+        });
+    }
+
+    void SetImage(GameObject btn) {
+        for (int i = 0; i < Res.EMOTION_COUNT; i++) {
+            GameObject obj = Instantiate(btn) as GameObject;
+            obj.transform.SetParent(parentSmile);
+            obj.transform.localScale = Vector3.one;
+            obj.name = "" + i;
+            LoadAssetBundle.LoadSprite(obj.GetComponent<Button>().image, Res.AS_UI, "a" + (i+1));
+            obj.GetComponent<Button>().onClick.AddListener(delegate {
+                sendSmile(obj);
             });
         }
     }
@@ -54,28 +65,36 @@ public class ChatControl : MonoBehaviour {
     internal void setText(string nick, string content) {
         string temp;
         bool check = emoticons.TryGetValue(content, out temp);
-        GameObject obj;
+        //GameObject obj;
         if (list.Count >= 10) {
             Destroy(list[0]);
             list.RemoveAt(0);
         }
-        if(nick.Length > 12) {
+        if (nick.Length > 12) {
             nick = nick.Substring(0, 12);
         }
         if (check) {
-            obj = Instantiate(icon_chat_prefab) as GameObject;
-            obj.GetComponent<Text>().text = nick + ":";
-            obj.GetComponentInChildren<Image>().sprite = Res.getSmileByName(temp);
-        } else {
-            obj = Instantiate(txt_chat_prefab) as GameObject;
-            obj.GetComponent<Text>().text = nick + ": " + content;
-        }
-        if (obj != null) {
-            obj.transform.SetParent(parent_chat);
-            obj.transform.localScale = Vector3.one;
-            list.Add(obj);
-        }
+            //obj = Instantiate(icon_chat_prefab) as GameObject;
+            LoadAssetBundle.LoadPrefab(Res.AS_PREFABS, "Chat_Smile", (prefabAB) => {
+                GameObject obj = Instantiate(prefabAB) as GameObject;
+                obj.GetComponent<Text>().text = nick + ":";
 
+                LoadAssetBundle.LoadSprite(obj.GetComponentInChildren<Image>(), Res.AS_UI, temp);
+                obj.transform.SetParent(parent_chat);
+                obj.transform.localScale = Vector3.one;
+                list.Add(obj);
+            });
+        } else {
+            LoadAssetBundle.LoadPrefab(Res.AS_PREFABS, "Chat_Text", (prefabAB) => {
+                GameObject obj = Instantiate(prefabAB) as GameObject;
+                obj.GetComponent<Text>().text = nick + ": " + content;
+
+                obj.transform.SetParent(parent_chat);
+                obj.transform.localScale = Vector3.one;
+                list.Add(obj);
+            });
+
+        }
         //scroll.verticalNormalizedPosition = 0;
         scroll.verticalScrollbar.value = 0;
         ip_chat.text = "";

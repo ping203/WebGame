@@ -4,11 +4,12 @@ using System.Collections;
 
 public class PanelSetting : PanelGame {
     public Toggle nhacnen, autoready, nhanloimoichoi;
+
     void OnEnable() {
         nhanloimoichoi.isOn = BaseInfo.gI().isNhanLoiMoiChoi;
         nhacnen.isOn = BaseInfo.gI().isSound;
         autoready.isOn = BaseInfo.gI().isAutoReady;
-
+       // base.OnEnable();
     }
 
     public void onChangeVL() {
@@ -20,20 +21,10 @@ public class PanelSetting : PanelGame {
         PlayerPrefs.SetInt("sound", nhacnen.isOn ? 0 : 1);
         PlayerPrefs.Save();
         BaseInfo.gI().isSound = nhacnen.isOn;
-        //if (BaseInfo.gI().isSound) {
-        //    //SoundManager.Get().startAudio(SoundManager.AUDIO_TYPE.BKG_MUSIC);
-        //    GameControl.instance.sound.pauseSound();
-        //} else {
-        //    //SoundManager.Get().pauseAudio(SoundManager.AUDIO_TYPE.BKG_MUSIC);
-        //    GameControl.instance.sound.pla();
-        //}
+
     }
     public void clickRung() {
-        //PlayerPrefs.SetInt ("rung", rung.isOn ? 0 : 1);
-        //PlayerPrefs.Save ();
 
-        //BaseInfo.gI ().isVibrate = rung.isOn;
-        //GameControl.instance.sound.startClickButtonAudio ();
     }
 
     public void clickNhanLoiMoiChoi() {
@@ -45,3 +36,4 @@ public class PanelSetting : PanelGame {
         BaseInfo.gI().isAutoReady = autoready.isOn;
     }
 }
+

@@ -26,11 +26,12 @@ public class PanelChat : PanelGame {
     Vector3 vtHide = new Vector3(0, -520, 0);
     // Use this for initialization
     void Awake() {
-        for (int i = 0; i < Res.list_emotions.Length; i++) {
+        for (int i = 0; i < Res.EMOTION_COUNT; i++) {
             GameObject btn = Instantiate(btnSmile) as GameObject;
             btn.transform.SetParent(tblSmile.transform);
             btn.transform.localScale = Vector3.one;
-            btn.GetComponent<Button>().image.sprite = Res.getSmileByName("a" + (i + 1));
+            //btn.GetComponent<Button>().image.sprite = Res.getSmileByName("a" + (i + 1));
+            LoadAssetBundle.LoadSprite(btn.GetComponent<Button>().image, Res.AS_UI, "a" + (i + 1));
             btn.name = "" + i;
             btn.GetComponent<Button>().onClick.AddListener(delegate {
                 ClickSmile(btn);

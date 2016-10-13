@@ -286,8 +286,6 @@ public class XocDia : BaseCasino {
         for (int i = 0; i < m_totalMeMoneyCuaCuoc.Length; i++) {
             m_totalMeMoneyCuaCuoc[i].text = "0";
         }
-
-        Debug.Log("=============ResetData");
         //So tien cuoc thong ke.
         //--------------------
 
@@ -780,9 +778,10 @@ public class XocDia : BaseCasino {
             for (int i = 0; i < 6; i++) {
                 m_totalMoney[i] = message.reader().ReadLong();
                 m_totalMeMoney[i] = message.reader().ReadLong();
-
                 m_totalMoneyCuaCuoc[i].text = BaseInfo.formatMoney(m_totalMoney[i]);
-                m_totalMeMoneyCuaCuoc[i].text = BaseInfo.formatMoney(m_totalMeMoney[i]);
+                if (BaseInfo.gI().mainInfo.nick.Equals(nick)) {
+                    m_totalMeMoneyCuaCuoc[i].text = BaseInfo.formatMoney(m_totalMeMoney[i]);
+                }
             }
         } catch (System.IO.IOException e) {
             Debug.LogException(e);

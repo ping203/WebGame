@@ -17,13 +17,12 @@ public class TopControl : PanelGame {
 
     // Update is called once per frame
     void Update() {
-        if (www != null) {
-            if (www.isDone && !isOne) {
-                rawAvata.texture = www.texture;
-                isOne = true;
-            }
-        }
-
+        //if (www != null) {
+        //    if (www.isDone && !isOne) {
+        //        rawAvata.texture = www.texture;
+        //        isOne = true;
+        //    }
+        //}
         displayXu.text = BaseInfo.formatMoneyNormal(BaseInfo.gI().mainInfo.moneyVip) + Res.MONEY_VIP_UPPERCASE;
         displayFree.text = BaseInfo.formatMoneyNormal(BaseInfo.gI().mainInfo.moneyFree) + Res.MONEY_FREE_UPPERCASE;
     }
@@ -84,8 +83,8 @@ public class TopControl : PanelGame {
         game_name.sprite = gameControl.gameNames[nameIndex];
     }
 
-    WWW www;
-    bool isOne = false;
+    //WWW www;
+    //bool isOne = false;
     public void updateProfileUser() {
         string dis = BaseInfo.gI().mainInfo.displayname;
         if (dis.Length > 15) {
@@ -98,17 +97,29 @@ public class TopControl : PanelGame {
 
         displayXu.text = BaseInfo.formatMoneyNormal(BaseInfo.gI().mainInfo.moneyVip) + Res.MONEY_VIP_UPPERCASE;
         lb_id.text = "ID: " + BaseInfo.gI().mainInfo.userid;
-        www = null;
+       // www = null;
         if (link_avata != "") {
-            www = new WWW(link_avata);
-            isOne = false;
-            imgAvata.gameObject.SetActive(false);
-            rawAvata.gameObject.SetActive(true);
+            //www = new WWW(link_avata);
+            //isOne = false;
+            //imgAvata.gameObject.SetActive(false);
+            //rawAvata.gameObject.SetActive(true);
+            StartCoroutine(getAvata(link_avata));
         } else if (idAvata > 0) {
             imgAvata.gameObject.SetActive(true);
             rawAvata.gameObject.SetActive(false);
-            imgAvata.sprite = Res.getAvataByID(idAvata);//Res.list_avata[idAvata + 1];
+            // imgAvata.sprite = Res.getAvataByID(idAvata);//Res.list_avata[idAvata + 1];
+            LoadAssetBundle.LoadSprite(imgAvata, Res.AS_AVATA, "" + idAvata);
         }
+    }
+
+    IEnumerator getAvata(string link) {
+        WWW www = new WWW(link);
+        yield return www;
+        imgAvata.gameObject.SetActive(false);
+        rawAvata.gameObject.SetActive(true);
+        rawAvata.texture = www.texture;
+        www.Dispose();
+        www = null;
     }
 
     public void clickAvatar() {
@@ -120,6 +131,7 @@ public class TopControl : PanelGame {
     public void clickSetting() {
         GameControl.instance.sound.startClickButtonAudio();
         gameControl.panelSetting.onShow();
+        //LoadAssetBundle.LoadScene("sub_setting", "sub_setting");
     }
 
     public void clickHomThu() {

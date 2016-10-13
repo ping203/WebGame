@@ -36,8 +36,6 @@ public class RoomControl : StageControl {
                 onClickGame(obj);
             });
         }
-
-        //loopVerticalScrollRect.enabled = false;
     }
     const float posXDefault = 200.0f;
     public void setNoti(string str) {
@@ -46,9 +44,9 @@ public class RoomControl : StageControl {
             
             float w = LayoutUtility.GetPreferredWidth(text_noti.rectTransform);
             text_noti.transform.localPosition = new Vector3(posXDefault, 0, 0);
-            float posEnd = -posXDefault - w;
+            float posEnd = -posXDefault - w - 50;
 
-            float time = (posXDefault - posEnd) / 100;
+            float time = (posXDefault - posEnd) / 50;
             text_noti.transform.DOKill();
             text_noti.transform.DOLocalMoveX(posEnd, time).SetLoops(-1).SetEase(Ease.Linear);
         }
@@ -71,10 +69,6 @@ public class RoomControl : StageControl {
         //    }
         //}
     }
-    void deActive() {
-        gameObject.SetActive(false);
-    }
-
     public override void onBack() {
         GameControl.instance.sound.startClickButtonAudio();
         //  gameControl.setStage(gameControl.menu);

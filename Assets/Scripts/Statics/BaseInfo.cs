@@ -79,7 +79,7 @@ public class BaseInfo {
     public string khuyenMai;
     public int phanTram;
     public bool isVIP = false;
-    
+
     public List<long> listBetMoneysVIP = new List<long>();
     public List<long> listBetMoneysFREE = new List<long>();
 
@@ -261,7 +261,7 @@ public class BaseInfo {
     public bool checkNumber(string test) {
         for (int i = 0; i < test.Length; i++) {
             char c = test[i];
-            if (( c < '0' ) || (c > '9')) {
+            if ((c < '0') || (c > '9')) {
                 return false;
             }
         }
@@ -372,8 +372,12 @@ public class BaseInfo {
             return -1;
         }
         int sc = 0;
-        for (int i = 0; i < src.Length; i++) {
-            sc += (getValue(src[i]) > 10 ? 0 : getValue(src[i]));
+        if (isSap(src)) {
+            sc = 100;
+        } else {
+            for (int i = 0; i < src.Length; i++) {
+                sc += (getValue(src[i]) > 10 ? 0 : getValue(src[i]));
+            }
         }
         return sc;
     }

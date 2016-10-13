@@ -57,18 +57,21 @@ public class Res {
     public static string[] TypeCard_Name = new string[] { "mauthau", "doi", "thu", "samco", "sanh", "thung", "culu", "tuquy", "thungphasanh" };
     public static string[] TYPECARD = { "Mậu thầu", "Đôi", "Thú", "Sám cô", "Sảnh", "Thùng", "Cù lũ", "Tứ quý", "Thùng phá sảnh" };
 
-    public static Sprite[] list_avata;// = new List<Sprite>();
+   // public static Sprite[] list_avata = new Sprite[60];// = new List<Sprite>();
     public static Sprite[] list_cards;// = new List<Sprite>();
-    public static Sprite[] list_emotions;// = new List<Sprite>();
+    //public static Sprite[] list_emotions;// = new List<Sprite>();
+    public const int EMOTION_COUNT = 28;
+    public const int AVATA_COUNT = 60;
 
-    public static Sprite getAvataByID(int id) {
+    /*public static Sprite getAvataByID(int id) {
         for (int i = 0; i < list_avata.Length; i++) {
             if (id == int.Parse(list_avata[i].name)) {
                 return list_avata[i];
             }
         }
         return null;
-    }
+    }*/
+
     public static Sprite getCardByID(int id) {
         string str = "cardall_" + id;
         for (int i = 0; i < list_cards.Length; i++) {
@@ -78,14 +81,20 @@ public class Res {
         }
         return null;
     }
-    public static Sprite getSmileByName(string name) {
-        for (int i = 0; i < list_emotions.Length; i++) {
-            if (name.Trim().Equals(list_emotions[i].name.Trim())) {
-                return list_emotions[i];
-            }
-        }
-        return null;
-    }
+    //public static Sprite getSmileByName(string name) {
+    //    for (int i = 0; i < list_emotions.Length; i++) {
+    //        if (name.Trim().Equals(list_emotions[i].name.Trim())) {
+    //            return list_emotions[i];
+    //        }
+    //    }
+    //    return null;
+    //}
+
+
+    public const string AS_PREFABS = "prefabs";
+    public const string AS_AVATA = "avata";
+    public const string AS_MAINSCENE = "mainscene";
+    public const string AS_UI = "ui";
 }
 
 public enum Align {

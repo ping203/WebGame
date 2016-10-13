@@ -146,8 +146,10 @@ public class ABSUser : MonoBehaviour {
         if (BaseInfo.gI().isView) {
             return;
         } else {
-            if (npcController != null)
+            if (npcController != null) {
                 npcController.name_player = getName();
+                npcController.setShowKick(isMasters);
+            }
             if (casinoStage.players[0].getName().Equals(getName())) {
                 clickButtonInfo();
                 return;
@@ -222,12 +224,12 @@ public class ABSUser : MonoBehaviour {
 
             timer.gameObject.SetActive(false);
         }
-        if (www != null) {
-            if (www.isDone && !isOne) {
-                raw_avatar.texture = www.texture;
-                isOneAvata = true;
-            }
-        }
+        //if (www != null) {
+        //    if (www.isDone && !isOne) {
+        //        raw_avatar.texture = www.texture;
+        //        isOneAvata = true;
+        //    }
+        //}
     }
 
     public void setName(string name) {
@@ -360,8 +362,7 @@ public class ABSUser : MonoBehaviour {
         setInvite(pl.isVisibleInvite);
         serverPos = pl.posServer;
         setSit(true);
-
-        setSoBai(0);
+        
         isSits = true;
         isPlayings = false;
 
@@ -397,59 +398,34 @@ public class ABSUser : MonoBehaviour {
         if (lb_money_result2 != null)
             lb_money_result2.SetActive(false);
 
-        www = null;
-        isOneAvata = false;
+        //www = null;
+        ///isOneAvata = false;
         if (pl.link_avatar != "") {
-            www = new WWW(pl.link_avatar);
-            img_avatar.gameObject.SetActive(false);
-            raw_avatar.gameObject.SetActive(true);
+            //www = new WWW(pl.link_avatar);
+            // img_avatar.gameObject.SetActive(false);
+            // raw_avatar.gameObject.SetActive(true);
+            StartCoroutine(getAvata(pl.link_avatar));
         } else {
             img_avatar.gameObject.SetActive(true);
             raw_avatar.gameObject.SetActive(false);
-            img_avatar.sprite = Res.getAvataByID(pl.idAvata);//Res.list_avata[idAvata + 1];
+            //img_avatar.sprite = Res.getAvataByID(pl.idAvata);//Res.list_avata[idAvata + 1];
+            LoadAssetBundle.LoadSprite(img_avatar, Res.AS_AVATA, "" + pl.idAvata);
         }
     }
 
-    WWW www;
-    bool isOneAvata = false;
-    public void updateAvata() {
-        if (casinoStage.players[0].st_name == st_name && !BaseInfo.gI().isView) {
-            int id = BaseInfo.gI().mainInfo.idAvata;
-            //string link_ava = BaseInfo.gI ().mainInfo.link_Avatar;
+   // WWW www;
+ //   bool isOneAvata = false;
 
-            /* if(link_ava != "") {
-                 WWW www = new WWW (link_ava);
-                 if(www.error != null) {
-                     Debug.Log ("Image WWW ERROR: " + www.error);
-                 } else {
-                     while(!www.isDone) {
-                     }
-                     avatar.GetComponent<Image> ().enabled = false;
-                     avatar.GetComponent<UITexture> ().enabled = true;
-                     avatar.GetComponent<UITexture> ().mainTexture = www.texture;
-                 }
-             } else {
-                 avatar.GetComponent<Image> ().enabled = true;
-                 avatar.GetComponent<UITexture> ().enabled = false;*/
-            if (id >= 0) {
-                //avatar.spriteName = id + "";
-            } else {
-                //avatar.spriteName = "Avata_nau";
-            }
-            //}
-        }
+    IEnumerator getAvata(string link) {
+        WWW www = new WWW(link);
+        yield return www;
+        img_avatar.gameObject.SetActive(false);
+        raw_avatar.gameObject.SetActive(true);
+        raw_avatar.texture = www.texture;
+        www.Dispose();
+        www = null;
     }
-
-    private void setSoBai(int p) {
-        //throw new NotImplementedException();
-    }
-    //string[] genders = new string[] { "women_head1", "men_head1" };
-    //private void setGendel(sbyte gender) {
-    //    this.gender = gender;
-    //    avatar.spriteName = genders[gender];
-    //    //throw new NotImplementedException();
-    //}
-
+   
     public bool isSit() {
         return isSits;
     }
@@ -459,10 +435,10 @@ public class ABSUser : MonoBehaviour {
             buttonInvite.gameObject.SetActive(p);
         }
 
-        //if (toggleAction != null) {
-        //    toggleAction.enabled = !p;
-        //    toggleAction.isOn = false;
-        //}
+        if (toggleAction != null) {
+            //toggleAction.isOn = false;
+            toggleAction.gameObject.SetActive(!p);
+        }
     }
 
     public bool isMaster() {
