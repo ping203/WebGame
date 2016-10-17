@@ -85,7 +85,6 @@ public class NPCController : PanelGame {
 
         float distance = Vector2.Distance(player1.transform.position, tg.transform.position);
         float time = distance / 200;
-       // LoadAssetBundle.LoadPrefab("prefabs")
         GameObject obj = Instantiate(GameControl.instance.gameObj_Actions_InGame[id - 1]) as GameObject;
 
         obj.transform.parent = player1.transform.parent;

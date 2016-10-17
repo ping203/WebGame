@@ -48,7 +48,7 @@ public class ListernerServer : IChatListener {
         gameControl.panelWaiting.onHide();
         //gameControl.login.SaveDataWhenLogin();
         gameControl.setStage(gameControl.room);
-        gameControl.room.onClickGame(gameControl.room.btn_click_game[0].gameObject);
+        gameControl.room.onClickGame(gameControl.room.parentIconGame.GetChild(0).gameObject);
         gameControl.top.updateProfileUser();
         gameControl.top.setGameName();
         // gameControl.menu.updateAvataName();
@@ -317,10 +317,9 @@ public class ListernerServer : IChatListener {
         gameControl.currentCasino.resetData();
         gameControl.panelWaiting.onHide();
         if (gameControl.gameID == GameID.XENG || gameControl.gameID == GameID.TAIXIU) {
-            gameControl.room.onClickGame(gameControl.room.btn_click_game[0].gameObject);
+            gameControl.room.onClickGame(gameControl.room.parentIconGame.GetChild(0).gameObject);
         } else {
-            int i = gameControl.room.getIndexBtnGame(gameControl.gameID);
-            gameControl.room.onClickGame(gameControl.room.btn_click_game[i].gameObject);
+            gameControl.room.onClickGame(gameControl.room.objGame);
         }
         //gameControl.top.setGameName();
         BaseInfo.gI().isView = false;
@@ -334,10 +333,9 @@ public class ListernerServer : IChatListener {
                 gameControl.currentCasino.resetData();
                 gameControl.currentCasino.DisAppear();
                 if (gameControl.gameID == GameID.XENG || gameControl.gameID == GameID.TAIXIU) {
-                    gameControl.room.onClickGame(gameControl.room.btn_click_game[0].gameObject);
+                    gameControl.room.onClickGame(gameControl.room.parentIconGame.GetChild(0).gameObject);
                 } else {
-                    int i = gameControl.room.getIndexBtnGame(gameControl.gameID);
-                    gameControl.room.onClickGame(gameControl.room.btn_click_game[i].gameObject);
+                    gameControl.room.onClickGame(gameControl.room.objGame);
                 }
                 //gameControl.top.setGameName();
                 gameControl.setStage(gameControl.backState);
@@ -1986,7 +1984,7 @@ public class ListernerServer : IChatListener {
     public void onXeng_exitGame(Message message) {
         gameControl.panelWaiting.onHide();
         gameControl.setStage(gameControl.room);
-        gameControl.room.onClickGame(gameControl.room.btn_click_game[0].gameObject);
+        gameControl.room.onClickGame(gameControl.room.parentIconGame.GetChild(0).gameObject);
         gameControl.top.setGameName();
     }
 
@@ -2039,7 +2037,7 @@ public class ListernerServer : IChatListener {
         gameControl.panelWaiting.onHide();
         gameControl.setStage(gameControl.room);
 
-        gameControl.room.onClickGame(gameControl.room.btn_click_game[0].gameObject);
+        gameControl.room.onClickGame(gameControl.room.parentIconGame.GetChild(0).gameObject);
         gameControl.top.setGameName();
     }
     #endregion

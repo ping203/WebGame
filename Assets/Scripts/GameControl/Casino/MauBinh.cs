@@ -150,16 +150,16 @@ public class MauBinh : BaseCasino, IHasChanged {
         players[0].cardMauBinh[1].transform.localPosition = vt_chi_2;
         players[0].cardMauBinh[0].transform.localPosition = vt_chi_1;
 
-        setPositionCardHand(players[0].cardMauBinh[0].gameObject, -height_down * 2);
-        setPositionCardHand(players[0].cardMauBinh[1].gameObject, -height_down);
+        setPositionCardHand(players[0].cardMauBinh[0].transform, -height_down * 2);
+        setPositionCardHand(players[0].cardMauBinh[1].transform, -height_down);
     }
     void action_card_up() {
         players[0].cardMauBinh[0].resetPostionCard(150);
         players[0].cardMauBinh[1].resetPostionCard(250);
         players[0].cardMauBinh[2].resetPostionCard(250);
 
-        setPositionCardHand(players[0].cardMauBinh[0].gameObject, height_down * 2);
-        setPositionCardHand(players[0].cardMauBinh[1].gameObject, height_down);
+        setPositionCardHand(players[0].cardMauBinh[0].transform, height_down * 2);
+        setPositionCardHand(players[0].cardMauBinh[1].transform, height_down);
     }
 
     public override void resetData() {
@@ -216,9 +216,9 @@ public class MauBinh : BaseCasino, IHasChanged {
         btn_xong.gameObject.SetActive(true);
     }
 
-    public void setPositionCardHand(GameObject arr, float height) {
-        Vector3 vt = arr.transform.localPosition;
-        arr.transform.DOLocalMoveY(vt.y + height, 0.2f);
+    public void setPositionCardHand(Transform arr, float height) {
+        Vector3 vt = arr.localPosition;
+        arr.DOLocalMoveY(vt.y + height, 0.2f);
     }
 
     IEnumerator setCardHand(int[] cardHand, int pos, bool isDearling) {

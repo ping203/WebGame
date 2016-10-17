@@ -7,9 +7,11 @@ using System;
 public class PanelCreateRoom : PanelGame {
     public Slider sliderMoney;
     public Text inputMoney;
-    public Text inputPlayer;
+    public InputField inputPlayer;
 
     float rateVIP, rateFREE;
+
+    long money = 0;
 
     // Use this for initialization
     void Start() {
@@ -20,7 +22,8 @@ public class PanelCreateRoom : PanelGame {
             rateVIP = (float)1 / BaseInfo.gI().listBetMoneysVIP.Count;
             for (int j = 0; j < BaseInfo.gI().listBetMoneysVIP.Count; j++) {
                 if (value <= j * rateVIP) {
-                    inputMoney.text = BaseInfo.formatMoneyDetailDot(BaseInfo.gI().listBetMoneysVIP[j]);
+                    money = BaseInfo.gI().listBetMoneysVIP[j];
+                    inputMoney.text = BaseInfo.formatMoneyDetailDot(money);
                     break;
                 }
             }
@@ -28,7 +31,8 @@ public class PanelCreateRoom : PanelGame {
             rateFREE = (float)1 / BaseInfo.gI().listBetMoneysFREE.Count;
             for (int j = 0; j < BaseInfo.gI().listBetMoneysFREE.Count; j++) {
                 if (value <= j * rateFREE) {
-                    inputMoney.text = BaseInfo.formatMoneyDetailDot(BaseInfo.gI().listBetMoneysFREE[j]);
+                    money = BaseInfo.gI().listBetMoneysFREE[j];
+                    inputMoney.text = BaseInfo.formatMoneyDetailDot(money);
                     break;
                 }
             }
@@ -49,7 +53,6 @@ public class PanelCreateRoom : PanelGame {
                 GameControl.instance.panelMessageSytem.onShow("Nhập sai!");
                 return;
             }
-            long money = long.Parse(strMoney);
             int maxplayer = int.Parse(strMaxPlayer);
 
             bool check = false;

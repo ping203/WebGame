@@ -75,7 +75,8 @@ public class SoundManager : MonoBehaviour {
     }
 
     public void startClickButtonAudio() {
-        PlaySound("add", false);
+        if (!audioSource.isPlaying)
+            PlaySound("add", false);
     }
 
     public void startAnbairacAudio() {

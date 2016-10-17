@@ -145,6 +145,7 @@ public class Xeng : BaseCasino {
             index = 0;
         }
         list_item_xeng[index].setEffect(true);
+        gameControl.sound.start_xeng_spin();
         //Ket thuc
         if (loop == 1) {
             if (index == randomIndex) {

@@ -13,10 +13,12 @@ public class ItemInfoLichSuTaiXiu : MonoBehaviour {
 
     public void setInfo(int isTai, int phien) {
         this.isTai = isTai;
+        this.id_phien = phien;
         img_bkg.sprite = isTai == 1 ? sp_color[0] : sp_color[1];
     }
 
     public void onClick() {
+        Debug.Log("Id phien: " + id_phien);
         SendData.onXemLSTaiXiu(id_phien);
     }
 }

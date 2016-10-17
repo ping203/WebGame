@@ -9,10 +9,9 @@ using DG.Tweening;
 public class RoomControl : StageControl {
     //public static int roomType = 2; //1:Thuong, 2:VIP
     //  public GameObject prefabsTable;
-    public Transform parent;
+    public Transform parentIconGame;
 
     public Transform tf_effect;
-    public Button[] btn_click_game;
 
     //public Text displayName;
     //public Text lb_id;
@@ -30,9 +29,9 @@ public class RoomControl : StageControl {
     public Text text_noti;
     // Use this for initialization
     void Start() {
-        for (int i = 0; i < btn_click_game.Length; i++) {
-            GameObject obj = btn_click_game[i].gameObject;
-            btn_click_game[i].onClick.AddListener(delegate {
+        for (int i = 0; i < parentIconGame.childCount; i++) {
+            GameObject obj = parentIconGame.GetChild(i).gameObject;
+            parentIconGame.GetChild(i).GetComponent<Button>().onClick.AddListener(delegate {
                 onClickGame(obj);
             });
         }
@@ -311,9 +310,11 @@ public class RoomControl : StageControl {
     //    GameControl.instance.sound.startClickButtonAudio();
     //    // gameControl.panelRanking.onShow();
     //}
+    public GameObject objGame;
     public void onClickGame(GameObject game) {
-        for (int i = 0; i < btn_click_game.Length; i++) {
-            btn_click_game[i].transform.DOKill();
+        objGame = game;
+        for (int i = 0; i < parentIconGame.childCount; i++) {
+            parentIconGame.GetChild(i).transform.DOKill();
         }
         onClickGame(game.name);
         //tf_effect.localPosition = game.transform.localPosition;
@@ -373,43 +374,5 @@ public class RoomControl : StageControl {
 
         gameControl.top.setGameName();
         SendData.onSendGameID((sbyte)gameControl.gameID);
-    }
-
-    public int getIndexBtnGame(int gameID) {
-        int index = 0;
-        switch (gameControl.gameID) {
-            case GameID.PHOM:
-                index = 1;
-                break;
-            case GameID.TLMN:
-                index = 2;
-                break;
-            case GameID.TLMNsolo:
-                index = 8;
-                break;
-            case GameID.XAM:
-                index = 0;
-                break;
-            case GameID.BACAY:
-                index = 6;
-                break;
-            case GameID.XITO:
-                index = 9;
-                break;
-            case GameID.LIENG:
-                index = 5;
-                break;
-            case GameID.POKER:
-                index = 7;
-                break;
-            case GameID.MAUBINH:
-                index = 3;
-                break;
-            case GameID.XOCDIA:
-                index = 4;
-                break;
-        }
-
-        return index;
     }
 }

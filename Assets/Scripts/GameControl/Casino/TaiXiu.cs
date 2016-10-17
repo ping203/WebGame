@@ -140,8 +140,6 @@ public class TaiXiu : BaseCasino {
             lblTotalMoneyTai.text = formatMoney(tongTienTai);
             lblTotalMoneyXiu.text = formatMoney(tongTienXiu);
             xoc();
-            text_diem.gameObject.SetActive(true);
-            text_diem.text = "" + (kq1 + kq2 + kq3);
 
             StartCoroutine(show_ketqua(taihayxiu, kq1, kq2, kq3));
 
@@ -275,7 +273,6 @@ public class TaiXiu : BaseCasino {
             }
             string date = message.reader().ReadUTF();
 
-
             long tongDatTai = message.reader().ReadLong();
             long tongHoanTai = message.reader().ReadLong();
             long tongDatXiu = message.reader().ReadLong();
@@ -304,6 +301,7 @@ public class TaiXiu : BaseCasino {
             }
 
             panelHistory.onShow();
+            Debug.Log("Show lich su");
         } catch (Exception e) {
             Debug.LogException(e);
         }
@@ -321,6 +319,8 @@ public class TaiXiu : BaseCasino {
         yield return new WaitForSeconds(4);
         group_xoc.SetActive(false);
         group_ketqua.SetActive(true);
+        text_diem.gameObject.SetActive(true);
+        text_diem.text = "" + (kq1 + kq2 + kq3);
         img_xucxac[0].sprite = sp_xucxac[kq1 - 1];
         img_xucxac[1].sprite = sp_xucxac[kq2 - 1];
         img_xucxac[2].sprite = sp_xucxac[kq3 - 1];
@@ -365,6 +365,7 @@ public class TaiXiu : BaseCasino {
         }
         lblPlayerTai.text = "0";
         lblPlayerXiu.text = "0";
+        timeCountDown_TaiXiu.setTime(0);
     }
 
     public void onClick_DatCuoc(int isTai) {
@@ -469,7 +470,7 @@ public class TaiXiu : BaseCasino {
     int index = 0;
     //Tao ra icon lich su va update
     void genTXLichSu(int value, int phien) {
-        if (list_ls.Count < 18) {
+        if (list_ls.Count < 18) {//tao danh sach lich su
             GameObject obj = Instantiate(ls_tx) as GameObject;
             obj.transform.SetParent(his_parent);
             obj.transform.localScale = Vector3.one;
@@ -480,7 +481,7 @@ public class TaiXiu : BaseCasino {
             list_ls.Add(obj);
             if (list_ls.Count == 18)
                 it.img_yellow.gameObject.SetActive(true);
-        } else {
+        } else {//cap nhat danh sach lich su
             for (int i = 0; i < list_ls.Count; i++) {
                 ItemInfoLichSuTaiXiu it = list_ls[i].GetComponent<ItemInfoLichSuTaiXiu>();
                 if (i < list_ls.Count - 1) {
@@ -490,6 +491,7 @@ public class TaiXiu : BaseCasino {
                 } else {
                     it.setInfo(value, phien);
                     // it.img_yellow.gameObject.SetActive(true);
+                    Debug.Log("Cap nhat lich su");
                 }
             }
         }

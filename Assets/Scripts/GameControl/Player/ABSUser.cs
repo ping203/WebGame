@@ -164,72 +164,74 @@ public class ABSUser : MonoBehaviour {
     }
     bool isOne = true;
     public void Update() {
-        if (isTurns && getName().Length != 0) {
-            if (!timer.gameObject.activeInHierarchy)
-                timer.gameObject.SetActive(true);
-            dura += Time.deltaTime;
-            if (dura < BaseInfo.gI().timerTurnTable) {
-                float percent;
-                if (casinoStage.timeReceiveTurn == 0) {
-                    percent = 1;
-                } else {
-                    percent = dura * 100 / casinoStage.timeReceiveTurn;
+        if (timer != null) {
+            if (isTurns && getName().Length != 0) {
+                if (!timer.gameObject.activeInHierarchy)
+                    timer.gameObject.SetActive(true);
+                dura += Time.deltaTime;
+                if (dura < BaseInfo.gI().timerTurnTable) {
+                    float percent;
+                    if (casinoStage.timeReceiveTurn == 0) {
+                        percent = 1;
+                    } else {
+                        percent = dura * 100 / casinoStage.timeReceiveTurn;
+                    }
+                    float temp = 100f - percent;
+                    /*if (temp > 75) {
+                        //if (pos == 0 && casinoStage.isStart && isOne && !BaseInfo.gI().isView) {
+                        //    GameControl.instance.sound.startCountDownAudio();
+                        //    isOne = false;
+                        //} 
+                        if (pos == 0 && !BaseInfo.gI().isView) {
+                            GameControl.instance.sound.pauseSound();
+                        }
+                        timer.sprite.color = Color.green;
+
+                    } else*/
+                    if (temp > 50) {
+                        if (pos == 0 && !BaseInfo.gI().isView) {
+                            GameControl.instance.sound.pauseSound();
+                        }
+                        timer.sprite.color = Color.green;
+                    } else if (temp > 25) {
+                        if (pos == 0 && !BaseInfo.gI().isView) {
+                            GameControl.instance.sound.pauseSound();
+                        }
+                        timer.sprite.color = Color.yellow;
+                    } else {
+                        //if (pos == 0 && !BaseInfo.gI().isView) {
+                        //    GameControl.instance.sound.pauseSound();
+                        //}
+                        if (pos == 0 && isOne && !BaseInfo.gI().isView) {
+                            GameControl.instance.sound.startCountDownAudio();
+                            isOne = false;
+                        }
+
+                        timer.sprite.color = Color.red;
+                    }
+
+                    timer.setPercentage(percent);
                 }
-                float temp = 100f - percent;
-                /*if (temp > 75) {
-                    //if (pos == 0 && casinoStage.isStart && isOne && !BaseInfo.gI().isView) {
-                    //    GameControl.instance.sound.startCountDownAudio();
-                    //    isOne = false;
-                    //} 
+                if (dura >= BaseInfo.gI().timerTurnTable) {
                     if (pos == 0 && !BaseInfo.gI().isView) {
                         GameControl.instance.sound.pauseSound();
                     }
-                    timer.sprite.color = Color.green;
-
-                } else*/
-                if (temp > 50) {
-                    if (pos == 0 && !BaseInfo.gI().isView) {
-                        GameControl.instance.sound.pauseSound();
-                    }
-                    timer.sprite.color = Color.green;
-                } else if (temp > 25) {
-                    if (pos == 0 && !BaseInfo.gI().isView) {
-                        GameControl.instance.sound.pauseSound();
-                    }
-                    timer.sprite.color = Color.yellow;
-                } else {
-                    //if (pos == 0 && !BaseInfo.gI().isView) {
-                    //    GameControl.instance.sound.pauseSound();
-                    //}
-                    if (pos == 0 && isOne && !BaseInfo.gI().isView) {
-                        GameControl.instance.sound.startCountDownAudio();
-                        isOne = false;
-                    }
-
-                    timer.sprite.color = Color.red;
                 }
-
-                timer.setPercentage(percent);
-            }
-            if (dura >= BaseInfo.gI().timerTurnTable) {
+            } else if (timer.gameObject.activeInHierarchy) {
+                dura = 0; // loop
                 if (pos == 0 && !BaseInfo.gI().isView) {
                     GameControl.instance.sound.pauseSound();
                 }
-            }
-        } else if (timer.gameObject.activeInHierarchy) {
-            dura = 0; // loop
-            if (pos == 0 && !BaseInfo.gI().isView) {
-                GameControl.instance.sound.pauseSound();
-            }
 
-            timer.gameObject.SetActive(false);
+                timer.gameObject.SetActive(false);
+            }
+            //if (www != null) {
+            //    if (www.isDone && !isOne) {
+            //        raw_avatar.texture = www.texture;
+            //        isOneAvata = true;
+            //    }
+            //}
         }
-        //if (www != null) {
-        //    if (www.isDone && !isOne) {
-        //        raw_avatar.texture = www.texture;
-        //        isOneAvata = true;
-        //    }
-        //}
     }
 
     public void setName(string name) {
@@ -362,7 +364,7 @@ public class ABSUser : MonoBehaviour {
         setInvite(pl.isVisibleInvite);
         serverPos = pl.posServer;
         setSit(true);
-        
+
         isSits = true;
         isPlayings = false;
 
@@ -413,8 +415,8 @@ public class ABSUser : MonoBehaviour {
         }
     }
 
-   // WWW www;
- //   bool isOneAvata = false;
+    // WWW www;
+    //   bool isOneAvata = false;
 
     IEnumerator getAvata(string link) {
         WWW www = new WWW(link);
@@ -425,7 +427,7 @@ public class ABSUser : MonoBehaviour {
         www.Dispose();
         www = null;
     }
-   
+
     public bool isSit() {
         return isSits;
     }
@@ -917,7 +919,8 @@ public class ABSUser : MonoBehaviour {
     public void setXepXong(bool isXong) {
         sp_xepXong.gameObject.SetActive(isXong);
         if (isXong) {
-            sp_xepXong.transform.DOKill();
+            //sp_xepXong.transform.DOKill();
+            //sp_xepXong.transform.localScale = Vector3.one;
             sp_xepXong.transform.DOScale(1.2f, 0.4f).SetLoops(-1);
         }
     }

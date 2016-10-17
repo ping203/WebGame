@@ -14,6 +14,7 @@ public class TimeCountDown : MonoBehaviour {
             int sec = ((int)time % 60);
             if (min <= 0 && sec <= 0) {
                 text_time.text = "00:00";
+               // gameObject.SetActive(false);
             } else {
                 text_time.text = (min >= 10 ? (min + "") : ("0" + min)) + ":" + (sec >= 10 ? (sec + "") : ("0" + sec));
             }

@@ -524,12 +524,10 @@ public class ProcessHandler : MessageHandler {
                             secondHandler.processMessage(message);
                         }
                         break;
-
                 }
             });
         } catch (Exception ex) {
             Debug.LogException(ex);
-
         }
     }
 

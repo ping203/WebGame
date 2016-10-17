@@ -222,7 +222,6 @@ public abstract class BaseCasino : StageControl {
     public long moneyCuocban = 0;
     public void setTableName(string name, short id, long money) {
         moneyCuocban = money;
-        Debug.Log("=-=-=-=-=-=-=- " + moneyCuocban);
         if (lbInfoTable != null) {
             lbInfoTable.text = "Bàn: " + id;
         }
