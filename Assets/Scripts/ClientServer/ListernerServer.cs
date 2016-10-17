@@ -1638,11 +1638,9 @@ public class ListernerServer : IChatListener {
                 string guiLuc = message.reader().ReadUTF();
                 string noiDung = message.reader().ReadUTF();
                 sbyte isread = message.reader().ReadByte();
-                gameControl.panelMail.addIconTinNhan(id, guitu, guiLuc, noiDung, isread);
+                //gameControl.panelMail.addIconTinNhan(id, guitu, guiLuc, noiDung, isread);
             }
             gameControl.panelWaiting.onHide();
-            //gameControl.panelMail.onShow();
-
         } catch (Exception e) {
             // TODO: handle exception
             Debug.LogException(e);
@@ -1664,7 +1662,7 @@ public class ListernerServer : IChatListener {
                 string title = message.reader().ReadUTF();
                 string content = message.reader().ReadUTF();
                 if (content.Length > 0) {
-                    gameControl.panelMail.addIconSuKien(id, title, content);
+                   // gameControl.panelMail.addIconSuKien(id, title, content);
                 }
                 //Debug.Log(title + " ---------- " + title);
                 strEvent += content + ";\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
@@ -1788,13 +1786,19 @@ public class ListernerServer : IChatListener {
                 int idAvata = message.reader().ReadInt();
                 long money = message.reader().ReadLong();
 
+                ItemRanking it = new ItemRanking();
+                it.rank = i + 1;
+                it.rank_name = displayname;
+                it.id_avata = idAvata;
+                it.money = money;
                 //RankingPlayer temp = new RankingPlayer();
                 //temp.rank = i + 1;
                 //temp.playerName = displayname;
                 //temp.idAvata = idAvata;
                 //temp.money = money;
 
-                gameControl.panelRank.InstanceItem(i + 1, idAvata, displayname, money);
+                //gameControl.panelRank.InstanceItem(i + 1, idAvata, displayname, money);
+                PanelRank.list_top.Add(it);
             }
 
         } catch (Exception e) {

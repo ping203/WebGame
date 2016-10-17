@@ -91,10 +91,21 @@ public class Res {
     //}
 
 
-    public const string AS_PREFABS = "prefabs";
     public const string AS_AVATA = "avata";
     public const string AS_MAINSCENE = "mainscene";
     public const string AS_UI = "ui";
+
+
+    #region SUBSCENES
+    public const string AS_SUBSCENES = "subscenes";
+    public const string AS_SUBSCENES_SETTING = "sub_setting";
+    public const string AS_SUBSCENES_RANK = "sub_rank";
+    #endregion END SUBSCENES
+
+    #region PREFABS
+    public const string AS_PREFABS = "prefabs";
+    public const string AS_PREFABS_ITEMRANK = "ItemRank";
+    #endregion END PREFABS
 }
 
 public enum Align {

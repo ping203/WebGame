@@ -53,7 +53,7 @@ TextureImporter:
     serializedVersion: 2
     sprites: []
     outline: []
-  spritePackingTag: bkg
+  spritePackingTag: BKG
   userData: 
   assetBundleName: ui
   assetBundleVariant: 

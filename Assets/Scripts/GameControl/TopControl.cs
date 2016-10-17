@@ -130,8 +130,8 @@ public class TopControl : PanelGame {
     
     public void clickSetting() {
         GameControl.instance.sound.startClickButtonAudio();
-        gameControl.panelSetting.onShow();
-        //LoadAssetBundle.LoadScene("sub_setting", "sub_setting");
+        //gameControl.panelSetting.onShow();
+        LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_SETTING);
     }
 
     public void clickHomThu() {
@@ -180,7 +180,9 @@ public class TopControl : PanelGame {
 
     public void clickRanking() {
         GameControl.instance.sound.startClickButtonAudio();
-        gameControl.panelRank.onShow();
+        //gameControl.panelRank.onShow();
+
+        LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_RANK);
     }
 
     public void clickInviteFacebook() {
