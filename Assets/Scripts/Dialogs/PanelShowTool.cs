@@ -7,7 +7,7 @@ public class PanelShowTool : PanelGame {
     public GameObject sp_new;
 
     public void OnEnable() {
-        sp_new.SetActive(GameControl.instance.panelMail.isShowNew());
+        //sp_new.SetActive(PanelMail.instance.isShowNew());
     }
     public void onClick(string action) {
         switch (action) {
@@ -20,7 +20,8 @@ public class PanelShowTool : PanelGame {
                 LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_ADD_COIN);
                 break;
             case "mail":
-                GameControl.instance.panelMail.onShow();
+                //GameControl.instance.panelMail.onShow();
+                LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_MAIL);
                 break;
             case "help":
                 // GameControl.instance.panleHelp.onShow();

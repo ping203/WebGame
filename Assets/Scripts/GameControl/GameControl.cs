@@ -61,7 +61,7 @@ public class GameControl : MonoBehaviour {
     //public PanelHelp panleHelp;
     //public PanelNapChuyenXu panelNapChuyenXu;
     public PanelDoiThuong panelDoiThuong;
-    public PanelMail panelMail;
+    //public PanelMail panelMail;
     public PanelCreateRoom panelCreateRoom;
     public PanelToiBan panelToiBan;
     public PanelMoiChoi panelMoiChoi;
@@ -90,6 +90,9 @@ public class GameControl : MonoBehaviour {
     public BaseCasino currentCasino;
     public StageControl currenStage;
     public StageControl backState;
+
+    public List<ItemMail> listMail = new List<ItemMail>();
+    public List<ItemMail> listEvent = new List<ItemMail>();
 
     public List<RoomInfo> phongFree = new List<RoomInfo>();
     public List<RoomInfo> phongVip = new List<RoomInfo>();
@@ -292,7 +295,7 @@ public class GameControl : MonoBehaviour {
         //panleHelp.onHide();
         //panelNapChuyenXu.onHide();
         panelDoiThuong.onHide();
-        panelMail.onHide();
+        //panelMail.onHide();
         panelCreateRoom.onHide();
         panelToiBan.onHide();
         panelMoiChoi.onHide();

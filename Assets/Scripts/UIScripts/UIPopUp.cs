@@ -10,7 +10,7 @@ public class UIPopUp : MonoBehaviour {
     public GameObject blackBackground;
     public TweenType tweenType;
     public float tweenTime = 0.2f;
-    public bool ShowWhenEnable = false;
+    public bool ShowWhenEnable = true;
     public bool UseRectranform = false;
     public Ease EaseTypeIn = Ease.InBack;
     public Ease EaseTypeOut = Ease.OutBack;

@@ -9,9 +9,15 @@ public class PanelRank : PanelGame {
     public static List<ItemRanking> list_top = new List<ItemRanking>();
 
     public void Start() {
-        LoadAssetBundle.LoadPrefab(Res.AS_PREFABS, Res.AS_PREFABS_ITEMRANK, (prefabAB) => {
-            for (int i = 0; i < list_top.Count; i++) {
-                GameObject go = Instantiate(prefabAB) as GameObject;
+        LoadAssetBundle.LoadPrefab(Res.AS_PREFABS, Res.AS_PREFABS_ITEM_RANK, (prefabAB) => {
+            GameObject obj = prefabAB;
+            obj.transform.SetParent(parentItem);
+            obj.transform.localScale = Vector3.one;
+            obj.GetComponent<ItemRanking>().SetData(list_top[0].rank, list_top[0].id_avata, list_top[0].rank_name, list_top[0].money);
+            obj.GetComponent<ItemRanking>().setUI();
+
+            for (int i = 1; i < list_top.Count; i++) {
+                GameObject go = Instantiate(obj) as GameObject;
                 go.transform.SetParent(parentItem);
                 go.transform.localScale = Vector3.one;
                 go.GetComponent<ItemRanking>().SetData(list_top[i].rank, list_top[i].id_avata, list_top[i].rank_name, list_top[i].money);

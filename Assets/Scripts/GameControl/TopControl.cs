@@ -140,7 +140,8 @@ public class TopControl : PanelGame {
 
     public void clickHomThu() {
         GameControl.instance.sound.startClickButtonAudio();
-        gameControl.panelMail.onShow();
+        //gameControl.panelMail.onShow();
+        LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_MAIL);
     }
 
     public void clickNapXu() {

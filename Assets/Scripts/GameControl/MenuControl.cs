@@ -187,7 +187,8 @@ public class MenuControl : StageControl {
         GameControl.instance.sound.startClickButtonAudio();
         SendData.onGetInboxMessage();
         gameControl.panelWaiting.onShow ();
-        gameControl.panelMail.onShow();
+        //gameControl.panelMail.onShow();
+        LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_MAIL);
     }
 
     public void clickDienDan() {

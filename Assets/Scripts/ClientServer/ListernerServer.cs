@@ -1642,7 +1642,8 @@ public class ListernerServer : IChatListener {
 
     public void onInboxMessage(Message message) {
         try {
-            gameControl.panelMail.ClearListMail();
+            // gameControl.panelMail.ClearListMail();
+            gameControl.listMail.Clear();
             sbyte total = message.reader().ReadByte();
             for (int i = 0; i < total; i++) {
                 int id = message.reader().ReadInt();
@@ -1650,6 +1651,14 @@ public class ListernerServer : IChatListener {
                 string guiLuc = message.reader().ReadUTF();
                 string noiDung = message.reader().ReadUTF();
                 sbyte isread = message.reader().ReadByte();
+
+                ItemMail it = new ItemMail();
+                it.id = id;
+                it.guiTu = guitu;
+                it.guiLuc = guiLuc;
+                it.content = noiDung;
+                it.isRead = isread;
+                gameControl.listMail.Add(it);
                 //gameControl.panelMail.addIconTinNhan(id, guitu, guiLuc, noiDung, isread);
             }
             gameControl.panelWaiting.onHide();
@@ -1666,7 +1675,8 @@ public class ListernerServer : IChatListener {
 
     public void onListEvent(Message message) {
         try {
-            gameControl.panelMail.ClearListEvent();
+            //gameControl.panelMail.ClearListEvent();
+            gameControl.listEvent.Clear();
             int total = message.reader().ReadInt();
             string strEvent = "";
             for (int i = 0; i < total; i++) {
@@ -1675,8 +1685,11 @@ public class ListernerServer : IChatListener {
                 string content = message.reader().ReadUTF();
                 if (content.Length > 0) {
                     // gameControl.panelMail.addIconSuKien(id, title, content);
+                    ItemMail it = new ItemMail();
+                    it.id = id;
+                    it.content = content;
+                    gameControl.listEvent.Add(it);
                 }
-                //Debug.Log(title + " ---------- " + title);
                 strEvent += content + ";\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
             }
             //TODO: fixed notification.
