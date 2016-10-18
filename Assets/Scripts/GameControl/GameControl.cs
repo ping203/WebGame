@@ -58,10 +58,8 @@ public class GameControl : MonoBehaviour {
 
     public PanelWaiting panelWaiting;
     public PanelMessageSytem panelMessageSytem;
-    public PanelSetting panelSetting;
-    public PanelInfoPlayer panelInfoPlayer;
-    public PanelHelp panleHelp;
-    public PanelNapChuyenXu panelNapChuyenXu;
+    //public PanelHelp panleHelp;
+    //public PanelNapChuyenXu panelNapChuyenXu;
     public PanelDoiThuong panelDoiThuong;
     public PanelMail panelMail;
     public PanelCreateRoom panelCreateRoom;
@@ -82,14 +80,13 @@ public class GameControl : MonoBehaviour {
     //public DialogLuatChoi dialogLuatChoi;
     //public DialogEvent dialogEvent;
     //public DialogDoiMatKhau dialogDoiMatKhau;
-    public PanelChangeAvata panelChangeAvata;
-    public PanelChangePassword panelChangePassword;
-    public PanelChangeName panelChangeName;
-    public PanelRank panelRank;
+    //public PanelChangeAvata panelChangeAvata;
+    //public PanelChangePassword panelChangePassword;
+    //public PanelChangeName panelChangeName;
     public PanelUpVip panelUpVip;
 
     public SoundManager sound;
-
+    
     public BaseCasino currentCasino;
     public StageControl currenStage;
     public StageControl backState;
@@ -250,7 +247,6 @@ public class GameControl : MonoBehaviour {
                 setStage(xito);
                 currentCasino = (BaseCasino)currenStage;
                 break;
-
             case GameID.MAUBINH:
                 setStage(maubinh);
                 currentCasino = (BaseCasino)currenStage;
@@ -292,9 +288,9 @@ public class GameControl : MonoBehaviour {
         panelWaiting.onHide();
         panelMessageSytem.onHide();
         //panelSetting.onHide();
-        panelInfoPlayer.onHide();
-        panleHelp.onHide();
-        panelNapChuyenXu.onHide();
+        //panelInfoPlayer.onHide();
+        //panleHelp.onHide();
+        //panelNapChuyenXu.onHide();
         panelDoiThuong.onHide();
         panelMail.onHide();
         panelCreateRoom.onHide();
@@ -306,10 +302,10 @@ public class GameControl : MonoBehaviour {
         panelNotiDoiThuong.onHide();
         panelCuoc.onHide();
         panelDatCuoc.onHide();
-        panelChangeAvata.onHide();
-        panelChangePassword.onHide();
-        panelChangeName.onHide();
-        panelRank.onHide();
+        //panelChangeAvata.onHide();
+        //panelChangePassword.onHide();
+        //panelChangeName.onHide();
+        //panelRank.onHide();
         panelUpVip.onHide();
     }
 

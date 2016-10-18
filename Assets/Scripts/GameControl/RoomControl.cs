@@ -283,7 +283,8 @@ public class RoomControl : StageControl {
 
     public void clickHelp() {
         GameControl.instance.sound.startClickButtonAudio();
-        gameControl.panleHelp.onShow();
+        //gameControl.panleHelp.onShow();
+        LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_HELP);
     }
 
     public void clickCreateRoom() {

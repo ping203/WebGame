@@ -221,7 +221,6 @@ public class LoginControl : StageControl {
     }
     public bool isLoginFB { set; get; }
     public void sendloginFB(string accessToken) {
-        // login(1, "sgc", "sgc", GameControl.IMEI, "", 1, "", accessToken, "");
         gameControl.panelWaiting.onShow();
         StartCoroutine(delay(1, "sgc", "sgc", GameControl.IMEI, "", 1, "", accessToken, ""));
         isLoginFB = true;
@@ -229,14 +228,16 @@ public class LoginControl : StageControl {
 
     void clickSetting() {
         GameControl.instance.sound.startClickButtonAudio();
-        gameControl.panelSetting.onShow();
+        //gameControl.panelSetting.onShow();
 
-        //LoadAssetBundle.LoadScene("sub_setting", "sub_setting");
+        LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_SETTING);
     }
 
     void clickHelp() {
         GameControl.instance.sound.startClickButtonAudio();
-        gameControl.panleHelp.onShow();
+        // gameControl.panleHelp.onShow();
+
+        LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_HELP);
     }
 
     void clickCSKH() {

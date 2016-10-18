@@ -81,15 +81,6 @@ public class Res {
         }
         return null;
     }
-    //public static Sprite getSmileByName(string name) {
-    //    for (int i = 0; i < list_emotions.Length; i++) {
-    //        if (name.Trim().Equals(list_emotions[i].name.Trim())) {
-    //            return list_emotions[i];
-    //        }
-    //    }
-    //    return null;
-    //}
-
 
     public const string AS_AVATA = "avata";
     public const string AS_MAINSCENE = "mainscene";
@@ -100,11 +91,18 @@ public class Res {
     public const string AS_SUBSCENES = "subscenes";
     public const string AS_SUBSCENES_SETTING = "sub_setting";
     public const string AS_SUBSCENES_RANK = "sub_rank";
+    public const string AS_SUBSCENES_PLAYER_INFO = "sub_player_info";
+    public const string AS_SUBSCENES_CHANGE_AVATA = "sub_change_avata";
+    public const string AS_SUBSCENES_CHANGE_NAME = "sub_change_name";
+    public const string AS_SUBSCENES_CHANGE_PASS = "sub_change_pass";
+    public const string AS_SUBSCENES_HELP = "sub_help";
+    public const string AS_SUBSCENES_ADD_COIN = "sub_add_coin";
     #endregion END SUBSCENES
 
     #region PREFABS
     public const string AS_PREFABS = "prefabs";
     public const string AS_PREFABS_ITEMRANK = "ItemRank";
+    public const string AS_PREFABS_BUTTON_AVATA = "Button_Avata"; 
     #endregion END PREFABS
 }
 

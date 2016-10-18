@@ -16,13 +16,15 @@ public class PanelShowTool : PanelGame {
                 SendData.onGetInfoGift();
                 break;
             case "napthe":
-                GameControl.instance.panelNapChuyenXu.onShow();
+                //GameControl.instance.panelNapChuyenXu.onShow();
+                LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_ADD_COIN);
                 break;
             case "mail":
                 GameControl.instance.panelMail.onShow();
                 break;
             case "help":
-                GameControl.instance.panleHelp.onShow();
+                // GameControl.instance.panleHelp.onShow();
+                LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_HELP);
                 break;
         }
         onHide();

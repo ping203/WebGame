@@ -139,19 +139,21 @@ public class MenuControl : StageControl {
 
     public void clickSetting() {
         GameControl.instance.sound.startClickButtonAudio();
-        gameControl.panelSetting.onShow();
+        //gameControl.panelSetting.onShow();
 
-        //LoadAssetBundle.LoadScene("sub_setting", "sub_setting");
+        LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_SETTING);
     }
 
     public void clickHelp() {
         GameControl.instance.sound.startClickButtonAudio();
-        gameControl.panleHelp.onShow();
+        //gameControl.panleHelp.onShow();
+        LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_HELP);
     }
 
     public void clickNapXu() {
         GameControl.instance.sound.startClickButtonAudio();
-        gameControl.panelNapChuyenXu.onShow();
+        //gameControl.panelNapChuyenXu.onShow();
+        LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_ADD_COIN);
 
     }
 
@@ -173,8 +175,12 @@ public class MenuControl : StageControl {
 
     public void clickAvatar() {
         GameControl.instance.sound.startClickButtonAudio();
-        gameControl.panelInfoPlayer.infoMe();
-        gameControl.panelInfoPlayer.onShow();
+        //gameControl.panelInfoPlayer.infoMe();
+        //gameControl.panelInfoPlayer.onShow();
+        LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_PLAYER_INFO, () => {
+            gameControl.panelWaiting.onHide();
+            PanelInfoPlayer.instance.infoMe();
+        });
     }
 
     public void clickHomThu() {

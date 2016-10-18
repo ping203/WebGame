@@ -32,7 +32,7 @@ public class PanelRank : PanelGame {
     //    });
     //}
 
-    public void clearList() {
+    public static void clearList() {
         foreach (ItemRanking it in list_top) {
             Destroy(it.gameObject);
         }

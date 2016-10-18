@@ -17,14 +17,13 @@ public class PanelChangeAvata : PanelGame {
 
     public void loadAva() {
         if (isLoad) {
-            LoadAssetBundle.LoadPrefab(Res.AS_PREFABS, "Button_Avata", (prefabsAB) => {
+            LoadAssetBundle.LoadPrefab(Res.AS_PREFABS, Res.AS_PREFABS_BUTTON_AVATA, (prefabsAB) => {
                 for (int i = 0; i < Res.AVATA_COUNT; i++) {
                     GameObject btn = Instantiate(prefabsAB) as GameObject;
                     btn.transform.parent = tblAva.transform;
                     btn.transform.localScale = Vector3.one;
                     //btn.GetComponent<Button>().image.sprite = Res.getAvataByID(i+1);
                     LoadAssetBundle.LoadSprite(btn.GetComponent<Button>().image, Res.AS_AVATA, (i + 1) + "");
-                    //LoadAssetBundle.
                     btn.name = "" + (i + 1);
                     btn.GetComponent<Button>().onClick.AddListener(delegate {
                         ClickAva(btn);
@@ -40,6 +39,7 @@ public class PanelChangeAvata : PanelGame {
         int index = Convert.ToInt32(name.name);
         BaseInfo.gI().mainInfo.idAvata = index;
         SendData.onUpdateAvata(index);
-        onHide();
+        // onHide();
+        GetComponent<UIPopUp>().HideDialog();
     }
 }

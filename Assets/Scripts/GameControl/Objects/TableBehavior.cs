@@ -109,7 +109,8 @@ public class TableBehavior : MonoBehaviour {
             GameControl.instance.panelMessageSytem.onShow("Bạn cần có ít nhât "
                     + BaseInfo.formatMoney(tableItem.needMoney) + " " + money
                     + " để vào bàn! Bạn muốn nạp thêm " + money + "?", delegate {
-                        GameControl.instance.panelNapChuyenXu.onShow();
+                        //GameControl.instance.panelNapChuyenXu.onShow();
+                        LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_ADD_COIN);
                     });
         } else {
             BaseInfo.gI().numberPlayer = tableItem.maxUser;

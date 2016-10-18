@@ -382,14 +382,16 @@ public class ListernerServer : IChatListener {
         gameControl.panelWaiting.onHide();
         gameControl.panelMessageSytem.onShow(info + ". Bạn có muốn nạp thêm tiền không ?", delegate {
             //SendData.onJoinTableForView(BaseInfo.gI().idTable, "");
-            gameControl.panelNapChuyenXu.onShow();
+            //gameControl.panelNapChuyenXu.onShow();
+            LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_ADD_COIN);
         });
     }
 
     public void onJoinTableFail(string info) {
         gameControl.panelWaiting.onHide();
         gameControl.panelMessageSytem.onShow(info + ". Bạn có muốn nạp thêm tiền không ?", delegate {
-            gameControl.panelNapChuyenXu.onShow();
+            //gameControl.panelNapChuyenXu.onShow();
+            LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_ADD_COIN);
         });
     }
 
@@ -676,7 +678,8 @@ public class ListernerServer : IChatListener {
 
     public void onSysKick() {
         gameControl.panelMessageSytem.onShow("Tài khoản của bạn không đủ tiền để chơi tiếp./n Bạn có muốn nạp thêm tiền?", delegate {
-            gameControl.panelNapChuyenXu.onShow();
+            //gameControl.panelNapChuyenXu.onShow();
+            LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_ADD_COIN);
         });
     }
 
@@ -804,10 +807,11 @@ public class ListernerServer : IChatListener {
             long moneyFree = message.reader().ReadLong();
             long moneyFreeMax = message.reader().ReadLong();
 
-            gameControl.panelInfoPlayer.infoProfile(displayname, userID, money, moneyFree, soLanThang, soLanThua, link_Avatar, idAvata, "", "", 0);
-
-            gameControl.panelWaiting.onHide();
-            gameControl.panelInfoPlayer.onShow();
+            //gameControl.panelInfoPlayer.infoProfile(displayname, userID, money, moneyFree, soLanThang, soLanThua, link_Avatar, idAvata, "", "", 0);
+            LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_PLAYER_INFO, () => {
+                gameControl.panelWaiting.onHide();
+                PanelInfoPlayer.instance.infoProfile(displayname, userID, money, moneyFree, soLanThang, soLanThua, link_Avatar, idAvata, "", "", 0);
+            });
         } catch (Exception e) {
             // TODO: handle exceptione.
             Debug.LogException(e);
@@ -1470,8 +1474,12 @@ public class ListernerServer : IChatListener {
             sbyte type = message.reader().ReadByte();
             string info = message.reader().ReadUTF();
 
-            gameControl.panelInfoPlayer.infoMe();
+            //gameControl.panelInfoPlayer.infoMe();
             //gameControl.menu.updateAvataName();
+            //LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_PLAYER_INFO, () => {
+            //    gameControl.panelWaiting.onHide();
+            //    PanelInfoPlayer.instance.infoMe();
+            //});
             gameControl.top.updateProfileUser();
             gameControl.panelMessageSytem.onShow(info);
 
@@ -1488,11 +1496,15 @@ public class ListernerServer : IChatListener {
                 string name = message.reader().ReadUTF();
 
                 BaseInfo.gI().mainInfo.displayname = name;
-                gameControl.panelInfoPlayer.infoMe();
-                //gameControl.menu.updateAvataName();
+                //gameControl.panelInfoPlayer.infoMe();
+                //LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_PLAYER_INFO, () => {
+                //    gameControl.panelWaiting.onHide();
+                //    PanelInfoPlayer.instance.infoMe();
+                //});
+
                 gameControl.top.updateProfileUser();
             }
-            gameControl.panelMessageSytem.onShow(info, delegate { });
+            gameControl.panelMessageSytem.onShow(info);
         } catch (Exception e) {
             Debug.LogException(e);
         }
@@ -1662,7 +1674,7 @@ public class ListernerServer : IChatListener {
                 string title = message.reader().ReadUTF();
                 string content = message.reader().ReadUTF();
                 if (content.Length > 0) {
-                   // gameControl.panelMail.addIconSuKien(id, title, content);
+                    // gameControl.panelMail.addIconSuKien(id, title, content);
                 }
                 //Debug.Log(title + " ---------- " + title);
                 strEvent += content + ";\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
@@ -1779,7 +1791,7 @@ public class ListernerServer : IChatListener {
         try {
             //sbyte gameid = message.reader().ReadByte();
             //gameControl.main.clearGrid (gameid);
-            gameControl.panelRank.clearList();
+            PanelRank.clearList();
             int size = message.reader().ReadByte();
             for (int i = 0; i < size; i++) {
                 string displayname = message.reader().ReadUTF();

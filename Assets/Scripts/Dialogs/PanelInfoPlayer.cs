@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class PanelInfoPlayer : PanelGame {
+    public static PanelInfoPlayer instance;
     public Text txt_id;
     public Text txt_name;
     public Text txt_xu;
@@ -16,6 +17,9 @@ public class PanelInfoPlayer : PanelGame {
     //public PanelChangeAvata panelChangeAvata;
     public GameObject changePass, changeName, changeAvata, updateInfo;
     public InputField ip_email, ip_phone;
+    void Awake() {
+        instance = this;
+    }
 
     //public Text[] label;
 
@@ -34,6 +38,7 @@ public class PanelInfoPlayer : PanelGame {
      }*/
 
     bool isLoginFB;
+
     void OnEnable() {
         isLoginFB = GameControl.instance.login.isLoginFB;
     }
@@ -43,8 +48,11 @@ public class PanelInfoPlayer : PanelGame {
         if (isLoginFB) {
             GameControl.instance.panelMessageSytem.onShow("Bạn không thể đổi mật khẩu.");
         } else {
-            GameControl.instance.panelChangePassword.onShow();
-            onHide();
+            //GameControl.instance.panelChangePassword.onShow();
+            //onHide();
+            LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_CHANGE_PASS, () => {
+                GetComponent<UIPopUp>().HideDialog();
+            });
         }
     }
 
@@ -53,18 +61,23 @@ public class PanelInfoPlayer : PanelGame {
         if (isLoginFB) {
             GameControl.instance.panelMessageSytem.onShow("Bạn không thể đổi tên.");
         } else {
-            GameControl.instance.panelChangeName.onShow(BaseInfo.gI().mainInfo.displayname);
-            onHide();
+            //GameControl.instance.panelChangeName.onShow(BaseInfo.gI().mainInfo.displayname);
+            //onHide();
+            LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_CHANGE_NAME, () => {
+                GetComponent<UIPopUp>().HideDialog();
+            });
         }
     }
 
     public void clickChangeAvata() {
         GameControl.instance.sound.startClickButtonAudio();
         if (isLoginFB) {
-            GameControl.instance.panelMessageSytem.onShow("Bạn không thể đổi tên.");
+            GameControl.instance.panelMessageSytem.onShow("Bạn không thể đổi avata.");
         } else {
-            GameControl.instance.panelChangeAvata.onShow();
-            onHide();
+            // GameControl.instance.panelChangeAvata.onShow();
+            LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_CHANGE_AVATA, () => {
+                GetComponent<UIPopUp>().HideDialog();
+            });
         }
     }
 
@@ -125,12 +138,6 @@ public class PanelInfoPlayer : PanelGame {
         infoProfile(n, uid, xuMe, chipMe, slt, slth, link_ava, idAva, email, phone, num_star);
     }
 
-    public void updateAvata() {
-        int id = BaseInfo.gI().mainInfo.idAvata;
-        //Img_Avata.sprite = Res.getAvataByID(id);
-        LoadAssetBundle.LoadSprite(Img_Avata, Res.AS_AVATA, "" + id);
-    }
-
     public void infoProfile(string nameinfo, long userid, long xuinfo, long chipinfo,
         string slthang, string slthua, string link_avata, int idAvata,
         string email, string phone, int num_star) {
@@ -168,8 +175,7 @@ public class PanelInfoPlayer : PanelGame {
         //    //    stars[i].spriteName = "Sao_sang_to";
         //    //}
         //}
-
-
+        
         if (slthang.Length != 0 && slthua.Length != 0) {
             string[] st = slthang.Split(',');
             int slth = 0;
@@ -203,7 +209,6 @@ public class PanelInfoPlayer : PanelGame {
             StartCoroutine(getAvata(link_avata));
         }
     }
-
     IEnumerator getAvata(string link) {
         WWW www = new WWW(link);
         yield return www;

@@ -6,10 +6,14 @@ public class PanelChangeName : PanelGame {
 	public Text oldName;
     public InputField ip_newname;
 
-	public void onShow(string name){
-		oldName.text = name;
-		base.onShow ();
-	}
+	//public void onShow(string name){
+	//	oldName.text = name;
+	//	base.onShow ();
+	//}
+    
+    void OnEnable() {
+        oldName.text = BaseInfo.gI().mainInfo.displayname;
+    }
 
     public void changeName () {
         GameControl.instance.sound.startClickButtonAudio();

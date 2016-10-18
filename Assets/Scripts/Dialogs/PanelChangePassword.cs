@@ -4,9 +4,7 @@ using System.Collections;
 
 public class PanelChangePassword : PanelGame {
     public InputField ip_pass_current, ip_pass_new, ip_pass_again;
-
     public void changePass() {
-
         GameControl.instance.sound.startClickButtonAudio();
         string oldPass = ip_pass_current.text;
         string newPass1 = ip_pass_new.text;
@@ -28,6 +26,6 @@ public class PanelChangePassword : PanelGame {
         GameControl.instance.panelMessageSytem.onShow("Bạn muốn gửi tin nhắn để đổi mật khẩu.", delegate {
             SendData.onGetPass(BaseInfo.gI().mainInfo.nick);
         });
-        onHide();
+        GetComponent<UIPopUp>().HideDialog();
     }
 }

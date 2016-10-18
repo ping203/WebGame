@@ -837,13 +837,14 @@ public abstract class BaseCasino : StageControl {
 
     public void clickSetting() {
         GameControl.instance.sound.startClickButtonAudio();
-        gameControl.panelSetting.onShow();
-        //LoadAssetBundle.LoadScene("sub_setting", "sub_setting");
+        //gameControl.panelSetting.onShow();
+        LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_SETTING);
     }
 
     public void clickNapChuyenXu() {
         GameControl.instance.sound.startClickButtonAudio();
-        gameControl.panelNapChuyenXu.onShow();
+        //gameControl.panelNapChuyenXu.onShow();
+        LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_ADD_COIN);
     }
 
     public void clickButtonHistoryChat() {
