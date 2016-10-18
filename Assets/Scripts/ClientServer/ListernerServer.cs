@@ -1804,7 +1804,6 @@ public class ListernerServer : IChatListener {
         try {
             //sbyte gameid = message.reader().ReadByte();
             //gameControl.main.clearGrid (gameid);
-            PanelRank.clearList();
             int size = message.reader().ReadByte();
             for (int i = 0; i < size; i++) {
                 string displayname = message.reader().ReadUTF();
@@ -1823,7 +1822,7 @@ public class ListernerServer : IChatListener {
                 //temp.money = money;
 
                 //gameControl.panelRank.InstanceItem(i + 1, idAvata, displayname, money);
-                PanelRank.list_top.Add(it);
+                GameControl.instance.list_top.Add(it);
             }
 
         } catch (Exception e) {

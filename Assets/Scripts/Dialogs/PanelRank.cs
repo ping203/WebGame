@@ -6,9 +6,10 @@ public class PanelRank : PanelGame {
     //public GameObject itemRanking;
     public Transform parentItem;
 
-    public static List<ItemRanking> list_top = new List<ItemRanking>();
-
+    List<ItemRanking> list_top = new List<ItemRanking>();
     public void Start() {
+        clearList();
+        list_top = GameControl.instance.list_top;
         LoadAssetBundle.LoadPrefab(Res.AS_PREFABS, Res.AS_PREFABS_ITEM_RANK, (prefabAB) => {
             GameObject obj = prefabAB;
             obj.transform.SetParent(parentItem);
@@ -38,8 +39,8 @@ public class PanelRank : PanelGame {
     //    });
     //}
 
-    public static void clearList() {
-        foreach (ItemRanking it in list_top) {
+    void clearList() {
+        foreach (Transform it in parentItem) {
             Destroy(it.gameObject);
         }
         list_top.Clear();

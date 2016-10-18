@@ -86,13 +86,14 @@ public class GameControl : MonoBehaviour {
     public PanelUpVip panelUpVip;
 
     public SoundManager sound;
-    
+
     public BaseCasino currentCasino;
     public StageControl currenStage;
     public StageControl backState;
-
+    //list de nhan danh sach tu sver trả về. roi xu li rieng
     public List<ItemMail> listMail = new List<ItemMail>();
     public List<ItemMail> listEvent = new List<ItemMail>();
+    public List<ItemRanking> list_top = new List<ItemRanking>();
 
     public List<RoomInfo> phongFree = new List<RoomInfo>();
     public List<RoomInfo> phongVip = new List<RoomInfo>();
@@ -145,12 +146,12 @@ public class GameControl : MonoBehaviour {
                 Destroy(this.gameObject);
         }
 
-         //Res.list_avata = Resources.LoadAll<Sprite>("Avata");
+        //Res.list_avata = Resources.LoadAll<Sprite>("Avata");
         //for (int i = 0; i < Res.list_avata.Length; i++) {
-            
+
         //}
-       // Res.list_avata = LoadAssetBundle.LoadSprite()
-       // Res.list_emotions = Resources.LoadAll<Sprite>("Emotions");
+        // Res.list_avata = LoadAssetBundle.LoadSprite()
+        // Res.list_emotions = Resources.LoadAll<Sprite>("Emotions");
         Res.list_cards = Resources.LoadAll<Sprite>("Cards/cardall");
         IMEI = "357238040933272";//SystemInfo.deviceUniqueIdentifier;
     }

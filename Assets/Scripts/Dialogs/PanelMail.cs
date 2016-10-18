@@ -88,14 +88,20 @@ public class PanelMail : PanelGame {
     }
 
     public void ClearListMail() {
-        for (int i = 0; i < listMail.Count; i++) {
-            Destroy(listMail[i].gameObject);
+        //for (int i = 0; i < tblContaintTinNhan.childCount; i++) {
+        //    Destroy(tblContaintTinNhan.GetChild(i).gameObject);
+        //}
+        foreach (Transform it in tblContaintTinNhan) {
+            Destroy(it.gameObject);
         }
         listMail.Clear();
     }
     public void ClearListEvent() {
-        for (int i = 0; i < listEvent.Count; i++) {
-            Destroy(listEvent[i].gameObject);
+        //for (int i = 0; i < tblContaintSuKien.childCount; i++) {
+        //    Destroy(tblContaintSuKien.GetChild(i).gameObject);
+        //}
+        foreach (Transform it in tblContaintSuKien) {
+            Destroy(it.gameObject);
         }
         listEvent.Clear();
     }
