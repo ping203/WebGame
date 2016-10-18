@@ -66,10 +66,10 @@ public class GameControl : MonoBehaviour {
     //public PanelToiBan panelToiBan;
     //public PanelMoiChoi panelMoiChoi;
     public PanelChat panelChat;
-    public PanelDatCuoc panelDatCuoc;
-    public PanelRutTien panelRutTien;
-    public PanelInput panelInput;
-    public PanelCuoc panelCuoc;
+    //public PanelDatCuoc panelDatCuoc;
+    //public PanelRutTien panelRutTien;
+    //public PanelInput panelInput;
+    //public PanelCuoc panelCuoc;
     //public DialogKetQua dialogKetQua;
     //public DialogRutTien dialogRutTien;
     //public DialogThongTin dialogThongTin;
@@ -83,7 +83,7 @@ public class GameControl : MonoBehaviour {
     //public PanelChangeAvata panelChangeAvata;
     //public PanelChangePassword panelChangePassword;
     //public PanelChangeName panelChangeName;
-    public PanelUpVip panelUpVip;
+    //public PanelUpVip panelUpVip;
 
     public SoundManager sound;
 
@@ -294,16 +294,16 @@ public class GameControl : MonoBehaviour {
         //panelToiBan.onHide();
         //panelMoiChoi.onHide();
         panelChat.onHide();
-        panelRutTien.onHide();
-        panelInput.onHide();
+        //panelRutTien.onHide();
+        //panelInput.onHide();
         panelNotiDoiThuong.onHide();
-        panelCuoc.onHide();
-        panelDatCuoc.onHide();
+        //panelCuoc.onHide();
+        //panelDatCuoc.onHide();
         //panelChangeAvata.onHide();
         //panelChangePassword.onHide();
         //panelChangeName.onHide();
         //panelRank.onHide();
-        panelUpVip.onHide();
+        //panelUpVip.onHide();
     }
 
     void OnApplicationQuit() {

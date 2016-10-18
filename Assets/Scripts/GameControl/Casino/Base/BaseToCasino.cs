@@ -523,7 +523,7 @@ public class BaseToCasino : BaseCasino {
         } else {
             BaseInfo.gI().moneyMinTo = soTienTo;
         }
-        
+
         for (int i = 0; i < nUsers; i++) {
             if (players[i].isPlaying()) {
                 if (players[i].getName().Equals(nick)) {
@@ -744,16 +744,16 @@ public class BaseToCasino : BaseCasino {
             gameControl.panelMessageSytem.onShow("Không đủ tiền để rút, bạn có muốn nạp thêm?");
 
         } else {
-            if (players[0].getFolowMoney() < BaseInfo.gI().currentMinMoney) {
-                gameControl.panelRutTien.show(BaseInfo.gI().currentMinMoney,
-                        BaseInfo.gI().currentMaxMoney, 2, 0, 0, 0, BaseInfo.gI().typetableLogin);
+            LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_RUT_TIEN, () => {
+                if (players[0].getFolowMoney() < BaseInfo.gI().currentMinMoney) {
+                    PanelRutTien.instance.show(BaseInfo.gI().currentMinMoney,
+                            BaseInfo.gI().currentMaxMoney, 2, 0, 0, 0, BaseInfo.gI().typetableLogin);
+                } else {
+                    PanelRutTien.instance.show(BaseInfo.gI().currentMinMoney,
+                          BaseInfo.gI().currentMaxMoney, 3, 0, 0, 0, BaseInfo.gI().typetableLogin);
 
-            } else {
-                gameControl.panelRutTien.show(BaseInfo.gI().currentMinMoney,
-                      BaseInfo.gI().currentMaxMoney, 3, 0, 0, 0, BaseInfo.gI().typetableLogin);
-
-            }
-
+                }
+            });
         }
     }
     private void showThanhTo(float min, float maxMoney) {

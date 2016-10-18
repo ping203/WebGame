@@ -2,7 +2,8 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class PanelRutTien : PanelGame {
+public class PanelRutTien : MonoBehaviour {
+    public static PanelRutTien instance;
     public Slider slider;
     public Text lb_current;
     public Toggle checkbox;
@@ -12,6 +13,10 @@ public class PanelRutTien : PanelGame {
     //public Text lb_rut;
     public bool tuDongRutTien = false;
     public int soTienRut;
+
+    void Awake() {
+        instance = this;
+    }
 
     // Use this for initialization
     void Start() {
@@ -92,7 +97,6 @@ public class PanelRutTien : PanelGame {
             idtable = idTable;
             idroom = roomID;
             idgame = gameID;
-            onShow();
         }
     }
 
@@ -102,5 +106,9 @@ public class PanelRutTien : PanelGame {
             tienchon = tienmin;
         }
         lb_current.text = BaseInfo.formatMoneyDetailDot(tienchon);
+    }
+
+    public void onHide() {
+        GetComponent<UIPopUp>().HideDialog();
     }
 }

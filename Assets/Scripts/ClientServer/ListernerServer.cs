@@ -61,51 +61,51 @@ public class ListernerServer : IChatListener {
         switch (id) {
             case 0:
                 gameControl.panelMessageSytem.onShow("Tài khoản hoặc mật khẩu không đúng! Bạn có muốn Lấy lại mật khẩu không?", delegate {
-                    gameControl.panelInput.onShow("Lấy lại mật khẩu", "", "Tên đăng nhập:", delegate {
-                        string nick = gameControl.panelInput.ip_enter.text;
-                        bool kt = false;
+                    LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_INPUT, () => {
+                        PanelInput.instance.onShow("Lấy lại mật khẩu", "", "Tên đăng nhập:", delegate {
+                            string nick = PanelInput.instance.ip_enter.text;
+                            bool kt = false;
 
-                        if (nick.Equals("")) {
-                            info2 = "Nhập vào tên đăng nhập.";
+                            if (nick.Equals("")) {
+                                info2 = "Nhập vào tên đăng nhập.";
+                                kt = true;
+                            }
+                            if (kt) {
+                                gameControl.panelMessageSytem.onShow(info2);
+                                return;
+                            }
+                            SendData.onGetPass(nick);
+                            PanelInput.instance.onHide();
+                        });
+                    });
+                });
+                break;
+            case 2:
+                LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_INPUT, () => {
+                    PanelInput.instance.onShow("Nhập số điện thoại", info, "SĐT:", delegate {
+                        string phoneNumber = PanelInput.instance.ip_enter.text;
+                        bool kt = false;
+                        if (phoneNumber.Equals("")) {
+                            info2 = "Nhập vào số điện thoại.";
+                            kt = true;
+                        } else if (PanelInput.instance.checkSDT(phoneNumber) == -1) {
+                            info2 = "Sai định dạng số điện thoại!";
+                            kt = true;
+                        } else if (PanelInput.instance.checkSDT(phoneNumber) == -3) {
+                            info2 = "Số điện thoại phải nhiều hơn 9 và ít hơn 12 ký tự.";
                             kt = true;
                         }
                         if (kt) {
                             gameControl.panelMessageSytem.onShow(info2);
                             return;
                         }
-                        SendData.onGetPass(nick);
-                        gameControl.panelInput.onHide();
+
+                        string imei = GameControl.IMEI;
+
+                        gameControl.login.login(4, BaseInfo.gI().username, BaseInfo.gI().pass, imei, "", 1, BaseInfo.gI().username, "", phoneNumber);
+                        PanelInput.instance.onHide();
                     });
                 });
-                break;
-            case 2:
-                gameControl.panelInput.onShow("Nhập số điện thoại", info, "SĐT:", delegate {
-                    string phoneNumber = gameControl.panelInput.ip_enter.text;
-
-                    bool kt = false;
-
-                    if (phoneNumber.Equals("")) {
-                        info2 = "Nhập vào số điện thoại.";
-                        kt = true;
-                    } else if (gameControl.panelInput.checkSDT(phoneNumber) == -1) {
-                        info2 = "Sai định dạng số điện thoại!";
-                        kt = true;
-                    } else if (gameControl.panelInput.checkSDT(phoneNumber) == -3) {
-                        info2 = "Số điện thoại phải nhiều hơn 9 và ít hơn 12 ký tự.";
-                        kt = true;
-                    }
-                    if (kt) {
-                        gameControl.panelMessageSytem.onShow(info2);
-                        return;
-                    }
-
-                    string imei = GameControl.IMEI;
-
-                    gameControl.login.login(4, BaseInfo.gI().username, BaseInfo.gI().pass, imei, "", 1, BaseInfo.gI().username, "", phoneNumber);
-                    gameControl.panelInput.onHide();
-                });
-                break;
-            default:
                 break;
         }
         gameControl.panelWaiting.onHide();
@@ -1240,10 +1240,12 @@ public class ListernerServer : IChatListener {
                 gameControl.panelMessageSytem.onShow(
                         "Không đủ tiền, bạn có muốn lấy thêm "
                                 + " để tiếp tục chơi?", delegate {
-                                    gameControl.panelRutTien.show(
-                                                    BaseInfo.gI().currentMinMoney,
-                                                    BaseInfo.gI().currentMaxMoney, 2, 0, 0,
-                                                    0, BaseInfo.gI().typetableLogin);
+                                    LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_RUT_TIEN, () => {
+                                        PanelRutTien.instance.show(
+                                                        BaseInfo.gI().currentMinMoney,
+                                                        BaseInfo.gI().currentMaxMoney, 2, 0, 0,
+                                                        0, BaseInfo.gI().typetableLogin);
+                                    });
                                 });
             }
 
@@ -2090,6 +2092,9 @@ public class ListernerServer : IChatListener {
 
     public void onUpVIP(Message message) {
         sbyte vip = message.reader().ReadByte();
-        gameControl.panelUpVip.onShow(vip);
+        // gameControl.panelUpVip.onShow(vip);
+        LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_UP_VIP, () => {
+            PanelUpVip.instance.vip = vip;
+        });
     }
 }

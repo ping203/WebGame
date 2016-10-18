@@ -133,7 +133,10 @@ public class HasMasterCasino : BaseCasino {
     }
 
     public void clickButtonDatcuoc() {
-        gameControl.panelDatCuoc.onShow();
+        //  gameControl.panelDatCuoc.onShow();
+        LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_DAT_CUOC, () => {
+            PanelDatCuoc.instance.onShow();
+        });
     }
     public void onClickButtonStart() {
         if (getTotalPlayerReady() > 1) {

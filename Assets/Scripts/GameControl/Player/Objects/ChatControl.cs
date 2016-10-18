@@ -32,28 +32,31 @@ public class ChatControl : MonoBehaviour {
         "=D>", "@-)", ":-<" };
 
     Dictionary<string, string> emoticons = new Dictionary<string, string>();
-    void Awake() {
-        StartCoroutine(loadAvata());
+    void Start() {
+        LoadSmile();
     }
-
-    IEnumerator loadAvata() {
-        yield return new WaitForEndOfFrame();
-        LoadAssetBundle.LoadPrefab(Res.AS_PREFABS, "Item_Chat_Smile", (btn) => {
-            SetImage(btn);
-        });
-    }
-
-    void SetImage(GameObject btn) {
-        for (int i = 0; i < Res.EMOTION_COUNT; i++) {
-            GameObject obj = Instantiate(btn) as GameObject;
-            obj.transform.SetParent(parentSmile);
-            obj.transform.localScale = Vector3.one;
-            obj.name = "" + i;
-            LoadAssetBundle.LoadSprite(obj.GetComponent<Button>().image, Res.AS_UI, "a" + (i+1));
-            obj.GetComponent<Button>().onClick.AddListener(delegate {
-                sendSmile(obj);
+    void LoadSmile() {
+        LoadAssetBundle.LoadPrefab(Res.AS_PREFABS, Res.AS_PREFABS_ITEM_CHAT_SMILE, (objPre) => {
+            GameObject _obj = objPre;
+            _obj.transform.SetParent(parentSmile);
+            _obj.transform.localScale = Vector3.one;
+            _obj.name = "" + 0;
+            LoadAssetBundle.LoadSprite(_obj.GetComponent<Button>().image, Res.AS_CHAT, "a" + 1);
+            _obj.GetComponent<Button>().onClick.AddListener(delegate {
+                sendSmile(_obj);
             });
-        }
+
+            for (int i = 1; i < Res.EMOTION_COUNT; i++) {
+                GameObject obj = Instantiate(_obj) as GameObject;
+                obj.transform.SetParent(parentSmile);
+                obj.transform.localScale = Vector3.one;
+                obj.name = "" + i;
+                LoadAssetBundle.LoadSprite(obj.GetComponent<Button>().image, Res.AS_CHAT, "a" + (i + 1));
+                obj.GetComponent<Button>().onClick.AddListener(delegate {
+                    sendSmile(obj);
+                });
+            }
+        });
     }
 
     ChatControl() {
@@ -65,7 +68,6 @@ public class ChatControl : MonoBehaviour {
     internal void setText(string nick, string content) {
         string temp;
         bool check = emoticons.TryGetValue(content, out temp);
-        //GameObject obj;
         if (list.Count >= 10) {
             Destroy(list[0]);
             list.RemoveAt(0);
@@ -74,9 +76,8 @@ public class ChatControl : MonoBehaviour {
             nick = nick.Substring(0, 12);
         }
         if (check) {
-            //obj = Instantiate(icon_chat_prefab) as GameObject;
-            LoadAssetBundle.LoadPrefab(Res.AS_PREFABS, "Chat_Smile", (prefabAB) => {
-                GameObject obj = Instantiate(prefabAB) as GameObject;
+            LoadAssetBundle.LoadPrefab(Res.AS_PREFABS, Res.AS_PREFABS_ITEM_SMILE_CHAT, (prefabAB) => {
+                GameObject obj = prefabAB;
                 obj.GetComponent<Text>().text = nick + ":";
 
                 LoadAssetBundle.LoadSprite(obj.GetComponentInChildren<Image>(), Res.AS_UI, temp);
@@ -85,8 +86,8 @@ public class ChatControl : MonoBehaviour {
                 list.Add(obj);
             });
         } else {
-            LoadAssetBundle.LoadPrefab(Res.AS_PREFABS, "Chat_Text", (prefabAB) => {
-                GameObject obj = Instantiate(prefabAB) as GameObject;
+            LoadAssetBundle.LoadPrefab(Res.AS_PREFABS, Res.AS_PREFABS_ITEM_TEXT_CHAT, (prefabAB) => {
+                GameObject obj = prefabAB;
                 obj.GetComponent<Text>().text = nick + ": " + content;
 
                 obj.transform.SetParent(parent_chat);

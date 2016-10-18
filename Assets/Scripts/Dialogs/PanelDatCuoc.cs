@@ -2,14 +2,23 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class PanelDatCuoc : PanelGame {
+public class PanelDatCuoc : MonoBehaviour {
+    public static PanelDatCuoc instance;
     public Slider sliderMoney;
     public Text inputMoney;
     private long money;
     float rateVIP, rateFREE;
+
+    void Awake() {
+        instance = this;
+    }
     // Use this for initialization
     void Start() {
         sliderMoney.onValueChanged.AddListener(onChangeMoney);
+    }
+    
+    public void onHide() {
+        GetComponent<UIPopUp>().HideDialog();
     }
 
     public void onChangeMoney(float value) {
@@ -42,6 +51,5 @@ public class PanelDatCuoc : PanelGame {
     public void onShow() {
         sliderMoney.value = 0;
         onChangeMoney(0);
-        base.onShow();
     }
 }

@@ -2,11 +2,16 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class PanelInput : PanelGame {
+public class PanelInput : MonoBehaviour {
+   public static PanelInput instance;
     public Text lb_title, lb_display_1, lb_display_2, lb_text_ishide;
     public InputField ip_enter;
     public delegate void CallBack();
     public CallBack onClickOK;
+
+    void Awake() {
+        instance = this;
+    }
 
     public void onShow(string title, string display1, string display2, CallBack clickOK) {
         DoOnMainThread.ExecuteOnMainThread.Enqueue(() => {
@@ -14,7 +19,6 @@ public class PanelInput : PanelGame {
             lb_display_1.text = display1;
             lb_display_2.text = display2;
             onClickOK = clickOK;
-            base.onShow();
         });
     }
 
@@ -27,13 +31,12 @@ public class PanelInput : PanelGame {
                 string nick = ip_enter.text;
                 if (!nick.Equals("")) {
                     SendData.onGetPass(nick);
-                    Debug.Log(nick);
-                    base.onHide();
+                    //Debug.Log(nick);
+                    onHide();
                 } else {
                     GameControl.instance.panelMessageSytem.onShow("Tài khoản không đúng!");
                 }
             };
-            base.onShow();
         });
     }
 
@@ -54,5 +57,9 @@ public class PanelInput : PanelGame {
         }
 
         return 1;
+    }
+
+    public void onHide() {
+        GetComponent<UIPopUp>().HideDialog();
     }
 }

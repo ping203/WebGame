@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class Bacay : BaseCasino {
     public TimerLieng timerWaiting;
@@ -29,7 +30,10 @@ public class Bacay : BaseCasino {
     }
 
     private void showDatcuoc(long min, long max) {
-        gameControl.panelCuoc.onShow(min, max);
+        //gameControl.panelCuoc.onShow(min, max);
+        LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_CUOC, ()=> {
+            PanelCuoc.instance.onShow(min, max);
+        });
         //btn_bocuoc.gameObject.SetActive(false);
         //btn_cuoc.gameObject.SetActive(false);
         //showButtonCuoc(false);
@@ -182,8 +186,10 @@ public class Bacay : BaseCasino {
         timeReceiveTurnBC = GetCurrentMilli();
         gameControl.sound.startTineCountAudio();
         chip_tong.setMoneyChipChu(tongMoney);
-
-        gameControl.panelCuoc.onHide();
+        if (SceneManager.GetSceneByName(Res.AS_SUBSCENES_CUOC) != null) {
+            // gameControl.panelCuoc.onHide();
+            PanelCuoc.instance.onHide();
+        }
     }
 
     public override void onTimeAuToStart(sbyte time) {

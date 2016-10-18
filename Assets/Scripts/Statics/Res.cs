@@ -85,6 +85,7 @@ public class Res {
     public const string AS_AVATA = "avata";
     public const string AS_MAINSCENE = "mainscene";
     public const string AS_UI = "ui";
+    public const string AS_CHAT = "chat";
 
 
     #region SUBSCENES
@@ -100,6 +101,11 @@ public class Res {
     public const string AS_SUBSCENES_MAIL = "sub_mail";
     public const string AS_SUBSCENES_CREATE_ROOM = "sub_create_room";
     public const string AS_SUBSCENES_GOTO_ROOM = "sub_goto_room";
+    public const string AS_SUBSCENES_UP_VIP = "sub_up_vip";
+    public const string AS_SUBSCENES_CUOC = "sub_cuoc";
+    public const string AS_SUBSCENES_DAT_CUOC = "sub_dat_cuoc";
+    public const string AS_SUBSCENES_INPUT = "sub_input";//doi ten, lay lai pass...
+    public const string AS_SUBSCENES_RUT_TIEN = "sub_rut_tien";
     /// <summary>
     /// Scene doi thuong
     /// </summary>
@@ -114,6 +120,9 @@ public class Res {
     public const string AS_PREFABS_ITEM_MAIL = "ItemMail";
     public const string AS_PREFABS_BUTTON_GIFT = "Button_Gift";
     public const string AS_PREFABS_INVITE_GAME = "ItemMoiChoi";
+    public const string AS_PREFABS_ITEM_CHAT_SMILE = "Item_Chat_Smile";//khi load danh sach emotion
+    public const string AS_PREFABS_ITEM_SMILE_CHAT = "Chat_Smile";
+    public const string AS_PREFABS_ITEM_TEXT_CHAT = "Chat_Text";
     #endregion END PREFABS
 }
 

@@ -329,7 +329,10 @@ public class LoginControl : StageControl {
 
     void clickQuenMK() {
         //gameControl.dialogQuenMK.onShow(); 
-        gameControl.panelInput.onShow_GetPass();
+        // gameControl.panelInput.onShow_GetPass();
+        LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_INPUT, () => {
+            PanelInput.instance.onShow_GetPass();
+        });
     }
 
     void OnSubmit() {

@@ -31,7 +31,7 @@ public class PanelChat : PanelGame {
             btn.transform.SetParent(tblSmile.transform);
             btn.transform.localScale = Vector3.one;
             //btn.GetComponent<Button>().image.sprite = Res.getSmileByName("a" + (i + 1));
-            LoadAssetBundle.LoadSprite(btn.GetComponent<Button>().image, Res.AS_UI, "a" + (i + 1));
+            LoadAssetBundle.LoadSprite(btn.GetComponent<Button>().image, Res.AS_CHAT, "a" + (i + 1));
             btn.name = "" + i;
             btn.GetComponent<Button>().onClick.AddListener(delegate {
                 ClickSmile(btn);

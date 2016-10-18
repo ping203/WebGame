@@ -36,7 +36,7 @@ public class Chat : MonoBehaviour {
             chat_text_right.SetActive(false);
             spriteSmile.gameObject.SetActive(true);
             // spriteSmile.sprite = Res.getSmileByName(temp);
-            LoadAssetBundle.LoadSprite(spriteSmile, Res.AS_UI, temp);
+            LoadAssetBundle.LoadSprite(spriteSmile, Res.AS_CHAT, temp);
             spriteSmile.transform.DOKill();
             spriteSmile.transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
             spriteSmile.transform.DOScale(1, 0.2f).SetLoops(-1);
