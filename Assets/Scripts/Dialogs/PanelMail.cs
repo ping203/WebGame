@@ -19,9 +19,6 @@ public class PanelMail : PanelGame {
     }
 
     void Start() {
-        ClearListMail();
-        ClearListEvent();
-
         listMail = GameControl.instance.listMail;
         listEvent = GameControl.instance.listEvent;
 
@@ -66,7 +63,6 @@ public class PanelMail : PanelGame {
     public void addIconSuKien() {
         if (listEvent.Count <= 0) { return; }
         LoadAssetBundle.LoadPrefab(Res.AS_PREFABS, Res.AS_PREFABS_ITEM_MAIL, (objPre) => {
-
             GameObject obj = objPre;
             obj.transform.SetParent(tblContaintSuKien);
             obj.transform.localScale = Vector3.one;
@@ -86,7 +82,7 @@ public class PanelMail : PanelGame {
         });
         //listEvent.Add(btnT.GetComponent<ItemMail>());
     }
-
+    /*
     public void ClearListMail() {
         //for (int i = 0; i < tblContaintTinNhan.childCount; i++) {
         //    Destroy(tblContaintTinNhan.GetChild(i).gameObject);
@@ -105,7 +101,7 @@ public class PanelMail : PanelGame {
         }
         listEvent.Clear();
     }
-
+    */
     public void ClickDocTN(GameObject obj) {
         for (int i = 0; i < listMail.Count; i++) {
             listMail[i].GetComponent<ItemMail>().setCheck(false);

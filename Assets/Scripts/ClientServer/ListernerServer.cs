@@ -1408,28 +1408,38 @@ public class ListernerServer : IChatListener {
 
     public void InfoGift(Message message) {
         try {
-            gameControl.panelDoiThuong.onShow();
-            if (!gameControl.panelDoiThuong.isLoaded) {
-                int size = message.reader().ReadInt();
-                for (int i = 0; i < size; i++) {
-                    int id = message.reader().ReadInt();
-                    int type = message.reader().ReadInt();
-                    // type 1: the cao
-                    // type 2: vat pham
-                    string name = message.reader().ReadUTF();
-                    long cost = message.reader().ReadLong();
-                    string telco = message.reader().ReadUTF();
-                    long price = message.reader().ReadLong();
-                    long balance = message.reader().ReadLong();
-                    string des = message.reader().ReadUTF();
-                    string links = message.reader().ReadUTF();
-
-                    gameControl.panelDoiThuong.addGiftInfo(id, type, name, price, balance, links);
-                }
-                gameControl.panelDoiThuong.isLoaded = true;
+            //gameControl.panelDoiThuong.onShow();
+            gameControl.list_gift.Clear();
+            int size = message.reader().ReadInt();
+            for (int i = 0; i < size; i++) {
+                int id = message.reader().ReadInt();
+                int type = message.reader().ReadInt();
+                // type 1: the cao
+                // type 2: vat pham
+                string name = message.reader().ReadUTF();
+                long cost = message.reader().ReadLong();
+                string telco = message.reader().ReadUTF();
+                long price = message.reader().ReadLong();
+                long balance = message.reader().ReadLong();
+                string des = message.reader().ReadUTF();
+                string links = message.reader().ReadUTF();
+                InfoGift it = new InfoGift();
+                it.id = id;
+                it.type = type;
+                it.nameGift = name;
+                it.cost = cost;
+                it.telco = telco;
+                it.price = price;
+                it.balance = balance;
+                it.des = des;
+                it.link = links;
+                gameControl.list_gift.Add(it);
+                // gameControl.panelDoiThuong.addGiftInfo(id, type, name, price, balance, links);
             }
-            //        BaseInfo.gI().soDu = message.reader().ReadInt();
-            gameControl.panelWaiting.onHide();
+
+            LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_EXCHANGE, () => {
+                gameControl.panelWaiting.onHide();
+            });
         } catch (Exception e) {
             // TODO: handle exception
             Debug.LogException(e);
@@ -1443,14 +1453,21 @@ public class ListernerServer : IChatListener {
             if (total <= 0) {
                 gameControl.panelMessageSytem.onShow("Tất cả người chơi đều đang bận!");
             } else {
-                gameControl.panelMoiChoi.ClearParent();
                 for (int i = 0; i < total; i++) {
                     string name = msg.reader().ReadUTF();
                     string displayname = msg.reader().ReadUTF();
                     long money = msg.reader().ReadLong();
-                    gameControl.panelMoiChoi.addIcon(name, displayname, money);
+                    //gameControl.panelMoiChoi.addIcon(name, displayname, money);
+                    ItemInvite it = new ItemInvite();
+                    it._name = name;
+                    it.full_name = displayname;
+                    it.money = money;
+                    gameControl.list_invite.Add(it);
                 }
-                gameControl.panelMoiChoi.onShow();
+                //gameControl.panelMoiChoi.onShow();
+                LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_INVITE_GAME, () => {
+                    gameControl.panelWaiting.onHide();
+                });
             }
         } catch (Exception e) {
             // TODO: handle exception
@@ -1535,7 +1552,7 @@ public class ListernerServer : IChatListener {
             sbyte type = message.reader().ReadByte();
             if (type == 1) {
                 gameControl.panelMessageSytem.onShow("Tạo bàn thành công", delegate { });
-                gameControl.panelCreateRoom.onHide();
+                //gameControl.panelCreateRoom.onHide();
             } else {
                 gameControl.panelMessageSytem.onShow("Tạo bàn thất bại", delegate { });
             }

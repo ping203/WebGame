@@ -166,12 +166,14 @@ public class TopControl : PanelGame {
 
     public void clickCreateRoom() {
         GameControl.instance.sound.startClickButtonAudio();
-        gameControl.panelCreateRoom.onShow();
+        //gameControl.panelCreateRoom.onShow();
+        LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_CREATE_ROOM);
     }
 
     public void clickToiBan() {
         GameControl.instance.sound.startClickButtonAudio();
-        gameControl.panelToiBan.onShow();
+        //gameControl.panelToiBan.onShow();
+        LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_GOTO_ROOM);
     }
 
     public void clickNoti() {

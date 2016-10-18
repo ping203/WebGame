@@ -3,16 +3,20 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class InfoGift : MonoBehaviour {
-    public int idGift { get; set; }
-    public long priceGift { get; set; }
-    public long balance { get; set; }
+    public int id { get; set; }
+    public int type { get; set; }
     public string nameGift { get; set; }
+    public long cost { get; set; }
+    public string telco { get; set; }
+    public long price { get; set; }
+    public long balance { get; set; }
+    public string des { get; set; }
+    public string link { get; set; }
 
-    public RawImage Gift;
-    public Text Price, Name;
+    public RawImage img_Gift;
+    public Text txt_Price, txt_Name;
     WWW www;
     bool isSet = false;
-    string linkGift;
 
     // Update is called once per frame
     void Update() {
@@ -20,11 +24,11 @@ public class InfoGift : MonoBehaviour {
             if (www.error != null) {
                 isSet = false;
                 www = null;
-                www = new WWW(linkGift);
+                www = new WWW(link);
                 return;
             }
             if (www.isDone && !isSet) {
-                Gift.texture = www.texture;
+                img_Gift.texture = www.texture;
                 isSet = true;
                 www.Dispose();
                 www = null;
@@ -32,29 +36,21 @@ public class InfoGift : MonoBehaviour {
         }
     }
 
-    internal void setInfoGift(int id, string name, string linkGift, long longPrice, long longBalance) {
-        idGift = id;
-        priceGift = longPrice;
-        balance = longBalance;
-        nameGift = name;
-        this.linkGift = linkGift;
-        Price.text = BaseInfo.formatMoneyNormal(longPrice) + Res.MONEY_VIP_UPPERCASE;
-        Name.text = name;
-        www = new WWW(linkGift);
-        //StartCoroutine(coDownload(linkGift));
+    internal void setInfo(int id, int type, string nameGift, long cost, string telco, long price, string des, long balance, string link) {
+        this.id = id;
+        this.type = type;
+        this.nameGift = nameGift;
+        this.cost = cost;
+        this.telco = telco;
+        this.price = price;
+        this.des = des;
+        this.balance = balance;
+        this.link = link;
     }
-    /*
-    IEnumerator coDownload(string link) {
-        WWW www = new WWW(link);
-        yield return www;
 
-        if (www.error != null) {
-            isSet = false;
-        } else {
-            Gift.texture = www.texture;
-        }
-        www.Dispose();
-        www = null;
+    public void setUI() {
+        txt_Price.text = BaseInfo.formatMoneyNormal(price) + Res.MONEY_VIP_UPPERCASE;
+        txt_Name.text = nameGift;
+        www = new WWW(link);
     }
-    */
 }

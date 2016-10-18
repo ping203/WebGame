@@ -1,48 +1,46 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PanelMoiChoi : PanelGame {
-    public GameObject tblContaint;
-    public GameObject btnIcon;
+    public Transform tblContaint;
+    List<ItemInvite> list = new List<ItemInvite>();
     // Use this for initialization
-    void Start () {
-
+    void Start() {
+        list = GameControl.instance.list_invite;
+        addIcon();
     }
 
-    // Update is called once per frame
-    void Update () {
+    //public void addIcon(string name, string displayname, long money) {
+    public void addIcon() {
+        LoadAssetBundle.LoadPrefab(Res.AS_PREFABS, Res.AS_PREFABS_INVITE_GAME, (objPre) => {
+            GameObject obj = objPre;
+            obj.transform.SetParent(tblContaint.transform);
+            obj.transform.localScale = Vector3.one;
 
-    }
-
-    public void addIcon(string name, string displayname, long money) {
-        LoadAssetBundle.LoadPrefab(Res.AS_PREFABS, "ItemMoiChoi", (btnT) => {
-            btnT.transform.SetParent(tblContaint.transform);
-            btnT.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-            btnT.GetComponent<ItemInvite>().full_name = name;
-            if (name.Length > 17) {
-                name = name.Substring(0, 14) + "...";
-            }
-
-            btnT.GetComponent<ItemInvite>().setText(name, money);
-            btnT.GetComponent<Button>().onClick.AddListener(delegate {
-                ClickMoi(btnT);
+            obj.GetComponent<ItemInvite>().setText(list[0].name, list[0].money);
+            obj.GetComponent<Button>().onClick.AddListener(delegate {
+                ClickMoi(obj);
             });
+
+            for (int i = 1; i < list.Count; i++) {
+                GameObject btnT = obj;
+                btnT.transform.SetParent(tblContaint);
+                btnT.transform.localScale = Vector3.one;
+                btnT.GetComponent<ItemInvite>().setText(list[i].name, list[i].money);
+                btnT.GetComponent<Button>().onClick.AddListener(delegate {
+                    ClickMoi(btnT);
+                });
+            }
         });
-        //GameObject btnT = Instantiate (btnIcon) as GameObject;
     }
 
-    public void ClearParent () {
-        foreach(Transform t in tblContaint.transform) {
-            Destroy (t.gameObject);
-        }
-    }
-
-    public void ClickMoi (GameObject obj) {
-        SendData.onInviteFriend (obj.GetComponent<ItemInvite>().full_name);
-        Destroy (obj);
-        if(tblContaint.transform.childCount == 1) {
-            onHide ();
+    public void ClickMoi(GameObject obj) {
+        SendData.onInviteFriend(obj.GetComponent<ItemInvite>().full_name);
+        Destroy(obj);
+        if (tblContaint.transform.childCount == 1) {
+            onHide();
         }
     }
 }

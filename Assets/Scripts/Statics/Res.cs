@@ -98,6 +98,13 @@ public class Res {
     public const string AS_SUBSCENES_HELP = "sub_help";
     public const string AS_SUBSCENES_ADD_COIN = "sub_add_coin";
     public const string AS_SUBSCENES_MAIL = "sub_mail";
+    public const string AS_SUBSCENES_CREATE_ROOM = "sub_create_room";
+    public const string AS_SUBSCENES_GOTO_ROOM = "sub_goto_room";
+    /// <summary>
+    /// Scene doi thuong
+    /// </summary>
+    public const string AS_SUBSCENES_EXCHANGE = "sub_exchange";
+    public const string AS_SUBSCENES_INVITE_GAME = "sub_invite_game";
     #endregion END SUBSCENES
 
     #region PREFABS
@@ -105,6 +112,8 @@ public class Res {
     public const string AS_PREFABS_ITEM_RANK = "ItemRank";
     public const string AS_PREFABS_BUTTON_AVATA = "Button_Avata";
     public const string AS_PREFABS_ITEM_MAIL = "ItemMail";
+    public const string AS_PREFABS_BUTTON_GIFT = "Button_Gift";
+    public const string AS_PREFABS_INVITE_GAME = "ItemMoiChoi";
     #endregion END PREFABS
 }
 

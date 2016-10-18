@@ -60,11 +60,11 @@ public class GameControl : MonoBehaviour {
     public PanelMessageSytem panelMessageSytem;
     //public PanelHelp panleHelp;
     //public PanelNapChuyenXu panelNapChuyenXu;
-    public PanelDoiThuong panelDoiThuong;
+    //public PanelDoiThuong panelDoiThuong;
     //public PanelMail panelMail;
-    public PanelCreateRoom panelCreateRoom;
-    public PanelToiBan panelToiBan;
-    public PanelMoiChoi panelMoiChoi;
+    //public PanelCreateRoom panelCreateRoom;
+    //public PanelToiBan panelToiBan;
+    //public PanelMoiChoi panelMoiChoi;
     public PanelChat panelChat;
     public PanelDatCuoc panelDatCuoc;
     public PanelRutTien panelRutTien;
@@ -90,10 +90,13 @@ public class GameControl : MonoBehaviour {
     public BaseCasino currentCasino;
     public StageControl currenStage;
     public StageControl backState;
+
     //list de nhan danh sach tu sver trả về. roi xu li rieng
     public List<ItemMail> listMail = new List<ItemMail>();
     public List<ItemMail> listEvent = new List<ItemMail>();
     public List<ItemRanking> list_top = new List<ItemRanking>();
+    public List<InfoGift> list_gift = new List<InfoGift>();
+    public List<ItemInvite> list_invite = new List<ItemInvite>();
 
     public List<RoomInfo> phongFree = new List<RoomInfo>();
     public List<RoomInfo> phongVip = new List<RoomInfo>();
@@ -114,19 +117,9 @@ public class GameControl : MonoBehaviour {
     }
 
     public Sprite[] list_typecards;
-    public Sprite getTypeCardByName(string name) {
-        for (int i = 0; i < list_typecards.Length; i++) {
-            if (name.Equals(list_typecards[i].name.Trim())) {
-                return list_typecards[i];
-            }
-        }
-        return null;
-    }
 
     public GameObject[] list_help_typecards;
-
     public int gameID;
-
     public bool cancelAllInvite = false;
     /// <summary>
     /// Là các action trong game như: theo, bỏ lượt, úp bỏ...
@@ -295,11 +288,11 @@ public class GameControl : MonoBehaviour {
         //panelInfoPlayer.onHide();
         //panleHelp.onHide();
         //panelNapChuyenXu.onHide();
-        panelDoiThuong.onHide();
+        //panelDoiThuong.onHide();
         //panelMail.onHide();
-        panelCreateRoom.onHide();
-        panelToiBan.onHide();
-        panelMoiChoi.onHide();
+        //panelCreateRoom.onHide();
+        //panelToiBan.onHide();
+        //panelMoiChoi.onHide();
         panelChat.onHide();
         panelRutTien.onHide();
         panelInput.onHide();

@@ -10,7 +10,6 @@ public class PanelCreateRoom : PanelGame {
     public InputField inputPlayer;
 
     float rateVIP, rateFREE;
-
     long money = 0;
 
     // Use this for initialization
