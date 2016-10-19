@@ -5,9 +5,8 @@ using System.Collections.Generic;
 
 public class PanelMail : PanelGame {
     public static PanelMail instance;
-    public Transform tblContaintSuKien;
-    public Transform tblContaintTinNhan;
-    public GameObject itemMail;
+    public Transform parentSuKien;
+    public Transform parentTinNhan;
 
     public PanelMessage panelMessage;
 
@@ -19,19 +18,30 @@ public class PanelMail : PanelGame {
     }
 
     void Start() {
+        tg_mail.onValueChanged.AddListener(onValuaChangeMail);
+        tg_event.onValueChanged.AddListener(onValuaChangeEvent);
+    }
+
+    public void load() {
         listMail = GameControl.instance.listMail;
         listEvent = GameControl.instance.listEvent;
-
+        Debug.Log(listMail.Count + " =========== " + listEvent.Count);
         addIconTinNhan();
         addIconSuKien();
     }
 
     void OnEnable() {
-        if (tg_mail.isOn && listMail.Count <= 0) {
-            panelMessage.setTextMail("", "", "Không có thư nào!");
+        if (tg_mail.isOn) {
+            if (listMail.Count <= 0)
+                panelMessage.setTextMail("", "", "Không có thư nào!");
+            else
+                ClickDocTN(parentTinNhan.GetChild(0).gameObject);
         }
-        if (tg_event.isOn && listEvent.Count <= 0) {
-            panelMessage.setTextSK("Không có sự kiện nào!");
+        if (tg_event.isOn) {
+            if (listEvent.Count <= 0)
+                panelMessage.setTextSK("Không có sự kiện nào!");
+            else
+                ClickDocTN(parentSuKien.GetChild(0).gameObject);
         }
     }
 
@@ -40,7 +50,7 @@ public class PanelMail : PanelGame {
         if (listMail.Count <= 0) { return; }
         LoadAssetBundle.LoadPrefab(Res.AS_PREFABS, Res.AS_PREFABS_ITEM_MAIL, (objPre) => {
             GameObject obj = objPre;
-            obj.transform.SetParent(tblContaintTinNhan);
+            obj.transform.SetParent(parentTinNhan);
             obj.transform.localScale = Vector3.one;
             obj.GetComponent<ItemMail>().setIconItemTN(listMail[0].id, listMail[0].guiTu, listMail[0].guiLuc, listMail[0].content, listMail[0].isRead);
             obj.GetComponent<Button>().onClick.AddListener(delegate {
@@ -48,7 +58,7 @@ public class PanelMail : PanelGame {
             });
             for (int i = 1; i < listMail.Count; i++) {
                 GameObject btnT = Instantiate(obj) as GameObject;
-                itemMail.transform.SetParent(tblContaintTinNhan);
+                btnT.transform.SetParent(parentTinNhan);
                 btnT.transform.localScale = Vector3.one;
                 btnT.GetComponent<ItemMail>().setIconItemTN(listMail[i].id, listMail[i].guiTu, listMail[i].guiLuc, listMail[i].content, listMail[i].isRead);
                 btnT.GetComponent<Button>().onClick.AddListener(delegate {
@@ -64,7 +74,7 @@ public class PanelMail : PanelGame {
         if (listEvent.Count <= 0) { return; }
         LoadAssetBundle.LoadPrefab(Res.AS_PREFABS, Res.AS_PREFABS_ITEM_MAIL, (objPre) => {
             GameObject obj = objPre;
-            obj.transform.SetParent(tblContaintSuKien);
+            obj.transform.SetParent(parentSuKien);
             obj.transform.localScale = Vector3.one;
             obj.GetComponent<ItemMail>().setIconItemSK(listEvent[0].id, "", listEvent[0].content);
             obj.GetComponent<Button>().onClick.AddListener(delegate {
@@ -72,7 +82,7 @@ public class PanelMail : PanelGame {
             });
             for (int i = 1; i < listEvent.Count; i++) {
                 GameObject btnT = Instantiate(obj) as GameObject;
-                itemMail.transform.SetParent(tblContaintSuKien);
+                btnT.transform.SetParent(parentSuKien);
                 btnT.transform.localScale = Vector3.one;
                 btnT.GetComponent<ItemMail>().setIconItemSK(listEvent[i].id, "", listEvent[i].content);
                 btnT.GetComponent<Button>().onClick.AddListener(delegate {
@@ -130,15 +140,27 @@ public class PanelMail : PanelGame {
         SendData.onReadMessage(id);
     }
 
-    public void onValuaChange(int i) {
-        if (i == 1) {
-            if (listMail.Count <= 0) {
+    public void onValuaChangeMail(bool isactive) {
+        Debug.Log("Mail:   " + isactive);
+        if (!isactive)
+            return;
+        if (isactive) {
+            if (listMail.Count <= 0)
                 panelMessage.setTextMail("", "", "Không có thư nào!");
-            }
-        } else {
-            if (listEvent.Count <= 0) {
+            else
+                ClickDocTN(parentSuKien.GetChild(0).gameObject);
+        }
+    }
+
+    public void onValuaChangeEvent(bool isactive) {
+        Debug.Log("Event:   " + isactive);
+        if (!isactive)
+            return;
+        if (isactive) {
+            if (listEvent.Count <= 0)
                 panelMessage.setTextSK("Không có sự kiện nào!");
-            }
+            else
+                ClickDocSK(parentSuKien.GetChild(0).gameObject);
         }
     }
 

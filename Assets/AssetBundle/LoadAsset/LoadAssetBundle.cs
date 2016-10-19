@@ -148,25 +148,24 @@ public class LoadAssetBundle : MonoBehaviour {
             SceneManager.GetSceneByName(sceneName).GetRootGameObjects()[0].transform.GetChild(0).gameObject.SetActive(true);
         }
     }
-
+    static bool isLoading = false;
     internal static void LoadScene(string sceneBundleName, string sceneName, UnityAction SceneLoadDoneCallback = null, float timedur = 0.2f) {
         //DialogEx.ShowLoading(true);
-        if (SceneManager.GetSceneByName(sceneName) == null || !SceneManager.GetSceneByName(sceneName).isLoaded) {
+        if (!isLoading) {
+            isLoading = true;
+            if (SceneManager.GetSceneByName(sceneName) == null || !SceneManager.GetSceneByName(sceneName).isLoaded) {
 #if ASSET_BUNDLE
-            LoadAssetBundle.instance.StartCoroutine(LoadAssetBundle.instance.InitializeLevelAsync(sceneBundleName, sceneName, SceneLoadDoneCallback, timedur));
+                LoadAssetBundle.instance.StartCoroutine(LoadAssetBundle.instance.InitializeLevelAsync(sceneBundleName, sceneName, SceneLoadDoneCallback, timedur));
 #else
 			LoadAssetBundle.instance.StartCoroutine (LoadAssetBundle.instance.LoadGameScene(sceneName, SceneLoadDoneCallback, timedur));
 #endif
-        } else {
-            //Debug.LogError("Scene " + sceneName + " is loaded." + SceneManager.GetSceneByName(sceneName).GetRootGameObjects()[0] == null);
-            //Debug.LogError("Scene " + sceneName + " is loaded." + SceneManager.GetSceneByName(sceneName).GetRootGameObjects()[0].transform.GetChild(0) == null);
-            Transform tf = SceneManager.GetSceneByName(sceneName).GetRootGameObjects()[0].transform.GetChild(0);
-           // Debug.LogError("============================= " + tf.name);
-            if (tf != null)
-                tf.gameObject.SetActive(true);
-            if (SceneLoadDoneCallback != null)
-                SceneLoadDoneCallback();
-            //DialogEx.ShowLoading(false);
+            } else {
+                Transform tf = SceneManager.GetSceneByName(sceneName).GetRootGameObjects()[0].transform.GetChild(0);
+                if (tf != null)
+                    tf.gameObject.SetActive(true);
+                if (SceneLoadDoneCallback != null)
+                    SceneLoadDoneCallback();
+            }
         }
     }
 
@@ -186,6 +185,7 @@ public class LoadAssetBundle : MonoBehaviour {
         if (SceneLoadDoneCallback != null) {
             SceneLoadDoneCallback();
         }
+        isLoading = false;
         //Debug.LogError("ShowLoading false");
         //DialogEx.ShowLoading(false);
 
@@ -204,6 +204,8 @@ public class LoadAssetBundle : MonoBehaviour {
         IsChecking = false;
         if (SceneLoadDoneCallback != null)
             SceneLoadDoneCallback();
+
+        isLoading = false;
         //DialogEx.ShowLoading(false);
     }
 

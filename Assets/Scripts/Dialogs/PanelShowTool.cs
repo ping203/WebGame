@@ -21,7 +21,9 @@ public class PanelShowTool : PanelGame {
                 break;
             case "mail":
                 //GameControl.instance.panelMail.onShow();
-                LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_MAIL);
+                LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_MAIL, ()=>{
+                    PanelMail.instance.load();
+                });
                 break;
             case "help":
                 // GameControl.instance.panleHelp.onShow();

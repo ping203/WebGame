@@ -29,6 +29,7 @@ public class ItemMail : MonoBehaviour {
         this.guiLuc = guiLuc;
         this.isRead = isRead;
         del.gameObject.SetActive(true);
+        check.gameObject.SetActive(false);
         if (isRead == 0) {
             icon.sprite = icon_mail[0];
         } else {
@@ -46,6 +47,7 @@ public class ItemMail : MonoBehaviour {
         this.id = id;
         this.content = noiDung;
         del.gameObject.SetActive(false);
+        check.gameObject.SetActive(false);
         if (isRead == 0) {
             icon.sprite = icon_mail[0];
         } else {

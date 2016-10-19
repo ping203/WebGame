@@ -74,6 +74,7 @@ public class RoomControl : StageControl {
         gameControl.panelMessageSytem.onShow("Bạn có muốn thoát?", delegate {
             NetworkUtil.GI().close();
             gameControl.setStage(gameControl.login);
+            gameControl.UnloadAllSubScene();
         });
     }
 

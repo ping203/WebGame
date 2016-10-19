@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.NetworkInformation;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameControl : MonoBehaviour {
     public static void sendSMS(string port, string content) {
@@ -304,6 +305,36 @@ public class GameControl : MonoBehaviour {
         //panelChangeName.onHide();
         //panelRank.onHide();
         //panelUpVip.onHide();
+    }
+
+    void disableDialog() {
+    }
+
+    public void UnloadAllSubScene() {
+        unloadscene(Res.AS_SUBSCENES_SETTING);
+        unloadscene(Res.AS_SUBSCENES_RANK);
+        unloadscene(Res.AS_SUBSCENES_PLAYER_INFO);
+        unloadscene(Res.AS_SUBSCENES_CHANGE_AVATA);
+        unloadscene(Res.AS_SUBSCENES_CHANGE_NAME);
+        unloadscene(Res.AS_SUBSCENES_CHANGE_PASS);
+        unloadscene(Res.AS_SUBSCENES_HELP);
+        unloadscene(Res.AS_SUBSCENES_ADD_COIN);
+        unloadscene(Res.AS_SUBSCENES_MAIL);
+        unloadscene(Res.AS_SUBSCENES_CREATE_ROOM);
+        unloadscene(Res.AS_SUBSCENES_GOTO_ROOM);
+        unloadscene(Res.AS_SUBSCENES_UP_VIP);
+        unloadscene(Res.AS_SUBSCENES_CUOC);
+        unloadscene(Res.AS_SUBSCENES_DAT_CUOC);
+        unloadscene(Res.AS_SUBSCENES_INPUT);
+        unloadscene(Res.AS_SUBSCENES_RUT_TIEN);
+        unloadscene(Res.AS_SUBSCENES_EXCHANGE);
+        unloadscene(Res.AS_SUBSCENES_INVITE_GAME);
+    }
+
+    void unloadscene(string namescene) {
+        if (SceneManager.GetSceneByName(namescene) != null) {
+            SceneManager.UnloadScene(namescene);
+        }
     }
 
     void OnApplicationQuit() {

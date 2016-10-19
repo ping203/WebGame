@@ -26,6 +26,7 @@ public class ListernerServer : IChatListener {
         gameControl.panelWaiting.onHide();
         gameControl.panelMessageSytem.onShowDCN("Mất kết nối!", delegate {
             gameControl.disableAllDialog();
+            gameControl.UnloadAllSubScene();
             gameControl.setStage(gameControl.login);
             Debug.Log("Mất kết nối!");
             NetworkUtil.GI().close();
@@ -330,6 +331,7 @@ public class ListernerServer : IChatListener {
         if (nick.Equals(BaseInfo.gI().mainInfo.nick)) {
             try {
                 gameControl.disableAllDialog();
+                gameControl.UnloadAllSubScene();
                 gameControl.currentCasino.resetData();
                 gameControl.currentCasino.DisAppear();
                 if (gameControl.gameID == GameID.XENG || gameControl.gameID == GameID.TAIXIU) {
