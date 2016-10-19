@@ -55,8 +55,12 @@ public abstract class BaseCasino : StageControl {
     }
 
     public void clickButtonChat() {
-        if (!BaseInfo.gI().isView)
-            gameControl.panelChat.onShow();
+        if (!BaseInfo.gI().isView) {
+            // gameControl.panelChat.onShow();
+            LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_CHAT, () => {
+                PanelChat.instance.onShow();
+            });
+        }
     }
 
     public void clickKetQua() {
@@ -225,19 +229,16 @@ public abstract class BaseCasino : StageControl {
         if (lbInfoTable != null) {
             lbInfoTable.text = "Bàn: " + id;
         }
-        /*
-        if (lbInfoMoney != null) {
-            lbInfoMoney.text = "Cược: " + BaseInfo.formatMoneyDetail(money) + Res.MONEY_VIP_UPPERCASE;
-        }*/
         if (BaseInfo.gI().typetableLogin == Res.ROOMVIP) {
-            lbInfoMoney.transform.GetComponentInChildren<Image>().sprite = gameControl.icon_moneys[0];
+            //lbInfoMoney.transform.GetComponentInChildren<Image>().sprite = gameControl.icon_moneys[0];
+            LoadAssetBundle.LoadSprite(lbInfoMoney.transform.GetComponentInChildren<Image>(), Res.AS_UI, Res.AS_UI_ICON_MONEY_FREE);
             lbInfoMoney.text = "Cược: " + BaseInfo.formatMoneyDetail(money) + Res.MONEY_VIP_UPPERCASE;
         } else {
-            lbInfoMoney.transform.GetComponentInChildren<Image>().sprite = gameControl.icon_moneys[1];
+            //lbInfoMoney.transform.GetComponentInChildren<Image>().sprite = gameControl.icon_moneys[1];
+            LoadAssetBundle.LoadSprite(lbInfoMoney.transform.GetComponentInChildren<Image>(), Res.AS_UI, Res.AS_UI_ICON_MONEY_VIP);
             lbInfoMoney.text = "Cược: " + BaseInfo.formatMoneyDetail(money) + Res.MONEY_FREE_UPPERCASE;
         }
         setLuatChoi(rule);
-
         setGameName();
     }
 
@@ -429,14 +430,16 @@ public abstract class BaseCasino : StageControl {
 
         float distance = Vector2.Distance(player1.transform.position, player2.transform.position);
         float time = distance / 400;
-        GameObject obj = Instantiate(gameControl.gameObj_Actions_InGame[id - 1]) as GameObject;
+        //GameObject obj = Instantiate(gameControl.gameObj_Actions_InGame[id - 1]) as GameObject;
+        LoadAssetBundle.LoadPrefab(Res.AS_PREFABS, Res.action_name_ingame[id - 1], (objPre) => {
+            GameObject obj = objPre;
+            obj.transform.SetParent(player1.transform.parent);
+            obj.transform.localPosition = player1.transform.localPosition;
+            obj.transform.localScale = new Vector3(1, 1, 1);
 
-        obj.transform.parent = player1.transform.parent;
-        obj.transform.localPosition = player1.transform.localPosition;
-        obj.transform.localScale = new Vector3(1, 1, 1);
-
-        obj.transform.DOLocalMove(player2.transform.localPosition, time).OnComplete(delegate {
-            finish(obj);
+            obj.transform.DOLocalMove(player2.transform.localPosition, time).OnComplete(delegate {
+                finish(obj);
+            });
         });
     }
 

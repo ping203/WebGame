@@ -241,11 +241,13 @@ public class Poker : BaseToCasino {
             if (type >= 0 && type <= 8) {
                 int poss2 = getPlayer(info2[i].name);
                 //if (poss2 != 0) {
-                    players[poss2].sp_typeCard.sprite = gameControl.list_typecards[type];//gameControl.getTypeCardByName(Res.TypeCard_Name[type]);
+                //players[poss2].sp_typeCard.sprite = gameControl.list_typecards[type];//gameControl.getTypeCardByName(Res.TypeCard_Name[type]);
+                players[poss2].sp_typeCard.gameObject.SetActive(true);
+                players[poss2].sp_typeCard.transform.localPosition = Vector3.zero;
+                LoadAssetBundle.LoadSprite(players[poss2].sp_typeCard, Res.AS_UI_TYPE_CARD, Res.type_card[type], () => {
                     players[poss2].sp_typeCard.SetNativeSize();
-                    players[poss2].sp_typeCard.transform.localPosition = Vector3.zero;
-                    players[poss2].sp_typeCard.gameObject.SetActive(true);
                     players[poss2].onMoveSp_TypeCardToPlayer();
+                });
                 //} else {
                 if (poss2 == 0) {
                     if (listTypeCard != null)

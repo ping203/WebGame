@@ -66,7 +66,7 @@ public class GameControl : MonoBehaviour {
     //public PanelCreateRoom panelCreateRoom;
     //public PanelToiBan panelToiBan;
     //public PanelMoiChoi panelMoiChoi;
-    public PanelChat panelChat;
+    //public PanelChat panelChat;
     //public PanelDatCuoc panelDatCuoc;
     //public PanelRutTien panelRutTien;
     //public PanelInput panelInput;
@@ -77,7 +77,7 @@ public class GameControl : MonoBehaviour {
     //public DialogQuenMatKhau dialogQuenMK;
     //public DialogMoiBan dialogMoiBan;
     //public DialogAllMess dialogAllMess;
-    public PanelNotiDoiThuong panelNotiDoiThuong;
+    //public PanelNotiDoiThuong panelNotiDoiThuong;
     //public DialogLuatChoi dialogLuatChoi;
     //public DialogEvent dialogEvent;
     //public DialogDoiMatKhau dialogDoiMatKhau;
@@ -93,39 +93,45 @@ public class GameControl : MonoBehaviour {
     public StageControl backState;
 
     //list de nhan danh sach tu sver trả về. roi xu li rieng
+    [HideInInspector]
     public List<ItemMail> listMail = new List<ItemMail>();
+    [HideInInspector]
     public List<ItemMail> listEvent = new List<ItemMail>();
+    [HideInInspector]
     public List<ItemRanking> list_top = new List<ItemRanking>();
+    [HideInInspector]
     public List<InfoGift> list_gift = new List<InfoGift>();
+    [HideInInspector]
     public List<ItemInvite> list_invite = new List<ItemInvite>();
 
+    [HideInInspector]
     public List<RoomInfo> phongFree = new List<RoomInfo>();
+    [HideInInspector]
     public List<RoomInfo> phongVip = new List<RoomInfo>();
+    [HideInInspector]
     public List<TableItem> listTable = new List<TableItem>();
 
-    public GameObject[] gameObj_Actions_InGame;
-    public Sprite[] chips_InGame;
+    //public GameObject[] gameObj_Actions_InGame;
+    //public Sprite[] chips_InGame;
     /// <summary>
     /// 0-vip, 1- free
     /// </summary>
-    public Sprite[] icon_moneys;
-    public Sprite getChipByName(string name) {
-        for (int i = 0; i < chips_InGame.Length; i++) {
-            if (name.Equals(chips_InGame[i].name))
-                return chips_InGame[i];
-        }
-        return null;
-    }
+    //public Sprite[] icon_moneys;
+    //public Sprite getChipByName(string name) {
+    //    for (int i = 0; i < chips_InGame.Length; i++) {
+    //        if (name.Equals(chips_InGame[i].name))
+    //            return chips_InGame[i];
+    //    }
+    //    return null;
+    //}
 
-    public Sprite[] list_typecards;
-
-    public GameObject[] list_help_typecards;
+    //public Sprite[] list_typecards;
     public int gameID;
     public bool cancelAllInvite = false;
     /// <summary>
     /// Là các action trong game như: theo, bỏ lượt, úp bỏ...
     /// </summary>
-    public Sprite[] list_actions_ingame;
+    //public Sprite[] list_actions_ingame;
     public Sprite[] gameNames;
     public static string IMEI = "";
     void Awake() {
@@ -294,10 +300,10 @@ public class GameControl : MonoBehaviour {
         //panelCreateRoom.onHide();
         //panelToiBan.onHide();
         //panelMoiChoi.onHide();
-        panelChat.onHide();
+        //panelChat.onHide();
         //panelRutTien.onHide();
         //panelInput.onHide();
-        panelNotiDoiThuong.onHide();
+        //panelNotiDoiThuong.onHide();
         //panelCuoc.onHide();
         //panelDatCuoc.onHide();
         //panelChangeAvata.onHide();
@@ -329,6 +335,7 @@ public class GameControl : MonoBehaviour {
         unloadscene(Res.AS_SUBSCENES_RUT_TIEN);
         unloadscene(Res.AS_SUBSCENES_EXCHANGE);
         unloadscene(Res.AS_SUBSCENES_INVITE_GAME);
+        unloadscene(Res.AS_SUBSCENES_CHAT);
     }
 
     void unloadscene(string namescene) {

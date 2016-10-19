@@ -41,9 +41,13 @@ public class ChipBay : MonoBehaviour {
             } else {
                 name = "chip40";
             }
-            chip1.sprite = GameControl.instance.getChipByName(name);
-            chip2.sprite = GameControl.instance.getChipByName(name);
-            chip3.sprite = GameControl.instance.getChipByName(name);
+
+            LoadAssetBundle.LoadSprite(chip1, Res.AS_UI_ICON_CHIP, name);
+            LoadAssetBundle.LoadSprite(chip2, Res.AS_UI_ICON_CHIP, name);
+            LoadAssetBundle.LoadSprite(chip3, Res.AS_UI_ICON_CHIP, name);
+            //chip1.sprite = GameControl.instance.getChipByName(name);
+            //chip2.sprite = GameControl.instance.getChipByName(name);
+            //chip3.sprite = GameControl.instance.getChipByName(name);
 
             if (type == 1) {
                 StartCoroutine(Moveto());

@@ -24,7 +24,8 @@ public class ChipChuBan : MonoBehaviour {
         } else {
             name = "chip30";
         }
-        sp_chip0.sprite = GameControl.instance.getChipByName(name);
+        //sp_chip0.sprite = GameControl.instance.getChipByName(name);
+        LoadAssetBundle.LoadSprite(sp_chip0, Res.AS_UI_ICON_CHIP, name);
         if (money <= 0) {
             gameObject.SetActive(false);
         } else {
@@ -49,7 +50,8 @@ public class ChipChuBan : MonoBehaviour {
         } else {
             name = "chip30";
         }
-        sp_chip0.sprite = GameControl.instance.getChipByName(name);
+        //sp_chip0.sprite = GameControl.instance.getChipByName(name);
+        LoadAssetBundle.LoadSprite(sp_chip0, Res.AS_UI_ICON_CHIP, name);
         if (money <= 0) {
             gameObject.SetActive(false);
         } else {

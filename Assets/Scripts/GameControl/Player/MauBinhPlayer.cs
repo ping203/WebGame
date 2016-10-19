@@ -53,13 +53,15 @@ public class MauBinhPlayer : ABSUser {
         if (pos != 0) {
             sp_typeCard.StopAllCoroutines();
             sp_typeCard.gameObject.SetActive(true);
-            sp_typeCard.sprite = GameControl.instance.list_typecards[type];
-            sp_typeCard.SetNativeSize();
 
-            sp_typeCard.gameObject.transform.localPosition = new Vector3(0, -50, 0);
-            sp_typeCard.gameObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-            sp_typeCard.transform.DOLocalMoveY(-20, 0.5f);
-            StartCoroutine(setVisible(sp_typeCard.gameObject, 2.5f));
+            LoadAssetBundle.LoadSprite(sp_typeCard, Res.AS_UI_TYPE_CARD, Res.type_card[type], () => {
+                //sp_typeCard.sprite = GameControl.instance.list_typecards[type];
+                sp_typeCard.SetNativeSize();
+                sp_typeCard.gameObject.transform.localPosition = new Vector3(0, -50, 0);
+                sp_typeCard.gameObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+                sp_typeCard.transform.DOLocalMoveY(-20, 0.5f);
+                StartCoroutine(setVisible(sp_typeCard.gameObject, 2.5f));
+            });
         } else {
             if (((MauBinh)casinoStage).listTypeCard != null)
                 ((MauBinh)casinoStage).listTypeCard.setTg(type);

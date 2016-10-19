@@ -73,7 +73,7 @@ public class MenuControl : StageControl {
             rawAvata.gameObject.SetActive(false);
             // spriteAvata.spriteName = idAvata + "";
             //imgAvata.sprite = Res.getAvataByID(idAvata);//Res.list_avata[idAvata + 1];
-            LoadAssetBundle.LoadSprite(imgAvata, Res.AS_AVATA, "" + idAvata);
+            LoadAssetBundle.LoadSprite(imgAvata, Res.AS_UI_AVATA, "" + idAvata);
         }
     }
 
@@ -212,9 +212,9 @@ public class MenuControl : StageControl {
         }
     }
 
-    public void clickNoti() {
-        GameControl.instance.sound.startClickButtonAudio();
-        gameControl.panelNotiDoiThuong.onShow();
-    }
+    //public void clickNoti() {
+    //    GameControl.instance.sound.startClickButtonAudio();
+    //    gameControl.panelNotiDoiThuong.onShow();
+    //}
 }
 

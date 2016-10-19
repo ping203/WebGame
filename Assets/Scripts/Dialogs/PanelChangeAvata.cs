@@ -21,7 +21,7 @@ public class PanelChangeAvata : PanelGame {
                 GameObject obj = prefabsAB;
                 obj.transform.parent = tblAva.transform;
                 obj.transform.localScale = Vector3.one;
-                LoadAssetBundle.LoadSprite(obj.GetComponent<Button>().image, Res.AS_AVATA, 1 + "");
+                LoadAssetBundle.LoadSprite(obj.GetComponent<Button>().image, Res.AS_UI_AVATA, 1 + "");
                 obj.name = "" + 1;
                 obj.GetComponent<Button>().onClick.AddListener(delegate {
                     ClickAva(obj);
@@ -32,7 +32,7 @@ public class PanelChangeAvata : PanelGame {
                     btn.transform.parent = tblAva.transform;
                     btn.transform.localScale = Vector3.one;
                     //btn.GetComponent<Button>().image.sprite = Res.getAvataByID(i+1);
-                    LoadAssetBundle.LoadSprite(btn.GetComponent<Button>().image, Res.AS_AVATA, (i + 1) + "");
+                    LoadAssetBundle.LoadSprite(btn.GetComponent<Button>().image, Res.AS_UI_AVATA, (i + 1) + "");
                     btn.name = "" + (i + 1);
                     btn.GetComponent<Button>().onClick.AddListener(delegate {
                         ClickAva(btn);

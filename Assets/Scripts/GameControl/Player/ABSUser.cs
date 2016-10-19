@@ -411,7 +411,7 @@ public class ABSUser : MonoBehaviour {
             img_avatar.gameObject.SetActive(true);
             raw_avatar.gameObject.SetActive(false);
             //img_avatar.sprite = Res.getAvataByID(pl.idAvata);//Res.list_avata[idAvata + 1];
-            LoadAssetBundle.LoadSprite(img_avatar, Res.AS_AVATA, "" + pl.idAvata);
+            LoadAssetBundle.LoadSprite(img_avatar, Res.AS_UI_AVATA, "" + pl.idAvata);
         }
     }
 
@@ -683,14 +683,15 @@ public class ABSUser : MonoBehaviour {
         if (id < 0 || id > 8) {
             return;
         }
-        sp_action.sprite = GameControl.instance.list_actions_ingame[id];
-        sp_action.SetNativeSize();
-        sp_action.gameObject.SetActive(true);
+        //sp_action.sprite = GameControl.instance.list_actions_ingame[id];
+        LoadAssetBundle.LoadSprite(sp_action, Res.AS_UI_ACTION_PLAY_GAME, Res.action_play_ingame[id], ()=> {
+            sp_action.SetNativeSize();
+            sp_action.gameObject.SetActive(true);
 
-        sp_action.transform.localPosition = vt_sp_action;
-        sp_action.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
-        sp_action.transform.DOLocalMoveY(vt_sp_action.y + 80, 0.5f);
-
+            sp_action.transform.localPosition = vt_sp_action;
+            sp_action.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+            sp_action.transform.DOLocalMoveY(vt_sp_action.y + 80, 0.5f);
+        });
         Invoke("setVisibleAction", 2f);
     }
     void setVisibleAction() {

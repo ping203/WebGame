@@ -54,10 +54,10 @@ public class Res {
 
     public static float speedCard = 0.15f;
 
-    public static string[] TypeCard_Name = new string[] { "mauthau", "doi", "thu", "samco", "sanh", "thung", "culu", "tuquy", "thungphasanh" };
-    public static string[] TYPECARD = { "Mậu thầu", "Đôi", "Thú", "Sám cô", "Sảnh", "Thùng", "Cù lũ", "Tứ quý", "Thùng phá sảnh" };
+    //public static string[] TypeCard_Name = new string[] { "mauthau", "doi", "thu", "samco", "sanh", "thung", "culu", "tuquy", "thungphasanh" };
+    //public static string[] TYPECARD = { "Mậu thầu", "Đôi", "Thú", "Sám cô", "Sảnh", "Thùng", "Cù lũ", "Tứ quý", "Thùng phá sảnh" };
 
-   // public static Sprite[] list_avata = new Sprite[60];// = new List<Sprite>();
+    // public static Sprite[] list_avata = new Sprite[60];// = new List<Sprite>();
     public static Sprite[] list_cards;// = new List<Sprite>();
     //public static Sprite[] list_emotions;// = new List<Sprite>();
     public const int EMOTION_COUNT = 28;
@@ -82,11 +82,18 @@ public class Res {
         return null;
     }
 
-    public const string AS_AVATA = "avata";
     public const string AS_MAINSCENE = "mainscene";
     public const string AS_UI = "ui";
-    public const string AS_CHAT = "chat";
+    public const string AS_UI_AVATA = "avata";
+    public const string AS_UI_CHAT = "chat";
+    public const string AS_UI_ICON_CHIP = "iconchip";
+    public const string AS_UI_ACTION_PLAY_GAME = "actionplaygame";
+    public const string AS_UI_TYPE_CARD = "typecard";
+    public static string[] action_play_ingame = new string[5] { "action_xembai", "action_boluot", "action_theo", "action_upbo", "action_to" };
+    public static string[] type_card = new string[9] { "mauthau", "doi", "thu", "samco", "sanh", "thung", "culu", "tuquy", "thungphasanh" };
 
+    public const string AS_UI_ICON_MONEY_FREE = "icon_chip";
+    public const string AS_UI_ICON_MONEY_VIP = "icon_money";
 
     #region SUBSCENES
     public const string AS_SUBSCENES = "subscenes";
@@ -111,7 +118,11 @@ public class Res {
     /// </summary>
     public const string AS_SUBSCENES_EXCHANGE = "sub_exchange";
     public const string AS_SUBSCENES_INVITE_GAME = "sub_invite_game";
+    public const string AS_SUBSCENES_CHAT = "sub_chat";
     #endregion END SUBSCENES
+
+    public static string[] action_name_ingame = new string[6] { "Beer", "Cake", "Flower", "Hammer", "Kiss", "Tomato" };
+    //public static string[] chip_ingame = new string[16] { "chip0", "chip20", "chip21", "chip22", "chip23", "chip24", "chip30", "chip31", "chip32", "chip33", "chip34", "chip40", "chip41", "chip42", "chip43", "chip44" };
 
     #region PREFABS
     public const string AS_PREFABS = "prefabs";
@@ -121,8 +132,10 @@ public class Res {
     public const string AS_PREFABS_BUTTON_GIFT = "Button_Gift";
     public const string AS_PREFABS_INVITE_GAME = "ItemMoiChoi";
     public const string AS_PREFABS_ITEM_CHAT_SMILE = "Item_Chat_Smile";//khi load danh sach emotion
+    public const string AS_PREFABS_ITEM_CHAT_TEXT = "Item_Chat_Text";//khi load danh sach chat text
     public const string AS_PREFABS_ITEM_SMILE_CHAT = "Chat_Smile";
     public const string AS_PREFABS_ITEM_TEXT_CHAT = "Chat_Text";
+    //public const string AS_PREFABS_ITEM_TABLE = "ItemTable";
     #endregion END PREFABS
 }
 

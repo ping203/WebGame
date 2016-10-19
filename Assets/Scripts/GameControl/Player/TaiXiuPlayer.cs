@@ -33,7 +33,7 @@ public class TaiXiuPlayer : ABSUser {
             img_avatar.gameObject.SetActive(true);
             raw_avatar.gameObject.SetActive(false);
             //img_avatar.sprite = Res.getAvataByID(BaseInfo.gI().mainInfo.idAvata);
-            LoadAssetBundle.LoadSprite(img_avatar, Res.AS_AVATA, "" + BaseInfo.gI().mainInfo.idAvata);
+            LoadAssetBundle.LoadSprite(img_avatar, Res.AS_UI_AVATA, "" + BaseInfo.gI().mainInfo.idAvata);
         }
     }
 

@@ -1533,18 +1533,18 @@ public class ListernerServer : IChatListener {
 
     public void onPopupNotify(Message message) {
         try {
-            if (gameControl.panelNotiDoiThuong.tgParent.transform.childCount == 0) {
-                int size = message.reader().ReadInt();
-                for (int i = 0; i < size; i++) {
-                    int id = message.reader().ReadInt();
-                    int type = message.reader().ReadInt();
-                    string title = message.reader().ReadUTF();
-                    string content = message.reader().ReadUTF();
-                    //Debug.Log("ID: " + id + " Type: " + type + " Title: " + title + " Content: " + content);
+            //if (gameControl.panelNotiDoiThuong.tgParent.transform.childCount == 0) {
+            //    int size = message.reader().ReadInt();
+            //    for (int i = 0; i < size; i++) {
+            //        int id = message.reader().ReadInt();
+            //        int type = message.reader().ReadInt();
+            //        string title = message.reader().ReadUTF();
+            //        string content = message.reader().ReadUTF();
+            //        //Debug.Log("ID: " + id + " Type: " + type + " Title: " + title + " Content: " + content);
 
-                    gameControl.panelNotiDoiThuong.setActiveTab(title, content);
-                }
-            }
+            //        gameControl.panelNotiDoiThuong.setActiveTab(title, content);
+            //    }
+            //}
             //gameControl.panelNotiDoiThuong.onShow();
         } catch (Exception e) {
             Debug.LogException(e);
@@ -1699,7 +1699,7 @@ public class ListernerServer : IChatListener {
             //gameControl.panelMail.ClearListEvent();
             gameControl.listEvent.Clear();
             int total = message.reader().ReadInt();
-            string strEvent = "";
+            //string strEvent = "";
             for (int i = 0; i < total; i++) {
                 int id = message.reader().ReadInt();
                 string title = message.reader().ReadUTF();
@@ -1711,10 +1711,11 @@ public class ListernerServer : IChatListener {
                     it.content = content;
                     gameControl.listEvent.Add(it);
                 }
-                strEvent += content + ";\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
+                //strEvent += content + ";\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t";
             }
             //TODO: fixed notification.
-            gameControl.room.setNoti(strEvent.Trim());
+            //Debug.Log("============     " + strEvent);
+            //gameControl.room.setNoti(strEvent.Trim());
             gameControl.panelWaiting.onHide();
 
         } catch (Exception e) {

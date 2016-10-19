@@ -108,7 +108,7 @@ public class TopControl : PanelGame {
             imgAvata.gameObject.SetActive(true);
             rawAvata.gameObject.SetActive(false);
             // imgAvata.sprite = Res.getAvataByID(idAvata);//Res.list_avata[idAvata + 1];
-            LoadAssetBundle.LoadSprite(imgAvata, Res.AS_AVATA, "" + idAvata);
+            LoadAssetBundle.LoadSprite(imgAvata, Res.AS_UI_AVATA, "" + idAvata);
         }
     }
 
@@ -176,10 +176,10 @@ public class TopControl : PanelGame {
         LoadAssetBundle.LoadScene(Res.AS_SUBSCENES, Res.AS_SUBSCENES_GOTO_ROOM);
     }
 
-    public void clickNoti() {
-        GameControl.instance.sound.startClickButtonAudio();
-        gameControl.panelNotiDoiThuong.onShow();
-    }
+    //public void clickNoti() {
+    //    GameControl.instance.sound.startClickButtonAudio();
+    //    gameControl.panelNotiDoiThuong.onShow();
+    //}
 
     public void clickPlayNow() {
         GameControl.instance.sound.startClickButtonAudio();

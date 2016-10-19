@@ -200,7 +200,7 @@ public class PanelInfoPlayer : PanelGame {
             Img_Avata.gameObject.SetActive(true);
             Raw_Avata.gameObject.SetActive(false);
             //Img_Avata.sprite = Res.getAvataByID(idAvata);
-            LoadAssetBundle.LoadSprite(Img_Avata, Res.AS_AVATA, "" + idAvata);
+            LoadAssetBundle.LoadSprite(Img_Avata, Res.AS_UI_AVATA, "" + idAvata);
         } else {
             //Img_Avata.gameObject.SetActive(false);
             // Raw_Avata.gameObject.SetActive(true);

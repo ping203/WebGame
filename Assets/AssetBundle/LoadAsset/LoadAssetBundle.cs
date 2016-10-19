@@ -63,14 +63,15 @@ public class LoadAssetBundle : MonoBehaviour {
             yield return StartCoroutine(request);
     }
 
-    internal static void LoadSprite(Image image, string assetBundleName, string assetName) {
+    internal static void LoadSprite(Image image, string assetBundleName, string assetName, UnityAction loadDoneCallback = null, UnityAction loadErrorCallback = null
+        ) {
 #if UNITY_EDITOR
         if (AssetBundleManager.SimulateAssetBundleInEditor)
-            LoadAssetBundle.instance.StartCoroutine(LoadAssetBundle.instance.InstantiateTextureAsync(image, assetBundleName, assetName));
+            LoadAssetBundle.instance.StartCoroutine(LoadAssetBundle.instance.InstantiateTextureAsync(image, assetBundleName, assetName, loadDoneCallback, loadErrorCallback));
         else
-            LoadAssetBundle.instance.StartCoroutine(LoadAssetBundle.instance.InstantiateSpritetAsync(image, assetBundleName, assetName));
+            LoadAssetBundle.instance.StartCoroutine(LoadAssetBundle.instance.InstantiateSpritetAsync(image, assetBundleName, assetName, loadDoneCallback, loadErrorCallback));
 #else
-		LoadAssetBundle.instance.StartCoroutine(LoadAssetBundle.instance.InstantiateSpritetAsync(image, assetBundleName, assetName));
+		LoadAssetBundle.instance.StartCoroutine(LoadAssetBundle.instance.InstantiateSpritetAsync(image, assetBundleName, assetName, loadDoneCallback, loadErrorCallback));
 #endif
     }
 
@@ -86,8 +87,7 @@ public class LoadAssetBundle : MonoBehaviour {
         }
     }
 
-    protected IEnumerator InstantiateSpritetAsync(Image image, string assetBundleName, string assetName) {
-
+    protected IEnumerator InstantiateSpritetAsync(Image image, string assetBundleName, string assetName, UnityAction loadDoneCallback = null, UnityAction loadErrorCallback = null) {
         AssetBundleLoadAssetOperation request = AssetBundleManager.LoadAssetAsync(assetBundleName, assetName, typeof(Sprite));
         if (request == null)
             yield break;
@@ -95,9 +95,33 @@ public class LoadAssetBundle : MonoBehaviour {
         // Get the asset.
         var text = request.GetAsset<Sprite>();
         //Debug.Log ("Has sprite? " + (text != null));
-        if (text != null && image != null)
+        if (text != null && image != null) {
             image.sprite = text;
+            if (loadDoneCallback != null) {
+                loadDoneCallback();
+            }
+        } else if (loadErrorCallback != null)
+            loadErrorCallback();
     }
+
+    protected IEnumerator InstantiateTextureAsync(Image image, string assetBundleName, string assetName, UnityAction loadDoneCallback = null, UnityAction loadErrorCallback = null) {
+        AssetBundleLoadAssetOperation request = AssetBundleManager.LoadAssetAsync(assetBundleName, assetName, typeof(Texture2D));
+        if (request == null)
+            yield break;
+        yield return StartCoroutine(request);
+        // Get the asset.
+        var text = request.GetAsset<Texture2D>();
+        //Debug.Log ("Has sprite? " + (text != null));
+        if (text != null) {
+            var sprite = Sprite.Create(text, new Rect(0, 0, text.width, text.height), new Vector2(0.5f, 0.5f));
+            image.sprite = sprite;
+            if (loadDoneCallback != null) {
+                loadDoneCallback();
+            }
+        } else if (loadErrorCallback != null)
+            loadErrorCallback();
+    }
+
     protected IEnumerator InstantiatePrefabtAsync(string assetBundleName, string assetName, UnityAction<GameObject> loadDoneCallback, UnityAction loadErrorCallback) {
         AssetBundleLoadAssetOperation request = AssetBundleManager.LoadAssetAsync(assetBundleName, assetName, typeof(GameObject));
         if (request == null)
@@ -115,19 +139,6 @@ public class LoadAssetBundle : MonoBehaviour {
             loadErrorCallback();
     }
 
-    protected IEnumerator InstantiateTextureAsync(Image image, string assetBundleName, string assetName) {
-        AssetBundleLoadAssetOperation request = AssetBundleManager.LoadAssetAsync(assetBundleName, assetName, typeof(Texture2D));
-        if (request == null)
-            yield break;
-        yield return StartCoroutine(request);
-        // Get the asset.
-        var text = request.GetAsset<Texture2D>();
-        //Debug.Log ("Has sprite? " + (text != null));
-        if (text != null) {
-            var sprite = Sprite.Create(text, new Rect(0, 0, text.width, text.height), new Vector2(0.5f, 0.5f));
-            image.sprite = sprite;
-        }
-    }
 
     private IEnumerator CheckingDownload() {
         while (IsChecking) {

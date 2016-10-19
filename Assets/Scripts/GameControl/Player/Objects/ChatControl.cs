@@ -41,7 +41,7 @@ public class ChatControl : MonoBehaviour {
             _obj.transform.SetParent(parentSmile);
             _obj.transform.localScale = Vector3.one;
             _obj.name = "" + 0;
-            LoadAssetBundle.LoadSprite(_obj.GetComponent<Button>().image, Res.AS_CHAT, "a" + 1);
+            LoadAssetBundle.LoadSprite(_obj.GetComponent<Button>().image, Res.AS_UI_CHAT, "a" + 1);
             _obj.GetComponent<Button>().onClick.AddListener(delegate {
                 sendSmile(_obj);
             });
@@ -51,7 +51,7 @@ public class ChatControl : MonoBehaviour {
                 obj.transform.SetParent(parentSmile);
                 obj.transform.localScale = Vector3.one;
                 obj.name = "" + i;
-                LoadAssetBundle.LoadSprite(obj.GetComponent<Button>().image, Res.AS_CHAT, "a" + (i + 1));
+                LoadAssetBundle.LoadSprite(obj.GetComponent<Button>().image, Res.AS_UI_CHAT, "a" + (i + 1));
                 obj.GetComponent<Button>().onClick.AddListener(delegate {
                     sendSmile(obj);
                 });

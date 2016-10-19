@@ -14,7 +14,7 @@ public class NPCController : PanelGame {
 
     [HideInInspector]
     public Toggle tg;
-    
+
     public void onClick(string action) {
         switch (action) {
             case "info":
@@ -85,14 +85,16 @@ public class NPCController : PanelGame {
 
         float distance = Vector2.Distance(player1.transform.position, tg.transform.position);
         float time = distance / 200;
-        GameObject obj = Instantiate(GameControl.instance.gameObj_Actions_InGame[id - 1]) as GameObject;
+        LoadAssetBundle.LoadPrefab(Res.AS_PREFABS, Res.action_name_ingame[id - 1], (objPre) => {
+            GameObject obj = objPre;
 
-        obj.transform.parent = player1.transform.parent;
-        obj.transform.localPosition = player1.transform.localPosition;
-        obj.transform.localScale = new Vector3(1, 1, 1);
+            obj.transform.SetParent(player1.transform.parent);
+            obj.transform.localPosition = player1.transform.localPosition;
+            obj.transform.localScale = new Vector3(1, 1, 1);
 
-        obj.transform.DOLocalMove(tg.transform.localPosition, time).OnComplete(delegate {
-            finish(obj);
+            obj.transform.DOLocalMove(tg.transform.localPosition, time).OnComplete(delegate {
+                finish(obj);
+            });
         });
     }
     void finish(GameObject ob) {

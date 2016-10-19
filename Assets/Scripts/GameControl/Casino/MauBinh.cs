@@ -201,7 +201,7 @@ public class MauBinh : BaseCasino, IHasChanged {
         StartCoroutine(setCardHand(cardHand, 0, true));
         StartCoroutine(delayXepXong());
 
-       gameControl.isTouchMB = true;
+        gameControl.isTouchMB = true;
         setTouchCardMB(true);
     }
 
@@ -312,13 +312,16 @@ public class MauBinh : BaseCasino, IHasChanged {
     public void setLoaiBai(int chi, int typeCard) {
         switch (chi) {
             case 1:
-                sp_chi1.sprite = gameControl.list_typecards[typeCard];
+                //sp_chi1.sprite = gameControl.list_typecards[typeCard];
+                LoadAssetBundle.LoadSprite(sp_chi1, Res.AS_UI_TYPE_CARD, Res.type_card[typeCard]);
                 break;
             case 2:
-                sp_chi2.sprite = gameControl.list_typecards[typeCard];
+                //sp_chi2.sprite = gameControl.list_typecards[typeCard];
+                LoadAssetBundle.LoadSprite(sp_chi2, Res.AS_UI_TYPE_CARD, Res.type_card[typeCard]);
                 break;
             case 3:
-                sp_chi3.sprite = gameControl.list_typecards[typeCard];
+                //sp_chi3.sprite = gameControl.list_typecards[typeCard];
+                LoadAssetBundle.LoadSprite(sp_chi3, Res.AS_UI_TYPE_CARD, Res.type_card[typeCard]);
                 break;
         }
         if (players[0].getName().Equals(BaseInfo.gI().mainInfo.nick))
@@ -469,10 +472,7 @@ public class MauBinh : BaseCasino, IHasChanged {
                     if (!BaseInfo.gI().isView && players[0].isPlaying()) {//neu dang choi
                         gameControl.sound.startSobaiAudio();
                         players[0].sp_typeCard.gameObject.SetActive(true);
-                        players[0].sp_typeCard.transform.localScale = new Vector3(0, 0, 0);
-                        players[0].sp_typeCard.transform.DOScale(1.4f, 0.2f);
-                        StartCoroutine(setInvisible(players[0].sp_typeCard.gameObject));
-
+                        players[0].sp_typeCard.transform.localScale = Vector3.zero;
                         Vector3 vt = players[0].sp_typeCard.transform.position;
 
                         for (int i = 0; i < players[0].cardMauBinh[0].getSize(); i++) {
@@ -487,9 +487,13 @@ public class MauBinh : BaseCasino, IHasChanged {
                             players[0].cardMauBinh[2].getCardbyPos(i).cardMo.gameObject.SetActive(true);
                             players[0].cardMauBinh[2].getCardbyPos(i).transform.localScale = Vector3.one;
                         }
-                        players[0].sp_typeCard.sprite = gameControl.list_typecards[typeCard];
-                        players[0].sp_typeCard.SetNativeSize();
+                        //players[0].sp_typeCard.sprite = gameControl.list_typecards[typeCard];
 
+                        LoadAssetBundle.LoadSprite(players[0].sp_typeCard, Res.AS_UI_TYPE_CARD, Res.type_card[typeCard], () => {
+                            players[0].sp_typeCard.transform.DOScale(1.4f, 0.2f);
+                            StartCoroutine(setInvisible(players[0].sp_typeCard.gameObject));
+                            players[0].sp_typeCard.SetNativeSize();
+                        });
                         switch (chi) {
                             case 1: {
                                     for (int i = 0; i < players[0].cardMauBinh[2].getSize(); i++) {
@@ -535,13 +539,14 @@ public class MauBinh : BaseCasino, IHasChanged {
                 }
             default: {
                     players[index].sp_typeCard.gameObject.SetActive(true);
-                    players[index].sp_typeCard.transform.localScale = new Vector3(0, 0, 0);
-                    players[index].sp_typeCard.transform.DOScale(1.4f, 0.2f).OnComplete(delegate {
-                        StartCoroutine(setInvisible(players[index].sp_typeCard.gameObject));
+                    players[index].sp_typeCard.transform.localScale = Vector3.zero;
+                    //players[index].sp_typeCard.sprite = gameControl.list_typecards[typeCard];
+                    LoadAssetBundle.LoadSprite(players[index].sp_typeCard, Res.AS_UI_TYPE_CARD, Res.type_card[typeCard], () => {
+                        players[index].sp_typeCard.transform.DOScale(1.4f, 0.2f).OnComplete(delegate {
+                            StartCoroutine(setInvisible(players[index].sp_typeCard.gameObject));
+                        });
+                        players[index].sp_typeCard.SetNativeSize();
                     });
-
-                    players[index].sp_typeCard.sprite = gameControl.list_typecards[typeCard];
-                    players[index].sp_typeCard.SetNativeSize();
                     switch (chi) {
                         case 1: {
                                 for (int i = 0; i < players[index].cardMauBinh[2].getSize(); i++) {

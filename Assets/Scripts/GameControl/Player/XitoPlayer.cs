@@ -64,10 +64,11 @@ public class XitoPlayer : ABSUser {
             return;
         }
         //if (pos != 0) {
-            sp_typeCard.StopAllCoroutines();
-            sp_typeCard.gameObject.SetActive(true);
+        sp_typeCard.StopAllCoroutines();
+        sp_typeCard.gameObject.SetActive(true);
 
-            sp_typeCard.sprite = GameControl.instance.list_typecards[type];
+        //sp_typeCard.sprite = GameControl.instance.list_typecards[type];
+        LoadAssetBundle.LoadSprite(sp_typeCard, Res.AS_UI_TYPE_CARD, Res.type_card[type], () => {
             sp_typeCard.SetNativeSize();
 
             sp_typeCard.gameObject.transform.localPosition = new Vector3(0, -50, 0);
@@ -75,6 +76,7 @@ public class XitoPlayer : ABSUser {
             sp_typeCard.transform.DOLocalMoveY(-20, 0.5f);
             //TweenPosition.Begin (sp_typeCard.gameObject, 0.5f, new Vector3 (0, -20, 0));
             StartCoroutine(setVisible(sp_typeCard.gameObject, 2.5f));
+        });
         //} else {
         if (pos == 0) {
             if (((Xito)casinoStage).listTypeCard != null)

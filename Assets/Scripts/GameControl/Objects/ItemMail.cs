@@ -15,9 +15,10 @@ public class ItemMail : MonoBehaviour {
     public Text lb_content;
     public Button del;
 
-    public Sprite[] icon_mail;
+    //public Sprite[] icon_mail;
     public void setRead() {
-        icon.sprite = icon_mail[1];
+        //icon.sprite = icon_mail[1];
+        LoadAssetBundle.LoadSprite(icon, Res.AS_UI, "icon_thu_mo");
     }
     public void setCheck(bool isCheck) {
         check.gameObject.SetActive(isCheck);
@@ -31,9 +32,11 @@ public class ItemMail : MonoBehaviour {
         del.gameObject.SetActive(true);
         check.gameObject.SetActive(false);
         if (isRead == 0) {
-            icon.sprite = icon_mail[0];
+            LoadAssetBundle.LoadSprite(icon, Res.AS_UI, "icon_thu_dong");
+            //icon.sprite = icon_mail[0];
         } else {
-            icon.sprite = icon_mail[1];
+            //icon.sprite = icon_mail[1];
+            LoadAssetBundle.LoadSprite(icon, Res.AS_UI, "icon_thu_mo");
         }
         icon.SetNativeSize();
         if (noiDung.Length > 20) {
@@ -49,9 +52,11 @@ public class ItemMail : MonoBehaviour {
         del.gameObject.SetActive(false);
         check.gameObject.SetActive(false);
         if (isRead == 0) {
-            icon.sprite = icon_mail[0];
+            LoadAssetBundle.LoadSprite(icon, Res.AS_UI, "icon_thu_dong");
+            //icon.sprite = icon_mail[0];
         } else {
-            icon.sprite = icon_mail[1];
+            //icon.sprite = icon_mail[1];
+            LoadAssetBundle.LoadSprite(icon, Res.AS_UI, "icon_thu_mo");
         }
         if (content.Length > 20) {
             lb_content.text = (content.Substring(0, 20) + "...");
