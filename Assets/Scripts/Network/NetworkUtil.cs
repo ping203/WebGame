@@ -37,8 +37,12 @@ public class NetworkUtil : MonoBehaviour {
         if (m_url.Equals("")) {
             WWW www = new WWW("http://choibaidoithuong.org/config");
             yield return www;
-            m_url = www.text;
-            Debug.Log("URL: " + m_url);
+            if (www.error != null) {
+                m_url = "";
+            } else {
+                m_url = www.text;
+            }
+            //Debug.Log("URL: " + m_url);
         }
 #if UNITY_WEBGL
         Application.ExternalCall("StartLoad");

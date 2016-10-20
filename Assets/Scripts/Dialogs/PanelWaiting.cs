@@ -3,10 +3,6 @@ using System.Collections;
 
 public class PanelWaiting : PanelGame {
     float timeShow;
-    // Use this for initialization
-    void Start() {
-
-    }
 
     // Update is called once per frame
     void Update() {

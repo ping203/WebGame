@@ -58,11 +58,11 @@ public class GameControl : MonoBehaviour {
 
     [SerializeField]
     Transform parentUI;
-    [HideInInspector]
+    //[HideInInspector]
     public PanelWaiting panelWaiting;
-    [HideInInspector]
+    //[HideInInspector]
     public PanelMessageSytem panelMessageSytem;
-    [HideInInspector]
+    //[HideInInspector]
     public Toast toast;
     //public PanelHelp panleHelp;
     //public PanelNapChuyenXu panelNapChuyenXu;
@@ -161,6 +161,7 @@ public class GameControl : MonoBehaviour {
         IMEI = "357238040933272";//SystemInfo.deviceUniqueIdentifier;
         if (panelWaiting == null) {
             LoadAssetBundle.LoadPrefab(Res.AS_PREFABS, Res.AS_PREFABS_WAITING, (obj) => {
+                Debug.Log("obj " + (obj == null));
                 panelWaiting = obj.GetComponent<PanelWaiting>();
                 panelWaiting.transform.SetParent(parentUI);
                 panelWaiting.transform.localScale = Vector3.one;
@@ -186,6 +187,8 @@ public class GameControl : MonoBehaviour {
                 toast.gameObject.SetActive(false);
             });
         }
+
+        Debug.Log("wait " + (panelWaiting == null));
     }
 
     // Use this for initialization
@@ -194,7 +197,7 @@ public class GameControl : MonoBehaviour {
         Application.targetFrameRate = 60;
 #endif
         new ListernerServer(this);
-        currenStage =login;
+        currenStage = login;
         login.Appear();
         //menu.DisAppear();
         //room.DisAppear();
@@ -213,9 +216,10 @@ public class GameControl : MonoBehaviour {
         xeng.DisAppear();
         taixiu.DisAppear();
 
-        disableAllDialog();
+        //disableAllDialog();
         if (NetworkUtil.GI().connected)
             NetworkUtil.GI().sendMessage(SendData.onGetPhoneCSKH());
+		//NetworkUtil.GI().connect(SendData.onGetPhoneCSKH());
     }
     public void setStage(StageControl stage) {
         if (currenStage != stage) {
@@ -323,6 +327,7 @@ public class GameControl : MonoBehaviour {
     internal void disableAllDialog() {
         panelWaiting.onHide();
         panelMessageSytem.onHide();
+        Debug.Log("dgfjsdhffkdsfdsfklds");
         //panelSetting.onHide();
         //panelInfoPlayer.onHide();
         //panleHelp.onHide();
