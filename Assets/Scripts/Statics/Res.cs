@@ -83,7 +83,6 @@ public class Res {
     }
 
     public const string AS_MAINSCENE = "mainscene";
-    public const string AS_LOGINSCENE = "loginscene";
     public const string AS_UI = "ui";
     public const string AS_UI_AVATA = "avata";
     public const string AS_UI_CHAT = "chat";

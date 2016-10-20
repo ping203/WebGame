@@ -27,9 +27,6 @@ public class RoomControl : StageControl {
     LoopVerticalScrollRect loopVerticalScrollRect;//toi uu scroll
 
     public Text text_noti;
-    void Awake() {
-        LoadAssetBundle.LoadScene(Res.AS_LOGINSCENE, "login");
-    }
     // Use this for initialization
     void Start() {
         for (int i = 0; i < parentIconGame.childCount; i++) {
@@ -76,8 +73,7 @@ public class RoomControl : StageControl {
         //  gameControl.setStage(gameControl.menu);
         gameControl.panelMessageSytem.onShow("Bạn có muốn thoát?", delegate {
             NetworkUtil.GI().close();
-            //gameControl.setStage(gameControl.login);
-            LoadAssetBundle.LoadScene(Res.AS_LOGINSCENE, "login");
+            gameControl.setStage(gameControl.login);
             gameControl.UnloadAllSubScene();
         });
     }
@@ -325,10 +321,6 @@ public class RoomControl : StageControl {
             parentIconGame.GetChild(i).transform.DOKill();
         }
         onClickGame(game.name);
-        //tf_effect.localPosition = game.transform.localPosition;
-
-        //vtPosCenter = mainTransform.InverseTransformPoint(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-        //tf_effect.position = game.transform.position;
         tf_effect.transform.SetParent(game.transform);
         tf_effect.localPosition = Vector3.zero;
         game.transform.DOScale(1.05f, 0.6f).SetLoops(-1);

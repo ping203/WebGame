@@ -27,9 +27,7 @@ public class ListernerServer : IChatListener {
         gameControl.panelMessageSytem.onShowDCN("Mất kết nối!", delegate {
             gameControl.disableAllDialog();
             gameControl.UnloadAllSubScene();
-            //gameControl.setStage(gameControl.login);
-            LoadAssetBundle.LoadScene(Res.AS_LOGINSCENE, "login");
-            Debug.Log("Mất kết nối!");
+            gameControl.setStage(gameControl.login);
             NetworkUtil.GI().close();
         });
     }

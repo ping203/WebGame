@@ -34,7 +34,7 @@ public class GameControl : MonoBehaviour {
         }
     }
 
-    //public LoginControl login;
+    public LoginControl login;
     //public MenuControl menu;
     public RoomControl room;
     public TopControl top;
@@ -194,8 +194,8 @@ public class GameControl : MonoBehaviour {
         Application.targetFrameRate = 60;
 #endif
         new ListernerServer(this);
-        currenStage = room;
-        //login.Appear();
+        currenStage =login;
+        login.Appear();
         //menu.DisAppear();
         //room.DisAppear();
         tlmn.DisAppear();
