@@ -3,12 +3,17 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class PanelMessageSytem : PanelGame {
+    //public static PanelMessageSytem instance;
     public Text txt_title, txt_content, txt_lb_ok, txt_lb_cancel;
     public Button btnOK;
     public Button btnCancel;
     public delegate void CallBack();
     public CallBack onClickOK;
     const float posXCenter = 0, posX = 80;
+
+    //void Awake() {
+    //    instance = this;
+    //}
 
     public void onShow(string mess) {
         btnCancel.gameObject.SetActive(false);

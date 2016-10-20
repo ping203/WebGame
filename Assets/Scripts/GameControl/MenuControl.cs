@@ -81,7 +81,8 @@ public class MenuControl : StageControl {
         GameControl.instance.sound.startClickButtonAudio();
         gameControl.panelMessageSytem.onShow("Bạn có muốn thoát?", delegate {
             NetworkUtil.GI().close();
-            gameControl.setStage(gameControl.login);
+            //gameControl.setStage(gameControl.login);
+            LoadAssetBundle.LoadScene(Res.AS_LOGINSCENE, "login");
         });
     }
 

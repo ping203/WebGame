@@ -83,6 +83,7 @@ public class Res {
     }
 
     public const string AS_MAINSCENE = "mainscene";
+    public const string AS_LOGINSCENE = "loginscene";
     public const string AS_UI = "ui";
     public const string AS_UI_AVATA = "avata";
     public const string AS_UI_CHAT = "chat";
@@ -135,6 +136,9 @@ public class Res {
     public const string AS_PREFABS_ITEM_CHAT_TEXT = "Item_Chat_Text";//khi load danh sach chat text
     public const string AS_PREFABS_ITEM_SMILE_CHAT = "Chat_Smile";
     public const string AS_PREFABS_ITEM_TEXT_CHAT = "Chat_Text";
+    public const string AS_PREFABS_MESSAGE_SYSTEM = "PanelMessageSytem";
+    public const string AS_PREFABS_WAITING = "PanelWait";
+    public const string AS_PREFABS_TOAST = "Toast";
     //public const string AS_PREFABS_ITEM_TABLE = "ItemTable";
     #endregion END PREFABS
 }

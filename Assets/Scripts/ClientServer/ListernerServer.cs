@@ -27,7 +27,8 @@ public class ListernerServer : IChatListener {
         gameControl.panelMessageSytem.onShowDCN("Mất kết nối!", delegate {
             gameControl.disableAllDialog();
             gameControl.UnloadAllSubScene();
-            gameControl.setStage(gameControl.login);
+            //gameControl.setStage(gameControl.login);
+            LoadAssetBundle.LoadScene(Res.AS_LOGINSCENE, "login");
             Debug.Log("Mất kết nối!");
             NetworkUtil.GI().close();
         });
@@ -103,7 +104,8 @@ public class ListernerServer : IChatListener {
 
                         string imei = GameControl.IMEI;
 
-                        gameControl.login.login(4, BaseInfo.gI().username, BaseInfo.gI().pass, imei, "", 1, BaseInfo.gI().username, "", phoneNumber);
+                        //gameControl.login.login(4, BaseInfo.gI().username, BaseInfo.gI().pass, imei, "", 1, BaseInfo.gI().username, "", phoneNumber);
+                        LoginControl.instance.login(4, BaseInfo.gI().username, BaseInfo.gI().pass, imei, "", 1, BaseInfo.gI().username, "", phoneNumber);
                         PanelInput.instance.onHide();
                     });
                 });
@@ -666,7 +668,8 @@ public class ListernerServer : IChatListener {
 
     public void onRegSuccess(Message msg) {
         gameControl.toast.showToast("Đăng ký thành công!");
-        gameControl.login.loginWhenRegSucces();
+        //gameControl.login.loginWhenRegSucces();
+        LoginControl.instance.loginWhenRegSucces();
     }
 
     public void onRegFail(string info) {

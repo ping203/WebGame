@@ -40,7 +40,7 @@ public class PanelInfoPlayer : PanelGame {
     bool isLoginFB;
 
     void OnEnable() {
-        isLoginFB = GameControl.instance.login.isLoginFB;
+        isLoginFB = LoginControl.instance.isLoginFB;
     }
 
     public void clickChangePass() {

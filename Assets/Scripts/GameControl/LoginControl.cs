@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 
 public class LoginControl : StageControl {
+    public static LoginControl instance;
     //public Text lb_version;
     public InputField input_username;
     public InputField input_passsword;
@@ -21,6 +22,7 @@ public class LoginControl : StageControl {
     }
 
     void Awake() {
+        instance = this;
         net = GameObject.FindObjectOfType<NetworkUtil>();
         input_username.text = PlayerPrefs.GetString("username");
         input_passsword.text = PlayerPrefs.GetString("password");

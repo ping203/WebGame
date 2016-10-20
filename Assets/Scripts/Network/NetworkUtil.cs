@@ -38,6 +38,7 @@ public class NetworkUtil : MonoBehaviour {
             WWW www = new WWW("http://choibaidoithuong.org/config");
             yield return www;
             m_url = www.text;
+            Debug.Log("URL: " + m_url);
         }
 #if UNITY_WEBGL
         Application.ExternalCall("StartLoad");

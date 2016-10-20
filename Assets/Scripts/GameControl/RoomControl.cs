@@ -27,6 +27,9 @@ public class RoomControl : StageControl {
     LoopVerticalScrollRect loopVerticalScrollRect;//toi uu scroll
 
     public Text text_noti;
+    void Awake() {
+        LoadAssetBundle.LoadScene(Res.AS_LOGINSCENE, "login");
+    }
     // Use this for initialization
     void Start() {
         for (int i = 0; i < parentIconGame.childCount; i++) {
@@ -73,7 +76,8 @@ public class RoomControl : StageControl {
         //  gameControl.setStage(gameControl.menu);
         gameControl.panelMessageSytem.onShow("Bạn có muốn thoát?", delegate {
             NetworkUtil.GI().close();
-            gameControl.setStage(gameControl.login);
+            //gameControl.setStage(gameControl.login);
+            LoadAssetBundle.LoadScene(Res.AS_LOGINSCENE, "login");
             gameControl.UnloadAllSubScene();
         });
     }

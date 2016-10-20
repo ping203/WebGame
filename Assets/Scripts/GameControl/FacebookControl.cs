@@ -62,7 +62,8 @@ public class FacebookControl : MonoBehaviour {
 
     void SendAccetoken(string acces) {
         Debug.Log("ACCCCCC " + acces);
-        GameControl.instance.login.sendloginFB(acces);
+        //GameControl.instance.login.sendloginFB(acces);
+        LoginControl.instance.sendloginFB(acces);
     }
 
     void SendIP(string ip) {

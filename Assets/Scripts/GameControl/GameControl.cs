@@ -34,8 +34,7 @@ public class GameControl : MonoBehaviour {
         }
     }
 
-    public Toast toast;
-    public LoginControl login;
+    //public LoginControl login;
     //public MenuControl menu;
     public RoomControl room;
     public TopControl top;
@@ -57,8 +56,14 @@ public class GameControl : MonoBehaviour {
     public Xeng xeng;
     public TaiXiu taixiu;
 
+    [SerializeField]
+    Transform parentUI;
+    [HideInInspector]
     public PanelWaiting panelWaiting;
+    [HideInInspector]
     public PanelMessageSytem panelMessageSytem;
+    [HideInInspector]
+    public Toast toast;
     //public PanelHelp panleHelp;
     //public PanelNapChuyenXu panelNapChuyenXu;
     //public PanelDoiThuong panelDoiThuong;
@@ -154,6 +159,33 @@ public class GameControl : MonoBehaviour {
         // Res.list_emotions = Resources.LoadAll<Sprite>("Emotions");
         Res.list_cards = Resources.LoadAll<Sprite>("Cards/cardall");
         IMEI = "357238040933272";//SystemInfo.deviceUniqueIdentifier;
+        if (panelWaiting == null) {
+            LoadAssetBundle.LoadPrefab(Res.AS_PREFABS, Res.AS_PREFABS_WAITING, (obj) => {
+                panelWaiting = obj.GetComponent<PanelWaiting>();
+                panelWaiting.transform.SetParent(parentUI);
+                panelWaiting.transform.localScale = Vector3.one;
+                panelWaiting.transform.localPosition = Vector3.zero;
+                panelWaiting.gameObject.SetActive(false);
+            });
+        }
+        if (panelMessageSytem == null) {
+            LoadAssetBundle.LoadPrefab(Res.AS_PREFABS, Res.AS_PREFABS_MESSAGE_SYSTEM, (obj) => {
+                panelMessageSytem = obj.GetComponent<PanelMessageSytem>();
+                panelMessageSytem.transform.SetParent(parentUI);
+                panelMessageSytem.transform.localScale = Vector3.one;
+                panelMessageSytem.transform.localPosition = Vector3.zero;
+                panelMessageSytem.gameObject.SetActive(false);
+            });
+        }
+        if (toast == null) {
+            LoadAssetBundle.LoadPrefab(Res.AS_PREFABS, Res.AS_PREFABS_TOAST, (obj) => {
+                toast = obj.GetComponent<Toast>();
+                toast.transform.SetParent(parentUI);
+                toast.transform.localScale = Vector3.one;
+                toast.transform.localPosition = Vector3.zero;
+                toast.gameObject.SetActive(false);
+            });
+        }
     }
 
     // Use this for initialization
@@ -162,8 +194,8 @@ public class GameControl : MonoBehaviour {
         Application.targetFrameRate = 60;
 #endif
         new ListernerServer(this);
-        currenStage = login;
-        login.Appear();
+        currenStage = room;
+        //login.Appear();
         //menu.DisAppear();
         //room.DisAppear();
         tlmn.DisAppear();
