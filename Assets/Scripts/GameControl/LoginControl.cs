@@ -161,7 +161,7 @@ public class LoginControl : StageControl {
     IEnumerator delayReg(string username, string pass, string imei) {
         if (net != null) {
             if (!net.connected) {
-                StartCoroutine(net.Start());
+                StartCoroutine(net.ConnectSever());
                 while (!net.connected) {
                     yield return new WaitForSeconds(0.1f);
                     if (net.connected) {
@@ -178,7 +178,7 @@ public class LoginControl : StageControl {
                              string accessToken, string regPhone) {
         if (net != null) {
             if (!net.connected) {
-                StartCoroutine(net.Start());
+                StartCoroutine(net.ConnectSever());
                 while (!net.connected) {
                     yield return new WaitForSeconds(0.1f);
                     if (net.connected) {

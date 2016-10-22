@@ -33,23 +33,40 @@ public class NetworkUtil : MonoBehaviour {
         }
     }
     string m_url = "";
+    string protocol_conect = "ws://";
     public IEnumerator Start() {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        Application.ExternalCall("StartLoad");
+        Application.ExternalCall("getPort");
+#endif
+        yield return new WaitForSeconds(0.1f);
+        if (protocol.Equals("")) {
+            protocol = "http:";
+        }
+
+        if (protocol.Equals("http:")) {
+            protocol_conect = "ws://";
+        } else {
+            protocol_conect = "wss://";
+        }
+
         if (m_url.Equals("")) {
-            WWW www = new WWW("http://choibaidoithuong.org/config");
+            WWW www = new WWW(protocol + "//choibaidoithuong.org/config");
             yield return www;
             if (www.error != null) {
                 m_url = "";
             } else {
-                m_url = www.text;
+                m_url = protocol_conect + www.text;
             }
-            //Debug.Log("URL: " + m_url);
+            Debug.Log("URL: " + m_url);
         }
-#if UNITY_WEBGL
-        Application.ExternalCall("StartLoad");
-#endif
+
+        StartCoroutine(ConnectSever());
+    }
+
+    public IEnumerator ConnectSever() {
         yield return StartCoroutine(doConnect());
         yield return StartCoroutine(threadReceiveMSG());
-
     }
 
     public static NetworkUtil GI() {
@@ -73,7 +90,7 @@ public class NetworkUtil : MonoBehaviour {
             //w_socket = new WebSocket(new Uri("ws://" + Res.IP + ":" + Res.PORT));        
             //try {
             if (m_url.Equals("")) {
-                m_url = "ws://" + Res.IP + ":" + Res.PORT;
+                m_url = protocol_conect + Res.IP + ":" + Res.PORT;
             }
             w_socket = new WebSocket(new Uri(m_url));
             // w_socket = new WebSocket(new Uri(Res.IP + ":" + Res.PORT));
@@ -93,9 +110,9 @@ public class NetworkUtil : MonoBehaviour {
             byte[] bytes = msg.toByteArray();
             //string message = System.Text.Encoding.UTF8.GetString(bytes);
 
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             Debug.Log("Send : " + msg.command);
-            #endif
+#endif
             w_socket.Send(bytes);
         } catch (Exception ex) {
             Debug.LogException(ex);
@@ -119,9 +136,9 @@ public class NetworkUtil : MonoBehaviour {
                 count++;
                 size = ((a1 & 0xff) << 8) | (a2 & 0xff);
                 byte[] subdata = new byte[size];
-                #if UNITY_EDITOR
+#if UNITY_EDITOR
                 Debug.Log("Read == " + command);
-                #endif
+#endif
                 Buffer.BlockCopy(data, count, subdata, 0, size);
                 count += size;
                 msg = new Message(command, subdata);
@@ -134,9 +151,6 @@ public class NetworkUtil : MonoBehaviour {
     }
 
     public void close() {
-#if UNITY_EDITOR
-        Debug.Log("Close current socket!");
-#endif
         cleanNetwork();
     }
 
@@ -206,6 +220,12 @@ public class NetworkUtil : MonoBehaviour {
     }
 
     void OnApplicationQuit() {
-        close();
+        cleanNetwork();
+        Debug.Log("Close socket");
+    }
+    public static string protocol = "";
+    void getProtocol(string _protocol) {
+        protocol = _protocol;
+        Debug.Log("PROTOCOL: " + _protocol);
     }
 }

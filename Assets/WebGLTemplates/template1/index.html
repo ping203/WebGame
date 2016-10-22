@@ -103,6 +103,9 @@
 		});
     }
 
+	function getPort(){
+		SendMessage('NetworkUtil', 'getProtocol', location.protocol);
+	}
 	
 	window.onbeforeunload = function () {
 		return "";

@@ -161,7 +161,6 @@ public class GameControl : MonoBehaviour {
         IMEI = "357238040933272";//SystemInfo.deviceUniqueIdentifier;
         if (panelWaiting == null) {
             LoadAssetBundle.LoadPrefab(Res.AS_PREFABS, Res.AS_PREFABS_WAITING, (obj) => {
-                Debug.Log("obj " + (obj == null));
                 panelWaiting = obj.GetComponent<PanelWaiting>();
                 panelWaiting.transform.SetParent(parentUI);
                 panelWaiting.transform.localScale = Vector3.one;
@@ -187,8 +186,6 @@ public class GameControl : MonoBehaviour {
                 toast.gameObject.SetActive(false);
             });
         }
-
-        Debug.Log("wait " + (panelWaiting == null));
     }
 
     // Use this for initialization
@@ -327,7 +324,6 @@ public class GameControl : MonoBehaviour {
     internal void disableAllDialog() {
         panelWaiting.onHide();
         panelMessageSytem.onHide();
-        Debug.Log("dgfjsdhffkdsfdsfklds");
         //panelSetting.onHide();
         //panelInfoPlayer.onHide();
         //panleHelp.onHide();

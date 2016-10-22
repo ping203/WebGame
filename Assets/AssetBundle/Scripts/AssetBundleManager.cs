@@ -349,7 +349,7 @@ namespace AssetBundles
 				download = new WWW(url);
 			else
 				download = WWW.LoadFromCacheOrDownload(url, m_AssetBundleManifest.GetAssetBundleHash(assetBundleName), 0); 
-			Debug.Log("Add download file from Url: " + url);
+			//Debug.Log("Add download file from Url: " + url);
 			m_DownloadingWWWs.Add(assetBundleName, download);
 	
 			return false;

@@ -14,7 +14,7 @@ public class LoadAssetBundle : MonoBehaviour {
 
     public string sceneAssetBundle;
     public string sceneName;
-    public string AssetBundleURL = "http://choibaidoithuong.org/";
+    string AssetBundleURL = "";
     public Text txtMsg;
     //public Image image;
     //public Slider Progress;
@@ -28,6 +28,8 @@ public class LoadAssetBundle : MonoBehaviour {
 
     //public IEnumerator InitBundle()
     IEnumerator Start() {
+        yield return new WaitForSeconds(0.4f);
+        AssetBundleURL = NetworkUtil.protocol + "//choibaidoithuong.org/";
         yield return StartCoroutine(Initialize());
         LoadScene(sceneAssetBundle, sceneName, HideScene);
     }
@@ -163,17 +165,20 @@ public class LoadAssetBundle : MonoBehaviour {
     internal static void LoadScene(string sceneBundleName, string sceneName, UnityAction SceneLoadDoneCallback = null, float timedur = 0.2f) {
         //DialogEx.ShowLoading(true);
         if (!isLoading) {
-            isLoading = true;
             if (SceneManager.GetSceneByName(sceneName) == null || !SceneManager.GetSceneByName(sceneName).isLoaded) {
 #if ASSET_BUNDLE
                 LoadAssetBundle.instance.StartCoroutine(LoadAssetBundle.instance.InitializeLevelAsync(sceneBundleName, sceneName, SceneLoadDoneCallback, timedur));
 #else
 			LoadAssetBundle.instance.StartCoroutine (LoadAssetBundle.instance.LoadGameScene(sceneName, SceneLoadDoneCallback, timedur));
 #endif
+
+                isLoading = true;
             } else {
                 Transform tf = SceneManager.GetSceneByName(sceneName).GetRootGameObjects()[0].transform.GetChild(0);
-                if (tf != null)
+                if (tf != null) {
                     tf.gameObject.SetActive(true);
+                    //isLoading = false;
+                }
                 if (SceneLoadDoneCallback != null)
                     SceneLoadDoneCallback();
             }
