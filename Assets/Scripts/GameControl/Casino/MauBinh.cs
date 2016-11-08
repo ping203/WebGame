@@ -147,8 +147,9 @@ public class MauBinh : BaseCasino, IHasChanged {
         players[0].cardMauBinh[1].resetPostionCard(200);
         players[0].cardMauBinh[2].resetPostionCard(200);
 
-        players[0].cardMauBinh[1].transform.localPosition = vt_chi_2;
-        players[0].cardMauBinh[0].transform.localPosition = vt_chi_1;
+		players[0].cardMauBinh[2].transform.localPosition = vt_chi_3;
+		players[0].cardMauBinh[1].transform.localPosition = vt_chi_2;
+		players[0].cardMauBinh[0].transform.localPosition = vt_chi_1;
 
         setPositionCardHand(players[0].cardMauBinh[0].transform, -height_down * 2);
         setPositionCardHand(players[0].cardMauBinh[1].transform, -height_down);
@@ -659,7 +660,13 @@ public class MauBinh : BaseCasino, IHasChanged {
                 if (getPlayer(name) == 2) {
                 }
                 StartCoroutine(setCardHand(card, getPlayer(name), false));
-
+                if (isDangXep) {
+                    players[0].cardMauBinh[2].transform.localPosition = vt_chi_3;
+                    players[0].cardMauBinh[1].transform.localPosition = vt_chi_2;
+                    players[0].cardMauBinh[0].transform.localPosition = vt_chi_1;
+                } else {
+                    action_card_down();
+                }
             }
             if (time > 0) {
                 turntimeMB = time;

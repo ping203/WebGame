@@ -44,7 +44,6 @@ public class BaseToCasino : BaseCasino {
                             + " "
                             + BaseInfo.formatMoneyDetailDot(players[0]
                                     .getFolowMoney());
-
                 } else {
                     lb_theo.text = (Res.TXT_CALL + " "
                             + BaseInfo.formatMoneyDetailDot(moneycuoc1));
@@ -63,9 +62,7 @@ public class BaseToCasino : BaseCasino {
             }
             this.moneyCuoc = moneycuoc1;
         } catch (Exception e) {
-            // TODO: handle exception
         }
-
     }
 
     protected long getMaxChips() {
@@ -77,6 +74,7 @@ public class BaseToCasino : BaseCasino {
         }
         return max;
     }
+
     public override void startTableOk(int[] cardHand, Message msg, string[] nickPlay) {
         base.startTableOk(cardHand, msg, nickPlay);
         for (int i = 0; i < players.Length; i++) {
@@ -186,12 +184,13 @@ public class BaseToCasino : BaseCasino {
     }
 
     public override void onNickSkip(String nick, Message msg) {
-        players[getPlayer(nick)].setAction(Res.AC_UPBO);
-        players[getPlayer(nick)].setTurn(false);
-        players[getPlayer(nick)].setRank(4);
-        players[getPlayer(nick)].cardHand.setAllMo(true);
-        players[getPlayer(nick)].setPlaying(false);
-        if (getPlayer(nick) == 0) {
+        int poss = getPlayer(nick);
+        players[poss].setAction(Res.AC_UPBO);
+        players[poss].setTurn(false);
+        players[poss].setRank(4);
+        players[poss].cardHand.setAllMo(true);
+        players[poss].setPlaying(false);
+        if (poss == 0) {
             disableAllBtnTable();
         }
         try {
@@ -199,8 +198,8 @@ public class BaseToCasino : BaseCasino {
         } catch (Exception e) {
 
         }
-        players[getPlayer(nick)].chip.gameObject.SetActive(false);
-        players[getPlayer(nick)].chipBay.onMoveto(players[getPlayer(nick)].getMoneyChip(), 1);
+        players[poss].chip.gameObject.SetActive(false);
+        players[poss].chipBay.onMoveto(players[poss].getMoneyChip(), 1);
     }
 
     public override void onFinishGame(Message message) {
@@ -243,10 +242,8 @@ public class BaseToCasino : BaseCasino {
                 }
                 players[j].setTurn(false);
             }
-
         } catch (Exception ex) {
             Debug.LogException(ex);
-
         }
         tongMoney = 0;
         chip_tong.setMoneyChipChu(tongMoney);
@@ -336,9 +333,6 @@ public class BaseToCasino : BaseCasino {
             is_xem = false;
             is_theo = false;
             is_to = false;
-
-        } else {
-
         }
 
         if (isVisible) {
@@ -364,7 +358,6 @@ public class BaseToCasino : BaseCasino {
         }
     }
     protected long getMaxMoney(long money) {
-
         minMoney = getmoneyTong();
         if (minMoney > BaseInfo.gI().moneyMinTo) {
             minMoney = BaseInfo.gI().moneyMinTo;
@@ -434,11 +427,8 @@ public class BaseToCasino : BaseCasino {
             if (players[poss].cardHand3Cay != null)
                 players[poss].cardHand3Cay.setAllMo(false);
         } catch (Exception e) {
-            Debug.Log(" infoWinPlayer ");
             Debug.LogException(e);
         }
-
-        int rank = infoWin.rank;
         for (int i = 0; i < BaseInfo.gI().infoWinTo.Count; i++) {
             if (infoWin == BaseInfo.gI().infoWinTo[i]) {
                 BaseInfo.gI().infoWinTo[i].rank = -1;
@@ -449,7 +439,6 @@ public class BaseToCasino : BaseCasino {
 
     public override void onInfoWinPlayer(List<InfoWinTo> infoWin, List<InfoWinTo> info2) {
         BaseInfo.gI().infoWinTo = infoWin;
-
         if (infoWin.Count <= 0) {
             return;
         }

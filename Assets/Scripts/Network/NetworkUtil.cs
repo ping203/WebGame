@@ -43,24 +43,25 @@ public class NetworkUtil : MonoBehaviour {
         if (protocol.Equals("")) {
             protocol = "http:";
         }
-
+        string ssss;
         if (protocol.Equals("http:")) {
             protocol_conect = "ws://";
+            ssss = "//choibaidoithuong.org/conf/http.cfg";
         } else {
             protocol_conect = "wss://";
+            ssss = "//choibaidoithuong.org/conf/https.cfg";
         }
 
         if (m_url.Equals("")) {
-            WWW www = new WWW(protocol + "//choibaidoithuong.org/config");
+            WWW www = new WWW(protocol + ssss);
             yield return www;
             if (www.error != null) {
                 m_url = "";
             } else {
                 m_url = protocol_conect + www.text;
             }
-            Debug.Log("URL: " + m_url);
         }
-
+        Debug.Log(protocol + " URL: " + m_url);
         StartCoroutine(ConnectSever());
     }
 
@@ -226,6 +227,6 @@ public class NetworkUtil : MonoBehaviour {
     public static string protocol = "";
     void getProtocol(string _protocol) {
         protocol = _protocol;
-        Debug.Log("PROTOCOL: " + _protocol);
+        //Debug.Log("PROTOCOL: " + _protocol);
     }
 }
