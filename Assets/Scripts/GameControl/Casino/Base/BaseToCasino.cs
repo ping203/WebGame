@@ -523,7 +523,7 @@ public class BaseToCasino : BaseCasino {
                     players[i].setMoneyChip(moneyBoRa
                             + players[i].getMoneyChip());
                     gameControl.sound.startToAudio();
-                    tongMoney += soTienTo;
+                    tongMoney += moneyBoRa;
                     chip_tong.setMoneyChipChu(tongMoney);
                     break;
                 }
